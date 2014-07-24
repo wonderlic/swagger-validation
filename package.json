@@ -1,0 +1,36 @@
+{
+  "name": "swagger-validation",
+  "version": "1.0.0",
+  "author": {
+    "name": "Christopher Katz",
+    "email": "chris.katz@wonderlic.com",
+    "url": "http://www.wonderlic.com"
+  },
+  "contributors": [],
+  "description": "Validation implementation intended to be used with the Wordnik Swagger implementation for Express",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wonderlic-chrisk/swagger-validation"
+  },
+  "keywords": [
+    "swagger",
+    "validation",
+    "swagger-validation"
+  ],
+  "bugs": "https://github.com/wonderlic-chrisk/swagger-validation/issues",
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.8.x"
+  },
+  "dependencies": {
+    "lodash": "2.4.x",
+    "is-integer": "1.0.x"
+  },
+  "devDependencies": {
+    "mocha": "1.20.x",
+    "chai": "1.9.x",
+    "docker": "0.2.x",
+    "gulp": "3.8.x",
+    "gulp-shell": "0.2.x"
+  }
+}
