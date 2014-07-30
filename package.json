@@ -26,11 +26,10 @@
     "lodash": "2.4.x"
   },
   "devDependencies": {
-    "mocha": "1.20.x",
+    "mocha": "1.21.x",
     "chai": "1.9.x",
     "jsdoc": "3.3.x",
     "ink-docstrap": "0.4.x",
-    "docker": "0.2.x",
     "gulp": "3.8.x",
     "gulp-shell": "0.2.x"
   }
