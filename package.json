@@ -31,6 +31,9 @@
     "jsdoc": "3.3.x",
     "ink-docstrap": "0.4.x",
     "gulp": "3.8.x",
-    "gulp-shell": "0.2.x"
+    "gulp-concat": "2.3.x",
+    "gulp-jsdoc-to-markdown": "0.1.x",
+    "gulp-shell": "0.2.x",
+    "gulp-util": "3.0.x"
   }
 }
