@@ -4,18 +4,18 @@ var gulp = require('gulp');
 var shell = require('gulp-shell');
 
 // run docker task
-// WHY YOU NO WORK?!?!
 gulp.task('docker', function() {
-  shell.task([
-    //'node docker -i "C:\\Source-Code\\swagger-validation\\lib" -o "C:\\Source-Code\\swagger-validation\\docs" -c monokai -n'
-    'docker -i ./lib -o ./docs -c monokai'
-  ]);
+  gulp.src('').pipe(shell(['"./node_modules/.bin/docker" -i ./lib -o ./docs/docker -c native -n']));
 });
 
-//gulp.task('watch', function() {
-//  gulp.watch('./lib/validation/*.js', function() {
-//    gulp.run('docco');
-//  });
-//});
+// run jsdoc task
+gulp.task('jsdoc', function() {
+  gulp.src('').pipe(shell(['"./node_modules/.bin/jsdoc" ./lib -r -t ./node_modules/ink-docstrap/template -c ./jsdoc.conf.json -d ./docs/jsdoc']));
+});
 
-gulp.task('default', ['docker']);
+// watch for any changes in the lib directory and re-run docker and jsdoc tasks to make the documentation
+gulp.task('watch', function() {
+  gulp.watch('./lib/**/*.js', ['jsdoc', 'docker']);
+});
+
+gulp.task('default', ['docker', 'jsdoc', 'watch']);
