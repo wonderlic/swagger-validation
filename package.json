@@ -1,6 +1,6 @@
 {
   "name": "swagger-validation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Wonderlic, Inc.",
     "email": "SoftwareDevelopment@wonderlic.com",
@@ -10,7 +10,7 @@
   "description": "Validation implementation intended to be used with the Wordnik Swagger implementation for Express",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wonderlic/swagger-validation"
+    "url": "https://github.com/wonderlic/swagger-validation.git"
   },
   "keywords": [
     "swagger",
