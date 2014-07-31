@@ -28,7 +28,7 @@ against the parameters specified automatically.
 this implementation may change if / when it gets pulled into swagger-node-express).**
 2. On each method inside swagger, call into one of the helper methods.
 3. Modify swagger-node-express directly. While this would have the same benefit that, by default, all methods will have their 
-request validated against the parameters specified automatically, this is a non-standard and will be an obsoleted approach once
+request validated against the parameters specified automatically, this is **non-standard** and will be deprecated once
 the pull request specified above gets pulled in.
 
 ```javascript
