@@ -38,9 +38,9 @@ this implementation may change if / when it gets pulled into swagger-node-expres
 // TODO: write this
 ```
 
-* Modify swagger-node-express directly. While this would have the same benefit that, by default, all methods will have their 
-request validated against the parameters specified automatically, this is **non-standard** and will be deprecated once
-the pull request specified above gets pulled in.
+* Modify swagger-node-express directly. While this would have the same benefit as the first one that, by default, all methods 
+will have their request validated against the parameters specified automatically, this is **non-standard** and will be 
+deprecated once the pull request specified above gets pulled in.
 
 ```javascript
 
