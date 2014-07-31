@@ -31,6 +31,7 @@ against the parameters specified automatically.
 
 **(NOTE: As of 7-31-2014, this is still a pull request of swagger and has not been approved. As such,
 this implementation may change if / when it gets pulled into swagger-node-express).**
+
 2. On each method inside swagger, call into one of the helper methods.
 
 ```javascript
