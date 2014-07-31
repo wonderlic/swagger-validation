@@ -1,5 +1,8 @@
 # Validation for swagger-node-express
 
+[![NPM version](https://badge.fury.io/js/swagger-validation.svg)](http://badge.fury.io/js/swagger-validation)
+[![Dependency Status](https://david-dm.org/wonderlic/swagger-validation.png)](https://david-dm.org/wonderlic/swagger-validation.png)
+
 This is a module that follows the [swagger specification 1.2](https://github.com/wordnik/swagger-spec/blob/master/versions/1.2.md) 
 to offer validation on a particular request as it gets wired up through [swagger-node-express](https://github.com/wordnik/swagger-node-express).
 
