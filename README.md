@@ -35,7 +35,7 @@ the pull request specified above gets pulled in.
 
 | Type | Format | Description |
 | ---- | ------ | ----- |
-| 'boolean' | | > This only handles native boolean types or converting from 'true' / 'false' strings, as the concept is not 
+| '''boolean''' | | > This only handles native boolean types or converting from 'true' / 'false' strings, as the concept is not 
                 > uniform for other types (ie, if it's a number, should it be 0 = false and 1 = true or should any non-zero number be true). 
                 > However, this only handles strings that are the string representation in JavaScript of their boolean counterparts, 
                 > so True, TRUE, etc. will not validate.                 
