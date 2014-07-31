@@ -605,7 +605,7 @@ describe('object', function() {
     };
 
     it('should validate', function() {
-      var value =  { id: 'true'};
+      var value = { id: 'true'};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
     });
@@ -644,7 +644,7 @@ describe('object', function() {
     };
 
     it('should validate', function() {
-      var value =  {
+      var value = {
         number: 0x33,
         float: -2.231231,
         double: Number.MIN_VALUE,
@@ -865,6 +865,130 @@ describe('object', function() {
         boolean: 'Not a boolean'
       }, model);
       helper.validateError(ret, 4, ['boolean is not a type of boolean', 'int32 is not a type of int32', 'int64 is not a type of int64', 'string is not a type of string']);
+    });
+  });
+
+  describe('one with object parameter not required', function() {
+    var model = {
+      bar: {
+        id: 'bar',
+        name: 'bar',
+        properties: {
+          array: helper.makeArrayParam(false, 'boolean')
+        }
+      },
+      foo: {
+        id: 'foo',
+        name: 'foo',
+        properties: {
+          obj: { $ref: 'bar' },
+          integer: { type: 'integer' }
+        }
+      }
+    };
+
+    it('should validate', function() {
+      var value = {
+        obj: { array: [true, false, true] },
+        integer: 1
+      };
+      var ret = validate(helper.makeParam('foo', false), value, model);
+      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+    });
+
+    it('should validate all missing', function() {
+      var ret = validate(helper.makeParam('foo', true), {}, model);
+      helper.validateSuccess(ret, 1, [JSON.stringify({})]);
+    });
+
+    it('should validate array missing', function() {
+      var value = {
+        obj: {},
+        integer: 1
+      };
+      var ret = validate(helper.makeParam('foo', true), value, model);
+      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+    });
+
+    it('should not validate all invalid', function() {
+      var value = {
+        obj: [true, false, true],
+        integer: false
+      };
+      var ret = validate(helper.makeParam('foo', true), value, model);
+      helper.validateError(ret, 2, ['integer is not a type of integer', 'obj is not a type of object']);
+    });
+
+    it('should not validate array invalid', function() {
+      var value = {
+        obj: { array: ['1'] },
+        integer: 1
+      };
+      var ret = validate(helper.makeParam('foo', true), value, model);
+      helper.validateError(ret, 1, ['1 is not a type of boolean']);
+    });
+  });
+
+  describe('one with required object parameter', function() {
+    var model = {
+      bar: {
+        id: 'bar',
+        name: 'bar',
+        required: ['array'],
+        properties: {
+          array: helper.makeArrayParam(false, 'boolean')
+        }
+      },
+      foo: {
+        id: 'foo',
+        name: 'foo',
+        required: ['obj', 'integer'],
+        properties: {
+          obj: { $ref: 'bar' },
+          integer: { type: 'integer' }
+        }
+      }
+    };
+
+    it('should validate', function() {
+      var value = {
+        obj: { array: [true, false, true] },
+        integer: 1
+      };
+      var ret = validate(helper.makeParam('foo', false), value, model);
+      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+    });
+
+    it('should not validate array missing', function() {
+      var value = {
+        obj: {},
+        integer: 1
+      };
+      var ret = validate(helper.makeParam('foo', true), value, model);
+      helper.validateError(ret, 1, ['array is required']);
+    });
+
+    it('should not validate all invalid', function() {
+      var value = {
+        obj: [true, false, true],
+        integer: false
+      };
+      var ret = validate(helper.makeParam('foo', true), value, model);
+      helper.validateError(ret, 2, ['integer is not a type of integer', 'obj is not a type of object']);
+    });
+
+    it('should not validate array invalid', function() {
+      var value = {
+        obj: { array: ['1'] },
+        integer: 1
+      };
+      var ret = validate(helper.makeParam('foo', true), value, model);
+      helper.validateError(ret, 1, ['1 is not a type of boolean']);
+    });
+
+    it('should not validate all missing', function() {
+      var ret = validate(helper.makeParam('foo', true), {}, model);
+      helper.validateError(ret, 2, ['integer is required', 'obj is required']);
     });
   });
 
