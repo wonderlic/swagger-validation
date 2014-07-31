@@ -129,6 +129,18 @@ describe('integer - int64', function() {
     helper.validateError(ret, 1, ["testParam is required"]);
   });
 
+  it('should not validate with true boolean', function() {
+    var value = true;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64'), value);
+    helper.validateError(ret, 1, ["testParam is not a type of int64"]);
+  });
+
+  it('should not validate with false boolean', function() {
+    var value = false;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64'), value);
+    helper.validateError(ret, 1, ["testParam is not a type of int64"]);
+  });
+
   it('should not validate with too large integer', function() {
     var value = 1e4500; // jshint ignore:line
     var ret = validate(helper.makeNumberParam('integer', false, 'int64'), value);

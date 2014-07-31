@@ -129,6 +129,18 @@ describe('number - double', function() {
     helper.validateError(ret, 1, ["testParam is required"]);
   });
 
+  it('should not validate with true boolean', function() {
+    var value = true;
+    var ret = validate(helper.makeNumberParam('number', false, 'double'), value);
+    helper.validateError(ret, 1, ["testParam is not a type of double"]);
+  });
+
+  it('should not validate with false boolean', function() {
+    var value = false;
+    var ret = validate(helper.makeNumberParam('number', false, 'double'), value);
+    helper.validateError(ret, 1, ["testParam is not a type of double"]);
+  });
+
   it('should not validate with too large number', function() {
     var value = 1e4500; // jshint ignore:line
     var ret = validate(helper.makeNumberParam('number', false, 'double'), value);
