@@ -22,7 +22,7 @@ Using NPM, include the `swagger-validation` module in your `package.json` depend
 
 There are few different ways to use this module within swagger-node-express depending on what you are trying to accomplish.
 
-1. Use the middleware component of Swagger. The benefit of this is that, by default, all methods will have their request validated 
+* Use the middleware component of Swagger. The benefit of this is that, by default, all methods will have their request validated 
 against the parameters specified automatically. 
 
 ```javascript
@@ -32,13 +32,13 @@ against the parameters specified automatically.
 **(NOTE: As of 7-31-2014, this is still a pull request of swagger and has not been approved. As such,
 this implementation may change if / when it gets pulled into swagger-node-express).**
 
-2. On each method inside swagger, call into one of the helper methods.
+* On each method inside swagger, call into one of the helper methods.
 
 ```javascript
 // TODO: write this
 ```
 
-3. Modify swagger-node-express directly. While this would have the same benefit that, by default, all methods will have their 
+* Modify swagger-node-express directly. While this would have the same benefit that, by default, all methods will have their 
 request validated against the parameters specified automatically, this is **non-standard** and will be deprecated once
 the pull request specified above gets pulled in.
 
