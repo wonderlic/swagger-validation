@@ -31,6 +31,32 @@ this implementation may change if / when it gets pulled into swagger-node-expres
 request validated against the parameters specified automatically, this is a non-standard and will be an obsoleted approach once
 the pull request specified above gets pulled in.
 
+```javascript
+
+    // /swagger-node-express/lib/swagger.js
+    // lines 418 - 420 currently have
+    else {
+      callback(req, res, next);
+    }
+
+    // change it to 
+    else {
+      var validate = require('swagger-validation');
+      var ret = validate(api.operations[0], req, self.allModels);
+      if(ret.length) {
+        var errors = _.pluck(_.pluck(ret, 'error'), 'message');
+        res.send(JSON.stringify({
+          'message': 'validation failure - ' + errors.join(),
+          'code': 400
+        }), 400);
+        return;
+      }
+    
+      callback(req, res, next);
+    }
+    
+```
+
 ## Types of validation
 
 | Type | Format | Description |
