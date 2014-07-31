@@ -35,17 +35,17 @@ the pull request specified above gets pulled in.
 
 | Type | Format | Description |
 | ---- | ------ | ----- |
-| `boolean` | | <blockquote>This only handles native boolean types or converting from 'true' / 'false' strings, as the concept is not uniform for other types (ie, if it's a number, should it be 0 = false and 1 = true or should any non-zero number be true). However, this only handles strings that are the string representation in JavaScript of their boolean counterparts, so True, TRUE, etc. will not validate. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.</blockquote>
-| 'integer' | &nbsp; | 
-| 'integer' | 'int32' | 
-| 'integer' | 'int64' | 
-| 'number' | | 
-| 'number' | 'float' | 
-| 'number' | 'double' | 
-| 'string' | | 
-| 'string' | 'byte' | 
-| 'string' | 'date' | 
-| 'string' | 'date-time' | 
+| `boolean` | | This only handles native boolean types or converting from 'true' / 'false' strings, as the concept is not uniform for other types (ie, if it's a number, should it be 0 = false and 1 = true or should any non-zero number be true). However, this only handles strings that are the string representation in JavaScript of their boolean counterparts, so True, TRUE, etc. will not validate. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
+| `integer` | | 
+| `integer` | `int32` | 
+| `integer` | `int64` | 
+| `number` | | 
+| `number` | `float` | 
+| `number` | `double` | 
+| `string` | | 
+| `string` | `byte` | 
+| `string` | `date` | 
+| `string` | `date-time` | 
 
 
 ## Documentation
