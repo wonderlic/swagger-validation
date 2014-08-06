@@ -1,9 +1,6 @@
 # Validation for swagger-node-express
 
-<!--
 [![Build Status](https://img.shields.io/travis/wonderlic/swagger-validation/master.svg)](https://travis-ci.org/wonderlic/swagger-validation)
--->
-
 [![NPM version](https://badge.fury.io/js/swagger-validation.svg)](http://badge.fury.io/js/swagger-validation)
 [![Dependency Status](https://david-dm.org/wonderlic/swagger-validation.png)](https://david-dm.org/wonderlic/swagger-validation.png)
 
