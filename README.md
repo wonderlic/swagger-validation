@@ -36,10 +36,35 @@ against the parameters specified automatically.
 **(NOTE: As of 7-31-2014, this is still a pull request of swagger and has not been approved. As such,
 this implementation may change if / when it gets pulled into swagger-node-express).**
 
-* On each method inside swagger, call into one of the helper methods.
+* On each method inside swagger, validate the request. For the following method (taken directly from the 
+swagger-application inside swagger-node-express)
 
 ```javascript
-// TODO: write this
+
+exports.findById = {
+  'spec': {
+    description : "Operations about pets",  
+    path : "/pet/{petId}",
+    method: "GET",
+    summary : "Find pet by ID",
+    notes : "Returns a pet based on ID",
+    type : "Pet",
+    nickname : "getPetById",
+    produces : ["application/json"],
+    parameters : [param.path("petId", "ID of pet that needs to be fetched", "string")],
+    responseMessages : [swe.invalid('id'), swe.notFound('pet')]
+  },
+  'action': function (req,res) {
+    if (!req.params.petId) {
+      throw swe.invalid('id'); }
+    var id = parseInt(req.params.petId);
+    var pet = petData.getPetById(id);
+
+    if(pet) res.send(JSON.stringify(pet));
+    else throw swe.notFound('pet',res);
+  }
+};
+
 ```
 
 * Modify swagger-node-express directly. While this would have the same benefit as the first one that, by default, all methods 
@@ -69,7 +94,7 @@ This **will** be deprecated / removed once the pull request specified above gets
     
       callback(req, res, next);
     }
-    
+        
 ```
 
 ## Types of validation
