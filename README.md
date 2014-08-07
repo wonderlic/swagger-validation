@@ -36,11 +36,11 @@ against the parameters specified automatically.
 **(NOTE: As of 7-31-2014, this is still a pull request of swagger and has not been approved. As such,
 this implementation may change if / when it gets pulled into swagger-node-express).**
 
-* On each method inside swagger, validate the request. For the following method (taken directly from the 
-swagger-application inside swagger-node-express)
+* On each method inside swagger, validate the request. 
+
+For the following method (using the swagger-application "test application" inside swagger-node-express)
 
 ```javascript
-
 exports.findById = {
   'spec': {
     description : "Operations about pets",  
@@ -64,6 +64,101 @@ exports.findById = {
     else throw swe.notFound('pet',res);
   }
 };
+```
+
+change it to 
+
+```javascript
+exports.findById = {
+  'spec': {
+    description : "Operations about pets",  
+    path : "/pet/{petId}",
+    method: "GET",
+    summary : "Find pet by ID",
+    notes : "Returns a pet based on ID",
+    type : "Pet",
+    nickname : "getPetById",
+    produces : ["application/json"],
+    parameters : [param.path("petId", "ID of pet that needs to be fetched", "string")],
+    responseMessages : [swe.invalid('id'), swe.notFound('pet')]
+  },
+  'action': function (req,res) {
+    
+    var validate = require('swagger-validation');
+    var models = require("./models.js");
+    var _ = require('lodash');
+    var ret = validate(exports.findById.spec, req, models); // models are only needed if this is intended to validate an object
+    if(ret.length) {
+      var errors = _.pluck(_.pluck(ret, 'error'), 'message');
+      res.send(JSON.stringify({
+        'message': 'validation failure - ' + errors.join(),
+        'code': 400
+      }), 400);
+      return;
+    }
+  
+    if (!req.params.petId) {
+      throw swe.invalid('id'); }
+    var id = parseInt(req.params.petId);
+    var pet = petData.getPetById(id);
+
+    if(pet) res.send(JSON.stringify(pet));
+    else throw swe.notFound('pet',res);
+  }
+};
+```
+
+or, for a little cleaner approach:
+
+```javascript
+exports.findById = {
+  'spec': {
+    description : "Operations about pets",
+    path : "/pet/{petId}",
+    method: "GET",
+    summary : "Find pet by ID",
+    notes : "Returns a pet based on ID",
+    type : "Pet",
+    nickname : "getPetById",
+    produces : ["application/json"],
+    parameters : [param.path("petId", "ID of pet that needs to be fetched", "integer")],
+    responseMessages : [swe.invalid('id'), swe.notFound('pet')]
+  },
+  'action': function (req,res) {
+    validateReq(req, res, exports.findById.spec, function() {
+      if (!req.params.petId) {
+        throw swe.invalid('id'); }
+      var id = parseInt(req.params.petId);
+      var pet = petData.getPetById(id);
+
+      if(pet) res.send(JSON.stringify(pet));
+      else throw swe.notFound('pet',res);
+    });
+  }
+};
+
+...
+
+// put this somewhere else (either in the same file or put it in a separate module using the standard 
+// module.exports Node convention) so that everyone can share it
+
+var validate = require('swagger-validation');
+var _ = require('lodash');
+var models = require("./models.js");
+
+function validateReq(req, res, spec, func) {
+  var ret = validate(spec, req, models);
+  if(ret.length) {
+    var errors = _.pluck(_.pluck(ret, 'error'), 'message');
+    res.send(JSON.stringify({
+      'message': 'validation failure - ' + errors.join(),
+      'code': 400
+    }), 400);
+    return;
+  }
+
+  func();
+}
 
 ```
 
