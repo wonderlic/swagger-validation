@@ -7,7 +7,7 @@
 * [Validation](#Validation)
   * [Validation.Validate_ParamType(param, req, [models])](#Validation.Validate_ParamType)
   * [Validation.Validate_Parameter(param, value, [models])](#Validation.Validate_Parameter)
-  * [Validation.Validate(operation, req, [models])](#Validation.Validate)
+  * [Validation.Validate(spec, req, [models])](#Validation.Validate)
   * [Validation.ParamTypes](#Validation.ParamTypes)
     * [ParamTypes.Validate_Body(param, req, [models])](#Validation.ParamTypes.Validate_Body)
     * [ParamTypes.Validate_Form(param, req, [models])](#Validation.ParamTypes.Validate_Form)
@@ -56,7 +56,7 @@ This is a polyfill for checking if something is an integer. This is proposed fun
 * [Validation](#Validation)
   * [Validation.Validate_ParamType(param, req, [models])](#Validation.Validate_ParamType)
   * [Validation.Validate_Parameter(param, value, [models])](#Validation.Validate_Parameter)
-  * [Validation.Validate(operation, req, [models])](#Validation.Validate)
+  * [Validation.Validate(spec, req, [models])](#Validation.Validate)
   * [Validation.ParamTypes](#Validation.ParamTypes)
     * [ParamTypes.Validate_Body(param, req, [models])](#Validation.ParamTypes.Validate_Body)
     * [ParamTypes.Validate_Form(param, req, [models])](#Validation.ParamTypes.Validate_Form)
@@ -105,12 +105,12 @@ Ensures that the <tt>value</tt> that is passed in on the req is valid based upon
 
 **Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
 <a name="Validation.Validate"></a>
-##Validation.Validate(operation, req, [models])
-Validates the <tt>req</tt> against the <tt>operation</tt> that was defined.
+##Validation.Validate(spec, req, [models])
+Validates the <tt>req</tt> against the <tt>spec</tt> that was defined.
 
 **Params**
 
-- operation `Object` - The operation that this is validating  
+- spec `Object` - The specification that this is validating  
 - req `Object` - The request that this is validating  
 - \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
 
