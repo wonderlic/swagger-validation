@@ -34,7 +34,7 @@ Using NPM, include the `swagger-validation` module in your `package.json` depend
 
 There are few different ways to use this module within swagger-node-express depending on what you are trying to accomplish.
 
-### Use the middleware component of Swagger. 
+### Use the middleware component of Swagger 
 
 The benefit of this is that, by default, all methods will have their request validated 
 against the parameters specified automatically. 
@@ -46,7 +46,7 @@ against the parameters specified automatically.
 **(NOTE: As of 7-31-2014, this is still a pull request of swagger and has not been approved. As such,
 this implementation may change if / when it gets pulled into swagger-node-express).**
 
-### On each method inside swagger-node-express, validate the request. 
+### Validate each method individually 
 
 For the following method (using the swagger-application "test application" inside swagger-node-express)
 
@@ -170,7 +170,7 @@ function validateReq(req, res, spec, func) {
 
 ```
 
-### Modify swagger-node-express directly. 
+### Modify swagger-node-express directly
 
 While this would have the same benefit as the first one that, by default, all methods 
 will have their request validated against the parameters specified automatically, this is **non-standard** and **can lead to unintended consequences**. 
