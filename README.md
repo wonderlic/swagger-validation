@@ -87,7 +87,8 @@ exports.findById = {
     var validate = require('swagger-validation');
     var models = require("./models.js");
     var _ = require('lodash');
-    var ret = validate(exports.findById.spec, req, models); // models are only needed if this is intended to validate an object
+    // models are only needed if this is intended to validate an object
+    var ret = validate(exports.findById.spec, req, models); 
     if(ret.length) {
       var errors = _.pluck(_.pluck(ret, 'error'), 'message');
       res.send(JSON.stringify({
@@ -137,11 +138,8 @@ exports.findById = {
   }
 };
 
-...
-
-// put this somewhere else (either in the same file or put it in a separate module using the standard 
-// module.exports Node convention) so that everyone can share it
-
+// put this somewhere else, either in the same file or put it in a 
+// separate module using the standard module.exports Node convention
 var validate = require('swagger-validation');
 var _ = require('lodash');
 var models = require("./models.js");
