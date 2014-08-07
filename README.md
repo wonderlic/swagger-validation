@@ -14,7 +14,7 @@ parameters, and models. It returns an array of JavaScript Error objects if there
 it only uses the message property of the Error object which, using lo-dash or Underscore.js, can be got easily via 
 
 ```javascript
-var errors = _.pluck(_.pluck([THE RETURN FROM THE CALL TO VALIDATE], 'error'), 'message');)
+var errors = _.pluck(_.pluck([VALIDATION RETURN], 'error'), 'message');)
 ```
 
 ## Installation
