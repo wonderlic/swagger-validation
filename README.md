@@ -7,6 +7,16 @@
 This module follows the [swagger specification 1.2](https://github.com/wordnik/swagger-spec/blob/master/versions/1.2.md) 
 to offer validation on a particular request as it gets wired up through [swagger-node-express](https://github.com/wordnik/swagger-node-express).
 
+## Quick Description
+
+This module validates the request from a swagger-node-express application using the existing swagger-node-express objects,
+parameters, and models. It returns an array of JavaScript Error objects if there are any validation errors. For now,
+it only uses the message property of the Error object which, using lo-dash or Underscore.js, can be got easily via 
+
+```javascript
+var errors = _.pluck(_.pluck([THE RETURN FROM THE CALL TO VALIDATE], 'error'), 'message');)
+```
+
 ## Installation
 
 Using NPM, include the `swagger-validation` module in your `package.json` dependencies.
