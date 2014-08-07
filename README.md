@@ -40,11 +40,21 @@ The benefit of this is that, by default, all methods will have their request val
 against the parameters specified automatically. 
 
 ```javascript
-// TODO: write this
+
+// add this to the swagger definition, usually defined in the app.js
+swagger.addMiddleware(function(req, res, spec, models) {
+  var ret = validate(spec, req, models);
+  if(ret.length) {
+    var errors = _.pluck(_.pluck(ret, 'error'), 'message');
+    var message = 'validation failure - ' + errors.join();
+    return { 'code' : 400, 'message': message };
+  }
+});
+
 ```
 
-**(NOTE: As of 7-31-2014, this is still a pull request of swagger and has not been approved. As such,
-this implementation may change if / when it gets pulled into swagger-node-express).**
+**(NOTE: As of 8-7-2014, this is still a pull request of swagger and has not been approved. As such,
+this implementation WILL change if / when it gets pulled into swagger-node-express).**
 
 ### Validate each method individually 
 
@@ -187,7 +197,7 @@ This **will** be deprecated / removed once the pull request specified above gets
     // change it to 
     else {
       var validate = require('swagger-validation');
-      var ret = validate(api.operations[0], req, self.allModels);
+      var ret = validate(spec, req, self.allModels);
       if(ret.length) {
         var errors = _.pluck(_.pluck(ret, 'error'), 'message');
         res.send(JSON.stringify({
