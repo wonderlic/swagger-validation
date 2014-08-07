@@ -4,13 +4,11 @@
 [![NPM version](https://badge.fury.io/js/swagger-validation.svg)](http://badge.fury.io/js/swagger-validation)
 [![Dependency Status](https://david-dm.org/wonderlic/swagger-validation.png)](https://david-dm.org/wonderlic/swagger-validation.png)
 
-This module follows the [swagger specification 1.2](https://github.com/wordnik/swagger-spec/blob/master/versions/1.2.md) 
-to offer validation on a particular request as it gets wired up through [swagger-node-express](https://github.com/wordnik/swagger-node-express).
-
 ## Quick Description
 
-This module validates the request from a swagger-node-express application using the existing swagger-node-express objects,
-parameters, and models. It returns an array of JavaScript Error objects if there are any validation errors. For now,
+This module validates a request from a swagger-node-express application using the existing swagger-node-express objects,
+parameters, and models following the [swagger specification 1.2](https://github.com/wordnik/swagger-spec/blob/master/versions/1.2.md). 
+It returns an array of JavaScript Error objects if there are any validation errors. For now,
 it only uses the message property of the Error object which, using lo-dash or Underscore.js, can be got easily via 
 
 ```javascript
