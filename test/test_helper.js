@@ -13,13 +13,14 @@ exports.makeParam = function(type, required, format, name) {
 };
 
 // helper method to make the string param object
-exports.makeStringParam = function(type, required, format, enums, name) {
+exports.makeStringParam = function(type, required, format, pattern, enums, name) {
   return {
     type: type,
     required: required,
     format: format ? format : undefined,
     'enum': enums ? enums : undefined,
-    name: name ? name : 'testParam'
+    name: name ? name : 'testParam',
+    pattern: pattern ? pattern : undefined
   };
 };
 
@@ -36,11 +37,15 @@ exports.makeNumberParam = function(type, required, format, minimum, maximum, nam
 };
 
 // helper method to make the array / set param object
-exports.makeArrayParam = function(required, itemType, itemFormat, uniqueItems, name) {
+exports.makeArrayParam = function(required, itemType, itemFormat, itemPattern, uniqueItems, name) {
   return {
     type: 'Array',
     required: required,
-    items: {type: itemType, format: itemFormat ? itemFormat : undefined },
+    items: {
+      type: itemType,
+      format: itemFormat ? itemFormat : undefined,
+      pattern: itemPattern ? itemPattern : undefined
+    },
     uniqueItems: uniqueItems ? uniqueItems : undefined,
     name: name ? name : 'testParam'
   };
@@ -67,7 +72,7 @@ exports.validateSuccess = function(ret, length, values) {
       expect(param).to.have.ownProperty('value');
 
       var value = param.value;
-      expect(value).to.equal(values[i]);
+      expect(value).to.eql(values[i]);
     }
   }
 };
@@ -87,6 +92,6 @@ exports.validateError = function(ret, length, errors) {
     expect(error).to.be.an.instanceof(Error);
 
     var errMessage = error.message;
-    expect(errMessage).to.equal(errors[i]);
+    expect(errMessage).to.eql(errors[i]);
   }
 };

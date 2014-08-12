@@ -18,7 +18,13 @@ describe('string', function() {
 
   it('should validate with enum', function() {
     var value = 'Hi';
-    var ret = validate(helper.makeStringParam('string', false, undefined, ['Hi', 'Hello']), value);
+    var ret = validate(helper.makeStringParam('string', false, undefined, undefined, ['Hi', 'Hello']), value);
+    helper.validateSuccess(ret, 1, [value]);
+  });
+
+  it('should validate when pattern does match', function() {
+    var value = 'Heya';
+    var ret = validate(helper.makeStringParam('string', false, null, '/^Heya$/i'), value);
     helper.validateSuccess(ret, 1, [value]);
   });
 
@@ -41,13 +47,13 @@ describe('string', function() {
 
   it('should not validate with enum', function() {
     var value = 'Hola';
-    var ret = validate(helper.makeStringParam('string', false, undefined, ['Hi', 'Hello']), value);
+    var ret = validate(helper.makeStringParam('string', false, undefined, undefined, ['Hi', 'Hello']), value);
     helper.validateError(ret, 1, ["testParam is not a valid entry"]);
   });
 
   it('should not validate with enum case-sensitive', function() {
     var value = 'HI';
-    var ret = validate(helper.makeStringParam('string', false, undefined, ['Hi', 'Hello']), value);
+    var ret = validate(helper.makeStringParam('string', false, undefined, undefined, ['Hi', 'Hello']), value);
     helper.validateError(ret, 1, ["testParam is not a valid entry"]);
   });
 
@@ -78,5 +84,11 @@ describe('string', function() {
     var value = ['this', 'is', 'a', 'string'];
     var ret = validate(helper.makeStringParam('string', false), value);
     helper.validateError(ret, 1, ["testParam is not a type of string"]);
+  });
+
+  it('should not validate when pattern does not match', function() {
+    var value = 'Heya';
+    var ret = validate(helper.makeStringParam('string', false, null, '/^Goodbye$/i'), value);
+    helper.validateError(ret, 1, ["testParam does not match the required pattern /^Goodbye$/i"]);
   });
 });

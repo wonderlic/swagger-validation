@@ -1,6 +1,6 @@
 {
   "name": "swagger-validation",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "author": {
     "name": "Wonderlic, Inc.",
     "email": "SoftwareDevelopment@wonderlic.com",
@@ -22,8 +22,15 @@
   "engines": {
     "node": ">= 0.8.x"
   },
+  "scripts": {
+    "jshint": "jshint ./lib ./test index.js gulpfile.js",
+    "test": "npm run jshint && mocha",
+    "test-debug": "mocha --debug-brk"
+  },
   "dependencies": {
-    "lodash": "2.4.x"
+    "lodash": "2.4.x",
+    "moment": "^2.8.1",
+    "parse-regexp": "0.0.1"
   },
   "devDependencies": {
     "mocha": "1.21.x",
