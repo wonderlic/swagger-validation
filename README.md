@@ -15,6 +15,19 @@ it only uses the message property of the Error object which, using lo-dash or Un
 var errors = _.pluck(_.pluck([VALIDATION RETURN], 'error'), 'message');)
 ```
 
+In addition to validating the req, it will also transform some values. The table below shows how inputs will be transformed:
+
+| Input Type                                   | Swagger Type  | Swagger Format     | Output                                               |
+| -------------------------------------------- | ------------- | ------------------ | ---------------------------------------------------- |
+| string integer/long e.g. `"123"`             | `integer`     | `int32` or `int64` | integer/long e.g. `123`                              |
+| string hex e.g. `"0x123"`                    | `integer`     | `int32` or `int64` | integer/long e.g. `291`                              |
+| string float/double e.g. `"123.01"`          | `number`      | `float` or `double`| float/double e.g. `123.01`                           |
+| string boolean e.g. `"true"`                 | `boolean`     |                    | boolean e.g. `true`                                  |
+| string date e.g. `"2014-08-10"`              | `string`      | `date`             | Date object e.g. `new Date("2014-08-10")`**          |
+| string date e.g. `"2014-08-10T12:00:01"`     | `string`      | `date-time`        | Date object e.g. `new Date("2014-08-10T12:00:01")`** |
+
+** The date conversions are done using the [moment.js](//momentjs.com/) library. By default, it uses the `moment.ISO_8601()` format for parsing dates. You can override this by specifying a `pattern` property on your swagger object.  More on this below.
+
 ## Installation
 
 Using NPM, include the `swagger-validation` module in your `package.json` dependencies.
@@ -211,6 +224,36 @@ This **will** be deprecated / removed once the pull request specified above gets
     }
         
 ```
+
+## Functionality outside of swagger spec 1.2
+
+swagger-validation adhears to the official swagger specification as much as possible, but there are a few cases where it deviates to provide extra functionality.  If you follow the swagger specification explicitly and don't implement any of this extra functionality, swagger-validation should work just fine for you.
+
+### String pattern matching (RegExp)
+
+It is possible to validate string types using a RegExp pattern defined on your swagger object.  Take this example:
+```javascript
+exports.findByName = {
+  spec: {
+    description : "Find pet by name",  
+    path : "/pet/{petName}",
+    method: "GET",
+    type : "Pet",
+    produces : ["application/json"],
+    parameters : [{
+      id: "petName",
+      description: "petName",
+      type: "string",
+      pattern: "/^dr*/i"
+    }]
+  }
+};
+```
+It's a bit abitrary, but this will require that all names sent to the /pet/{petName} route start with `"dr"` (case insensitive).  `pattern` will accept any regex string as long as it's in the format of a regex object (e.g. "/somematch/"" not "somematch").
+
+### Date pattern matching (moment.js format)
+
+Much like the string pattern matching mentioned above, swagger objects with a type of `string` and a format of `date` or `date-time` also accept a `pattern` property.  However, instead of a RegExp string, it accepts a [moment.js format string](http://momentjs.com/docs/#/displaying/format/).  By default, it uses `moment.ISO_8601()`, which should match any ISO 8601 compatible date.  If you want to be more explicit, you can specify your own format using the `pattern` property.
 
 ## Types of validation
 

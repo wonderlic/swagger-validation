@@ -1,5 +1,6 @@
 'use strict';
 
+var moment = require('moment');
 var helper = require('./test_helper');
 var validate = require('../lib/validation/parameter');
 
@@ -17,18 +18,21 @@ describe('object', function() {
     };
 
     it('should validate with parameter null', function() {
-      var ret = validate(helper.makeParam('Test', false), null, model);
-      helper.validateSuccess(ret, 0);
+      var value = null;
+      var ret = validate(helper.makeParam('Test', false), value, model);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should validate with parameter undefined', function() {
-      var ret = validate(helper.makeParam('Test', false), undefined, model);
-      helper.validateSuccess(ret, 0);
+      var value = void(0);
+      var ret = validate(helper.makeParam('Test', false), value, model);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should validate with parameter empty', function() {
-      var ret = validate(helper.makeParam('Test', false), {}, model);
-      helper.validateSuccess(ret, 1, [{}]);
+      var value = {};
+      var ret = validate(helper.makeParam('Test', false), value, model);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with required parameter null', function() {
@@ -261,8 +265,9 @@ describe('object', function() {
 
     it('should validate', function() {
       var value = { id: '2014-08-08'};
+      var transformedValue = { id: moment('2014-08-08').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
   });
 
@@ -279,9 +284,10 @@ describe('object', function() {
     };
 
     it('should validate', function() {
-      var value = { id: '2014-08-09T12:43:00Z'};
+      var value = { id: '2014-08-09T12:43:00'};
+      var transformedValue = { id: moment('2014-08-09T12:43:00').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
   });
 
@@ -299,8 +305,9 @@ describe('object', function() {
 
     it('should validate', function() {
       var value = { id: 'true'};
+      var transformedValue = { id: true};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate', function() {
@@ -562,8 +569,9 @@ describe('object', function() {
 
     it('should validate', function() {
       var value = { id: '2014-08-08'};
+      var transformedValue = { id: moment('2014-08-08').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -589,9 +597,10 @@ describe('object', function() {
     };
 
     it('should validate', function() {
-      var value = { id: '2014-08-09T12:43:00Z'};
+      var value = { id: '2014-08-09T12:43:00'};
+      var transformedValue = { id: moment('2014-08-09T12:43:00').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -615,8 +624,9 @@ describe('object', function() {
 
     it('should validate', function() {
       var value = { id: 'true'};
+      var transformedValue = { id: true};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -663,11 +673,24 @@ describe('object', function() {
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
         date: '2013-08-09',
-        datetime: '2014-01-01T17:00Z',
+        datetime: '2014-01-01T17:00',
+        boolean: true
+      };
+      var transformedValue = {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'ThisIsAString ThatContains Many Spaces',
+        byte: [35, 98],
+        date: moment('2013-08-09').toDate(),
+        datetime: moment('2014-01-01T17:00').toDate(),
         boolean: true
       };
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate all invalid', function() {
@@ -709,7 +732,7 @@ describe('object', function() {
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
         date: '2013-08-09',
-        datetime: '2014-01-01T17:00Z',
+        datetime: '2014-01-01T17:00',
         boolean: true
       }, model);
       helper.validateError(ret, 4, [
@@ -779,11 +802,24 @@ describe('object', function() {
         param7: 'ThisIsAString ThatContains Many Spaces',
         param8: [35, 98],
         param9: '2013-08-09',
-        param10: '2014-01-01T17:00:00Z',
+        param10: '2014-01-01T17:00:00',
+        param11: true
+      };
+      var transformedValue = {
+        param1: 0x33,
+        param2: -2.231231,
+        param3: Number.MIN_VALUE,
+        param4: 2e0,
+        param5: -2312,
+        param6: Number.MAX_VALUE,
+        param7: 'ThisIsAString ThatContains Many Spaces',
+        param8: [35, 98],
+        param9: moment('2013-08-09').toDate(),
+        param10: moment('2014-01-01T17:00:00').toDate(),
         param11: true
       };
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate all missing', function() {
@@ -841,11 +877,24 @@ describe('object', function() {
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
         date: '2013-08-09',
-        datetime: '2014-01-01T17:00:00Z',
+        datetime: '2014-01-01T17:00:00',
+        boolean: true
+      };
+      var transformedValue = {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'ThisIsAString ThatContains Many Spaces',
+        byte: [35, 98],
+        date: moment('2013-08-09').toDate(),
+        datetime: moment('2014-01-01T17:00:00').toDate(),
         boolean: true
       };
       var ret = validate(helper.makeParam('baz', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate all invalid', function() {
@@ -1094,11 +1143,24 @@ describe('object', function() {
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
         date: '2013-08-09',
-        datetime: '2014-01-01T17:00:00Z',
+        datetime: '2014-01-01T17:00:00',
+        boolean: true
+      };
+      var transformedValue = {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'ThisIsAString ThatContains Many Spaces',
+        byte: [35, 98],
+        date: moment('2013-08-09').toDate(),
+        datetime: moment('2014-01-01T17:00:00').toDate(),
         boolean: true
       };
       var ret = validate(helper.makeParam('baz', false), value, model);
-      helper.validateSuccess(ret, 1, [value]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate all invalid', function() {

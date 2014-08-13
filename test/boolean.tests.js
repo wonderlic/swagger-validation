@@ -18,14 +18,16 @@ describe('boolean', function() {
 
   it('should validate with true string', function() {
     var value = 'true';
+    var transformedValue = true;
     var ret = validate(helper.makeParam('boolean', false), value);
-    helper.validateSuccess(ret, 1);
+    helper.validateSuccess(ret, 1, [transformedValue]);
   });
 
   it('should validate with false string', function() {
     var value = 'false';
+    var transformedValue = false;
     var ret = validate(helper.makeParam('boolean', false), value);
-    helper.validateSuccess(ret, 1);
+    helper.validateSuccess(ret, 1, [transformedValue]);
   });
 
   it('should not validate with required field null', function() {
