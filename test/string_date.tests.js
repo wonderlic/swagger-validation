@@ -6,7 +6,7 @@ var validate = require('../lib/validation/parameter');
 
 describe('string - date', function() {
   it('should validate', function() {
-    var value = '2014-01-01T17:00:00-0700';
+    var value = '2014-01-01';
     var expected = moment('2014-01-01', 'YYYY-MM-DD').toDate();
     var ret = validate(helper.makeStringParam('string', false, 'date'), value);
     helper.validateSuccess(ret, 1, [expected]);
