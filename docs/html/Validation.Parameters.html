@@ -143,6 +143,354 @@
         <dl>
             
 <dt>
+    <h4 class="name" id="Is_Pattern_Match"><span class="type-signature">&lt;static> </span>Is_Pattern_Match<span class="signature">(param, value)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Ensures that the <tt>value</tt> that is passed in matches the <tt>param</tt>'s pattern property.
+If <tt>param</tt> does not have a pattern property, or the pattern cannot be parsed into a valid
+RegExp object, pattern matching is skipped and <tt>value</tt> is considered valid.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The Swagger param that was created for this operation</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The value that is passed in along the req (via body, header, etc.)</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="string.js.html">validation/parameters/string.js</a>,
+				 <a href="string.js.html#sunlight-1-line-8">line 8</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>True if <tt>value</tt> matches pattern, or no valid pattern exists. False
+if pattern exists and <tt>value</tt> does not match pattern.</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Boolean</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="Is_Required"><span class="type-signature">&lt;static> </span>Is_Required<span class="signature">(param, value)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Used by the <a href="Validation.Parameters.html">Validation.Parameters</a> to determine whether or not a particular <tt>value</tt> is required.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The Swagger param that was created for this operation</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The value that is passed in along the req (via body, header, etc.)</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="helper.js.html">validation/parameters/helper.js</a>,
+				 <a href="helper.js.html#sunlight-1-line-54">line 54</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>If <tt>value</tt> is require, it is undefined/null/emptystring, and there is no defaultValue, this will return the 
+result of <a href="Validation.Parameters.html#Return_Error">Validation.Parameters.Return_Error</a>. If there is a defaultValue, this will return an empty array, which indicates 
+that the defaultValue will be used, which is not validated. If <tt>value</tt> is not undefined/null/empty, this will return undefined,
+indicating that further validation is required.</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Array</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="Return_Error"><span class="type-signature">&lt;static> </span>Return_Error<span class="signature">(err, <span class="optional">errArgs</span>)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
@@ -435,7 +783,7 @@ Everything returns an array as object and arrays can have multiple messages retu
 		<ul class="dummy">
 			<li>
 				<a href="helper.js.html">validation/parameters/helper.js</a>,
-				 <a href="helper.js.html#sunlight-1-line-37">line 37</a>
+				 <a href="helper.js.html#sunlight-1-line-38">line 38</a>
 			</li>
 		</ul>
 	</dd>
@@ -1092,11 +1440,10 @@ or a value property that contains the value passed in unmodified.</p>
     <div class="description">
         <p>There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time
 (more than likely due to the varied formats a date could have). Even using moment.js and something
-like moment-parseformat or the native Date object has the potential to lead to false positives. Without
-additional spec definition into what defines a date or date-time (or, ideally, the spec adds in a
-'format' for date / date time that can be used in a date validation function), this is too varied to
-be handled by the validation framework. As such, there is no inherent validation to be done, but it
-is a valid type, so just do required checks.</p>
+like moment-parseformat or the native Date object has the potential to lead to false positives. Therefore,
+swagger-validation will accept a 'pattern' property on Swagger Property/Parameter Objects, which
+should be a moment.js format string, which specifies the explicit format expected for date and date-time formats.
+If no pattern property is detected, date and date-time formats will use moment.ISO_8601 by default.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
 then this will throw a parameter is required error.</p>
     </div>
@@ -1208,7 +1555,7 @@ then this will throw a parameter is required error.</p>
 		<ul class="dummy">
 			<li>
 				<a href="date.js.html">validation/parameters/date.js</a>,
-				 <a href="date.js.html#sunlight-1-line-5">line 5</a>
+				 <a href="date.js.html#sunlight-1-line-6">line 6</a>
 			</li>
 		</ul>
 	</dd>
@@ -1237,7 +1584,9 @@ then this will throw a parameter is required error.</p>
 <div class="param-desc">
     <p>An empty Array if the <tt>value</tt> was &quot;nothing&quot; and not required, else an array
 containing an object with either an error property (which contains an Array of Error objects)
-or a value property that contains the value passed in unmodified.</p>
+or a value property that contains a Date object parsed from <tt>value</tt>. The time portion of the
+Date object will automatically be zero'd out, since date formats are meant to ignore the time portion
+of the date. If you need the time, use &quot;date-time&quot; instead.</p>
 </div>
 
 
@@ -1273,11 +1622,10 @@ or a value property that contains the value passed in unmodified.</p>
     <div class="description">
         <p>There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time
 (more than likely due to the varied formats a date could have). Even using moment.js and something
-like moment-parseformat or the native Date object has the potential to lead to false positives. Without
-additional spec definition into what defines a date or date-time (or, ideally, the spec adds in a
-'format' for date / date time that can be used in a date validation function), this is too varied to
-be handled by the validation framework. As such, there is no inherent validation to be done, but it
-is a valid type, so just do required checks.</p>
+like moment-parseformat or the native Date object has the potential to lead to false positives. Therefore,
+swagger-validation will accept a 'pattern' property on Swagger Property/Parameter Objects, which
+should be a moment.js format string, which specifies the explicit format expected for date and date-time formats.
+If no pattern property is detected, date and date-time formats will use moment.ISO_8601 by default.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
 then this will throw a parameter is required error.</p>
     </div>
@@ -1389,7 +1737,7 @@ then this will throw a parameter is required error.</p>
 		<ul class="dummy">
 			<li>
 				<a href="dateTime.js.html">validation/parameters/dateTime.js</a>,
-				 <a href="dateTime.js.html#sunlight-1-line-5">line 5</a>
+				 <a href="dateTime.js.html#sunlight-1-line-6">line 6</a>
 			</li>
 		</ul>
 	</dd>
@@ -1418,7 +1766,7 @@ then this will throw a parameter is required error.</p>
 <div class="param-desc">
     <p>An empty Array if the <tt>value</tt> was &quot;nothing&quot; and not required, else an array
 containing an object with either an error property (which contains an Array of Error objects)
-or a value property that contains the value passed in unmodified.</p>
+or a value property that contains a Date object parsed from <tt>value</tt>.</p>
 </div>
 
 
@@ -1917,7 +2265,7 @@ are validated the same way, with the exception of int64 as that is validated lik
 		<ul class="dummy">
 			<li>
 				<a href="integer.js_.html">validation/parameters/integer.js</a>,
-				 <a href="integer.js_.html#sunlight-1-line-56">line 56</a>
+				 <a href="integer.js_.html#sunlight-1-line-57">line 57</a>
 			</li>
 		</ul>
 	</dd>
@@ -2273,7 +2621,7 @@ are validated the same way.</p>
 		<ul class="dummy">
 			<li>
 				<a href="number.js.html">validation/parameters/number.js</a>,
-				 <a href="number.js.html#sunlight-1-line-58">line 58</a>
+				 <a href="number.js.html#sunlight-1-line-59">line 59</a>
 			</li>
 		</ul>
 	</dd>
@@ -2671,7 +3019,7 @@ or a value property that contains the value with JSON.stringify() called on it.<
 		<ul class="dummy">
 			<li>
 				<a href="object.js.html">validation/parameters/object.js</a>,
-				 <a href="object.js.html#sunlight-1-line-92">line 92</a>
+				 <a href="object.js.html#sunlight-1-line-93">line 93</a>
 			</li>
 		</ul>
 	</dd>
@@ -2847,7 +3195,7 @@ then this will throw a parameter is required error.</p>
 		<ul class="dummy">
 			<li>
 				<a href="string.js.html">validation/parameters/string.js</a>,
-				 <a href="string.js.html#sunlight-1-line-7">line 7</a>
+				 <a href="string.js.html#sunlight-1-line-31">line 31</a>
 			</li>
 		</ul>
 	</dd>
@@ -3020,7 +3368,7 @@ or a value property that contains the value parsed successfully.</p>
 		<ul class="dummy">
 			<li>
 				<a href="string.js.html">validation/parameters/string.js</a>,
-				 <a href="string.js.html#sunlight-1-line-39">line 39</a>
+				 <a href="string.js.html#sunlight-1-line-68">line 68</a>
 			</li>
 		</ul>
 	</dd>
@@ -3098,7 +3446,7 @@ or a value property that contains the value parsed successfully.</p>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a>
-		on Thu Aug 7th 2014 using the <a
+		on Wed Aug 13th 2014 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>

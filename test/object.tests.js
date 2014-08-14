@@ -1,5 +1,6 @@
 'use strict';
 
+var moment = require('moment');
 var helper = require('./test_helper');
 var validate = require('../lib/validation/parameter');
 
@@ -17,18 +18,21 @@ describe('object', function() {
     };
 
     it('should validate with parameter null', function() {
-      var ret = validate(helper.makeParam('Test', false), null, model);
-      helper.validateSuccess(ret, 0);
+      var value = null;
+      var ret = validate(helper.makeParam('Test', false), value, model);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should validate with parameter undefined', function() {
-      var ret = validate(helper.makeParam('Test', false), undefined, model);
-      helper.validateSuccess(ret, 0);
+      var value = void(0);
+      var ret = validate(helper.makeParam('Test', false), value, model);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should validate with parameter empty', function() {
-      var ret = validate(helper.makeParam('Test', false), {}, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify({})]);
+      var value = {};
+      var ret = validate(helper.makeParam('Test', false), value, model);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with required parameter null', function() {
@@ -72,7 +76,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
@@ -96,7 +100,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1.233242};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
@@ -120,7 +124,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1.233242 };
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
@@ -144,7 +148,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
@@ -168,7 +172,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
@@ -192,7 +196,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1.235641231};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
@@ -216,7 +220,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 'this is a string'};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
@@ -240,7 +244,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: [65, 43]};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
   });
 
@@ -251,15 +255,19 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'string', format: 'date' }
+          id: {
+            type: 'string',
+            format: 'date'
+          }
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: '8/8/2014'};
+      var value = { id: '2014-08-08'};
+      var transformedValue = { id: moment('2014-08-08').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
   });
 
@@ -276,9 +284,10 @@ describe('object', function() {
     };
 
     it('should validate', function() {
-      var value = { id: '8/9/2014 12:43 PM'};
+      var value = { id: '2014-08-09T12:43:00'};
+      var transformedValue = { id: moment('2014-08-09T12:43:00').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
   });
 
@@ -296,8 +305,9 @@ describe('object', function() {
 
     it('should validate', function() {
       var value = { id: 'true'};
+      var transformedValue = { id: true};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate', function() {
@@ -322,7 +332,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -352,7 +362,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1.233242};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -382,7 +392,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1.233242};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -412,7 +422,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -442,7 +452,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -472,7 +482,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -502,7 +512,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: 'this is a string'};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -532,7 +542,7 @@ describe('object', function() {
     it('should validate', function() {
       var value = { id: [65, 43]};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -549,15 +559,19 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'string', format: 'date' }
+          id: {
+            type: 'string',
+            format: 'date'
+          }
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: '8/8/2014'};
+      var value = { id: '2014-08-08'};
+      var transformedValue = { id: moment('2014-08-08').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -574,15 +588,19 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'string', format: 'date-time' }
+          id: {
+            type: 'string',
+            format: 'date-time'
+          }
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: '8/9/2014 12:43 PM'};
+      var value = { id: '2014-08-09T12:43:00'};
+      var transformedValue = { id: moment('2014-08-09T12:43:00').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -606,8 +624,9 @@ describe('object', function() {
 
     it('should validate', function() {
       var value = { id: 'true'};
+      var transformedValue = { id: true};
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate with missing parameter', function() {
@@ -653,12 +672,25 @@ describe('object', function() {
         int64: Number.MAX_VALUE,
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
-        date: '8/9/2013',
-        datetime: '1/1/2014 5:00PM',
+        date: '2013-08-09',
+        datetime: '2014-01-01T17:00',
+        boolean: true
+      };
+      var transformedValue = {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'ThisIsAString ThatContains Many Spaces',
+        byte: [35, 98],
+        date: moment('2013-08-09').toDate(),
+        datetime: moment('2014-01-01T17:00').toDate(),
         boolean: true
       };
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate all invalid', function() {
@@ -675,7 +707,18 @@ describe('object', function() {
         datetime: Number(2.23526),
         boolean: 'Not a boolean'
       }, model);
-      helper.validateError(ret, 8, ['boolean is not a type of boolean', 'double is not a type of double', 'float is not a type of float', 'int32 is not a type of int32', 'int64 is not a type of int64', 'integer is not a type of integer', 'number is not a type of number', 'string is not a type of string']);
+      helper.validateError(ret, 10, [
+        'boolean is not a type of boolean',
+        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'double is not a type of double',
+        'float is not a type of float',
+        'int32 is not a type of int32',
+        'int64 is not a type of int64',
+        'integer is not a type of integer',
+        'number is not a type of number',
+        'string is not a type of string'
+      ]);
     });
 
     it('should not validate half invalid', function() {
@@ -688,11 +731,16 @@ describe('object', function() {
         int64: -Number.MIN_VALUE,
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
-        date: '8/9/2013',
-        datetime: '1/1/2014 5:00PM',
+        date: '2013-08-09',
+        datetime: '2014-01-01T17:00',
         boolean: true
       }, model);
-      helper.validateError(ret, 4, ['double is not a type of double', 'float is not a type of float', 'integer is not a type of integer', 'number is not a type of number']);
+      helper.validateError(ret, 4, [
+        'double is not a type of double',
+        'float is not a type of float',
+        'integer is not a type of integer',
+        'number is not a type of number'
+      ]);
     });
 
     it('should not validate other half invalid', function() {
@@ -709,7 +757,14 @@ describe('object', function() {
         datetime: Number(2.3265),
         boolean: 'Not a boolean'
       }, model);
-      helper.validateError(ret, 4, ['boolean is not a type of boolean', 'int32 is not a type of int32', 'int64 is not a type of int64', 'string is not a type of string']);
+      helper.validateError(ret, 6, [
+        'boolean is not a type of boolean',
+        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'int32 is not a type of int32',
+        'int64 is not a type of int64',
+        'string is not a type of string'
+      ]);
     });
   });
 
@@ -746,12 +801,25 @@ describe('object', function() {
         param6: Number.MAX_VALUE,
         param7: 'ThisIsAString ThatContains Many Spaces',
         param8: [35, 98],
-        param9: '8/9/2013',
-        param10: '1/1/2014 5:00PM',
+        param9: '2013-08-09',
+        param10: '2014-01-01T17:00:00',
+        param11: true
+      };
+      var transformedValue = {
+        param1: 0x33,
+        param2: -2.231231,
+        param3: Number.MIN_VALUE,
+        param4: 2e0,
+        param5: -2312,
+        param6: Number.MAX_VALUE,
+        param7: 'ThisIsAString ThatContains Many Spaces',
+        param8: [35, 98],
+        param9: moment('2013-08-09').toDate(),
+        param10: moment('2014-01-01T17:00:00').toDate(),
         param11: true
       };
       var ret = validate(helper.makeParam('Test', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate all missing', function() {
@@ -808,12 +876,25 @@ describe('object', function() {
         int64: Number.MAX_VALUE,
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
-        date: '8/9/2013',
-        datetime: '1/1/2014 5:00PM',
+        date: '2013-08-09',
+        datetime: '2014-01-01T17:00:00',
+        boolean: true
+      };
+      var transformedValue = {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'ThisIsAString ThatContains Many Spaces',
+        byte: [35, 98],
+        date: moment('2013-08-09').toDate(),
+        datetime: moment('2014-01-01T17:00:00').toDate(),
         boolean: true
       };
       var ret = validate(helper.makeParam('baz', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate all invalid', function() {
@@ -830,7 +911,18 @@ describe('object', function() {
         datetime: Number(2.2356),
         boolean: 'Not a boolean'
       }, model);
-      helper.validateError(ret, 8, ['boolean is not a type of boolean', 'double is not a type of double', 'float is not a type of float', 'int32 is not a type of int32', 'int64 is not a type of int64', 'integer is not a type of integer', 'number is not a type of number', 'string is not a type of string']);
+      helper.validateError(ret, 10, [
+        'boolean is not a type of boolean',
+        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'double is not a type of double',
+        'float is not a type of float',
+        'int32 is not a type of int32',
+        'int64 is not a type of int64',
+        'integer is not a type of integer',
+        'number is not a type of number',
+        'string is not a type of string'
+      ]);
     });
 
     it('should not validate half invalid', function() {
@@ -843,8 +935,8 @@ describe('object', function() {
         int64: -Number.MIN_VALUE,
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
-        date: '8/9/2013',
-        datetime: '1/1/2014 5:00PM',
+        date: '2014-08-09',
+        datetime: '2014-01-01T17:00:00Z',
         boolean: true
       }, model);
       helper.validateError(ret, 4, ['double is not a type of double', 'float is not a type of float', 'integer is not a type of integer', 'number is not a type of number']);
@@ -864,7 +956,14 @@ describe('object', function() {
         datetime: Number(2.2356),
         boolean: 'Not a boolean'
       }, model);
-      helper.validateError(ret, 4, ['boolean is not a type of boolean', 'int32 is not a type of int32', 'int64 is not a type of int64', 'string is not a type of string']);
+      helper.validateError(ret, 6, [
+        'boolean is not a type of boolean',
+        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'int32 is not a type of int32',
+        'int64 is not a type of int64',
+        'string is not a type of string'
+      ]);
     });
   });
 
@@ -893,12 +992,12 @@ describe('object', function() {
         integer: 1
       };
       var ret = validate(helper.makeParam('foo', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should validate all missing', function() {
       var ret = validate(helper.makeParam('foo', true), {}, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify({})]);
+      helper.validateSuccess(ret, 1, [{}]);
     });
 
     it('should validate array missing', function() {
@@ -907,7 +1006,7 @@ describe('object', function() {
         integer: 1
       };
       var ret = validate(helper.makeParam('foo', true), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate all invalid', function() {
@@ -956,7 +1055,7 @@ describe('object', function() {
         integer: 1
       };
       var ret = validate(helper.makeParam('foo', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate array missing', function() {
@@ -1043,12 +1142,25 @@ describe('object', function() {
         int64: Number.MAX_VALUE,
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
-        date: '8/9/2013',
-        datetime: '1/1/2014 5:00PM',
+        date: '2013-08-09',
+        datetime: '2014-01-01T17:00:00',
+        boolean: true
+      };
+      var transformedValue = {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'ThisIsAString ThatContains Many Spaces',
+        byte: [35, 98],
+        date: moment('2013-08-09').toDate(),
+        datetime: moment('2014-01-01T17:00:00').toDate(),
         boolean: true
       };
       var ret = validate(helper.makeParam('baz', false), value, model);
-      helper.validateSuccess(ret, 1, [JSON.stringify(value)]);
+      helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate all invalid', function() {
@@ -1065,7 +1177,18 @@ describe('object', function() {
         datetime: Number(2.2356),
         boolean: 'Not a boolean'
       }, model);
-      helper.validateError(ret, 8, ['boolean is not a type of boolean', 'double is not a type of double', 'float is not a type of float', 'int32 is not a type of int32', 'int64 is not a type of int64', 'integer is not a type of integer', 'number is not a type of number', 'string is not a type of string']);
+      helper.validateError(ret, 10, [
+        'boolean is not a type of boolean',
+        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'double is not a type of double',
+        'float is not a type of float',
+        'int32 is not a type of int32',
+        'int64 is not a type of int64',
+        'integer is not a type of integer',
+        'number is not a type of number',
+        'string is not a type of string'
+      ]);
     });
 
     it('should not validate half invalid', function() {
@@ -1078,8 +1201,8 @@ describe('object', function() {
         int64: -Number.MIN_VALUE,
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
-        date: '8/9/2013',
-        datetime: '1/1/2014 5:00PM',
+        date: '2013-08-09',
+        datetime: '2014-01-01T17:00:00Z',
         boolean: true
       }, model);
       helper.validateError(ret, 4, ['double is not a type of double', 'float is not a type of float', 'integer is not a type of integer', 'number is not a type of number']);
@@ -1099,7 +1222,14 @@ describe('object', function() {
         datetime: Number(2.2356),
         boolean: 'Not a boolean'
       }, model);
-      helper.validateError(ret, 4, ['boolean is not a type of boolean', 'int32 is not a type of int32', 'int64 is not a type of int64', 'string is not a type of string']);
+      helper.validateError(ret, 6, [
+        'boolean is not a type of boolean',
+        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'int32 is not a type of int32',
+        'int64 is not a type of int64',
+        'string is not a type of string'
+      ]);
     });
 
     it('should not validate all missing', function() {

@@ -18,14 +18,16 @@ describe('number', function() {
 
   it('should validate with hex', function() {
     var value = 0x123;
+    var transformedValue = 291;
     var ret = validate(helper.makeNumberParam('number', false), value);
-    helper.validateSuccess(ret, 1, [value]);
+    helper.validateSuccess(ret, 1, [transformedValue]);
   });
 
   it('should validate with hex as string', function() {
     var value = "0x123";
+    var transformedValue = 291;
     var ret = validate(helper.makeNumberParam('number', false), value);
-    helper.validateSuccess(ret, 1);
+    helper.validateSuccess(ret, 1, [transformedValue]);
   });
 
   it('should validate with decimal of 0', function() {
