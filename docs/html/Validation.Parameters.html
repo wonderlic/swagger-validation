@@ -1967,7 +1967,7 @@ or a value property that contains the value passed in unmodified.</p>
         
             
 <dt>
-    <h4 class="name" id="Validate_Integer"><span class="type-signature">&lt;static> </span>Validate_Integer<span class="signature">(param, value)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id="Validate_Int64"><span class="type-signature">&lt;static> </span>Validate_Int64<span class="signature">(param, value)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
 </dt>
@@ -1975,11 +1975,15 @@ or a value property that contains the value passed in unmodified.</p>
     
     
     <div class="description">
-        <p>Ensures that the <tt>value</tt> that is passed in is a valid integer (or an integer with a format of int32).
+        <p>Ensures that the <tt>value</tt> that is passed in is a valid integer with a format of int64.
 This allows all forms of a number (so 2, 2.0, 2e0, 0x2). As a hex value COULD be the hex representation
 of an actual integer (and JavaScript parses it for us anyway), allow JavaScript to treat hex numbers in the
 way it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt> ensure that the
 value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).</p>
+<p>This allows numbers between <tt>Number.MIN_VALUE</tt> (exclusive) and <tt>Number.MAX_VALUE</tt> (inclusive).
+This does have issues with edge cases, however, (such as Number.MAX_VALUE + 1) as, per IEEE-754 2008 §4.3.1 spec,
+JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE not
+Number.Infinity. There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
 then this will throw a parameter is required error.</p>
     </div>
@@ -2092,6 +2096,187 @@ then this will throw a parameter is required error.</p>
 			<li>
 				<a href="integer.js_.html">validation/parameters/integer.js</a>,
 				 <a href="integer.js_.html#sunlight-1-line-8">line 8</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>An empty Array if the <tt>value</tt> was &quot;nothing&quot; and not required, else an array
+containing an object with either an error property (which contains an Array of Error objects)
+or a value property that contains the value parsed successfully.</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Array</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="Validate_Integer"><span class="type-signature">&lt;static> </span>Validate_Integer<span class="signature">(param, value)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Ensures that the <tt>value</tt> that is passed in is a valid integer (or an integer with a format of int32).
+This allows all forms of a number (so 2, 2.0, 2e0, 0x2). As a hex value COULD be the hex representation
+of an actual integer (and JavaScript parses it for us anyway), allow JavaScript to treat hex numbers in the
+way it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt> ensure that the
+value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).</p>
+<p>This allows numbers between -9007199254740991 and +9007199254740991 (inclusive) per
+(@link http://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.isinteger).</p>
+<p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
+then this will throw a parameter is required error.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The Swagger param that was created for this operation</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The value that is passed in along the req (via body, header, etc.)</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="integer.js_.html">validation/parameters/integer.js</a>,
+				 <a href="integer.js_.html#sunlight-1-line-63">line 63</a>
 			</li>
 		</ul>
 	</dd>
@@ -2265,7 +2450,7 @@ are validated the same way, with the exception of int64 as that is validated lik
 		<ul class="dummy">
 			<li>
 				<a href="integer.js_.html">validation/parameters/integer.js</a>,
-				 <a href="integer.js_.html#sunlight-1-line-57">line 57</a>
+				 <a href="integer.js_.html#sunlight-1-line-115">line 115</a>
 			</li>
 		</ul>
 	</dd>
@@ -2333,9 +2518,10 @@ or a integer with a format of int64). This allows all forms of a number (so 2, 2
 value COULD be the hex representation of an actual number (and JavaScript parses it for us anyway), allow JavaScript
 to treat hex numbers in the way it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt>
 ensure that the value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).</p>
-<p>This does have issues with edge case validation (such as Number.MAX_VALUE + 1) as, per IEEE-754 2008 §4.3.1 spec,
-JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE not Number.Infinity.
-There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive.</p>
+<p>This allows numbers between <tt>Number.MIN_VALUE</tt> (inclusive) and <tt>Number.MAX_VALUE</tt> (inclusive).
+This does have issues with edge cases, however, (such as Number.MAX_VALUE + 1) as, per IEEE-754 2008 §4.3.1 spec,
+JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE not
+Number.Infinity. There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
 then this will throw a parameter is required error.</p>
     </div>
@@ -2621,7 +2807,7 @@ are validated the same way.</p>
 		<ul class="dummy">
 			<li>
 				<a href="number.js.html">validation/parameters/number.js</a>,
-				 <a href="number.js.html#sunlight-1-line-59">line 59</a>
+				 <a href="number.js.html#sunlight-1-line-60">line 60</a>
 			</li>
 		</ul>
 	</dd>
@@ -3446,7 +3632,7 @@ or a value property that contains the value parsed successfully.</p>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a>
-		on Wed Aug 13th 2014 using the <a
+		on Thu Aug 14th 2014 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>

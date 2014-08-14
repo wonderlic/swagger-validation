@@ -31,8 +31,8 @@ describe('set', function() {
   });
 
   it('should validate with integer with int64 format', function() {
-    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64', null, true), [1.265, '2.2352', 2e0, 0x88]);
-    helper.validateSuccess(ret, 1, [[1.265, 2.2352, 2e0, 0x88]]);
+    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64', null, true), [123132, 2e0, 0x88]);
+    helper.validateSuccess(ret, 1, [[123132, 2e0, 0x88]]);
   });
 
   it('should validate with string with no format', function() {
@@ -224,7 +224,7 @@ describe('set', function() {
   });
 
   it('should not validate with one error with integer with int64 format', function() {
-    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64', null, true), [1.265, '2.2352', 2e0, 0x88, 'thisisastring']);
+    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64', null, true), [2e0, 0x88, 'thisisastring']);
     helper.validateError(ret, 1, ["thisisastring is not a type of int64"]);
   });
 
@@ -259,7 +259,7 @@ describe('set', function() {
   });
 
   it('should not validate with two errors with integer with int64 format', function() {
-    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64', null, true), [1.265, '2.2352', 2e0, 0x88, 'thisisastring', 'thisisalsoastring']);
+    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64', null, true), [2e0, 0x88, 'thisisastring', 'thisisalsoastring']);
     helper.validateError(ret, 2, ["thisisastring is not a type of int64", "thisisalsoastring is not a type of int64"]);
   });
 
@@ -294,7 +294,7 @@ describe('set', function() {
   });
 
   it('should not validate with non-uniqueness with integer with int64 format', function() {
-    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64', null, true), [1.265565, '2.2352', 2e0, 0x88, '1.265565']);
+    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64', null, true), [Number.MAX_VALUE, 2e0, 0x88, Number.MAX_VALUE]);
     helper.validateError(ret, 1, ["testParam is not unique. This may lead to an unintended loss of data"]);
   });
 

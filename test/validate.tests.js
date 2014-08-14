@@ -257,7 +257,7 @@ describe('validate', function(){
           }
         };
         var ret = validate(spec, req);
-        helper.validateError(ret, 1, ["someString does not match the required pattern /^hi/i"]);
+        helper.validateError(ret, 1, ["someString does not match the pattern /^hi/i"]);
       });
     });
   });

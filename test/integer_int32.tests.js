@@ -16,6 +16,18 @@ describe('integer - int32', function() {
     helper.validateSuccess(ret, 1, [value]);
   });
 
+  it('should validate with max number', function() {
+    var value = 9007199254740991;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int32'), value);
+    helper.validateSuccess(ret, 1, [value]);
+  });
+
+  it('should validate with min number', function() {
+    var value = -9007199254740991;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int32'), value);
+    helper.validateSuccess(ret, 1, [value]);
+  });
+
   it('should validate with hex', function() {
     var value = 0x123;
     var transformedValue = 291;

@@ -5,13 +5,25 @@ var validate = require('../lib/validation/parameter');
 
 describe('integer - int64', function() {
   it('should validate', function() {
-    var value = 1.5;
+    var value = 1;
     var ret = validate(helper.makeNumberParam('integer', false, 'int64'), value);
     helper.validateSuccess(ret, 1, [value]);
   });
 
   it('should validate with large integer', function() {
-    var value = 112312234132443.88635;
+    var value = 11231223413244388635;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64'), value);
+    helper.validateSuccess(ret, 1, [value]);
+  });
+
+  it('should validate with max number', function() {
+    var value = Number.MAX_VALUE;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64'), value);
+    helper.validateSuccess(ret, 1, [value]);
+  });
+
+  it('should validate with min number', function() {
+    var value = Number.MIN_VALUE + 1;
     var ret = validate(helper.makeNumberParam('integer', false, 'int64'), value);
     helper.validateSuccess(ret, 1, [value]);
   });
@@ -42,21 +54,9 @@ describe('integer - int64', function() {
     helper.validateSuccess(ret, 1, [value]);
   });
 
-  it('should validate with minimum with decimal', function() {
-    var value = 1.2356;
-    var ret = validate(helper.makeNumberParam('integer', false, 'int64', '1.23'), value);
-    helper.validateSuccess(ret, 1, [value]);
-  });
-
   it('should validate with maximum', function() {
     var value = 1;
     var ret = validate(helper.makeNumberParam('integer', false, 'int64', null, '10'), value);
-    helper.validateSuccess(ret, 1, [value]);
-  });
-
-  it('should validate with maximum with decimal', function() {
-    var value = 1.42;
-    var ret = validate(helper.makeNumberParam('integer', false, 'int64', null, '1.426541323432'), value);
     helper.validateSuccess(ret, 1, [value]);
   });
 
@@ -66,21 +66,9 @@ describe('integer - int64', function() {
     helper.validateSuccess(ret, 1, [value]);
   });
 
-  it('should validate with minimum inclusive with decimal', function() {
-    var value = 1.2356895;
-    var ret = validate(helper.makeNumberParam('integer', false, 'int64', '1.2356895'), value);
-    helper.validateSuccess(ret, 1, [value]);
-  });
-
   it('should validate with maximum inclusive', function() {
     var value = 32465;
     var ret = validate(helper.makeNumberParam('integer', false, 'int64', null, '32465'), value);
-    helper.validateSuccess(ret, 1, [value]);
-  });
-
-  it('should validate with maximum inclusive with decimal', function() {
-    var value = 8569.26652323;
-    var ret = validate(helper.makeNumberParam('integer', false, 'int64', null, '8569.26652323'), value);
     helper.validateSuccess(ret, 1, [value]);
   });
 
@@ -91,14 +79,14 @@ describe('integer - int64', function() {
   });
 
   it('should not validate with minimum', function() {
-    var value = -4563.23565632;
-    var ret = validate(helper.makeNumberParam('integer', false, 'int64', '-2.32333'), value);
+    var value = -4563451321;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64', '-2'), value);
     helper.validateError(ret, 1, ["testParam is below the minimum value"]);
   });
 
   it('should not validate with maximum', function() {
-    var value = 11.26535;
-    var ret = validate(helper.makeNumberParam('integer', false, 'int64', null, '10.278974132'), value);
+    var value = 11;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64', null, '10'), value);
     helper.validateError(ret, 1, ["testParam is above the maximum value"]);
   });
 
@@ -112,6 +100,30 @@ describe('integer - int64', function() {
     var value = 324653;
     var ret = validate(helper.makeNumberParam('integer', false, 'int64', '321', '32465'), value);
     helper.validateError(ret, 1, ["testParam is above the maximum value"]);
+  });
+
+  it('should not validate with minimum with decimal', function() {
+    var value = 1.2356;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64', '1.23'), value);
+    helper.validateError(ret, 1, ["testParam is not a type of int64"]);
+  });
+
+  it('should not validate with maximum with decimal', function() {
+    var value = 1.42;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64', null, '1.426541323432'), value);
+    helper.validateError(ret, 1, ["testParam is not a type of int64"]);
+  });
+
+  it('should not validate with minimum inclusive with decimal', function() {
+    var value = 1.2356895;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64', '1.2356895'), value);
+    helper.validateError(ret, 1, ["testParam is not a type of int64"]);
+  });
+
+  it('should not validate with maximum inclusive with decimal', function() {
+    var value = 8569.26652323;
+    var ret = validate(helper.makeNumberParam('integer', false, 'int64', null, '8569.26652323'), value);
+    helper.validateError(ret, 1, ["testParam is not a type of int64"]);
   });
 
   it('should not validate with required field null', function() {

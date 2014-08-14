@@ -4,6 +4,7 @@
 
 * [Polyfills](#Polyfills)
   * [Polyfills.isInteger(nVal)](#Polyfills.isInteger)
+  * [Polyfills.isInt64(nVal)](#Polyfills.isInt64)
 * [Validation](#Validation)
   * [Validation.Validate_ParamType(param, req, [models])](#Validation.Validate_ParamType)
   * [Validation.Validate_Parameter(param, value, [models])](#Validation.Validate_Parameter)
@@ -25,6 +26,7 @@
     * [Parameters.Return_Error(err, [errArgs])](#Validation.Parameters.Return_Error)
     * [Parameters.Return_Success(val)](#Validation.Parameters.Return_Success)
     * [Parameters.Is_Required(param, value)](#Validation.Parameters.Is_Required)
+    * [Parameters.Validate_Int64(param, value)](#Validation.Parameters.Validate_Int64)
     * [Parameters.Validate_Integer(param, value)](#Validation.Parameters.Validate_Integer)
     * [Parameters.Validate_Integer_Formats(param, value)](#Validation.Parameters.Validate_Integer_Formats)
     * [Parameters.Validate_Number(param, value)](#Validation.Parameters.Validate_Number)
@@ -41,6 +43,7 @@
 
 * [Polyfills](#Polyfills)
   * [Polyfills.isInteger(nVal)](#Polyfills.isInteger)
+  * [Polyfills.isInt64(nVal)](#Polyfills.isInt64)
 
 <a name="Polyfills.isInteger"></a>
 ##Polyfills.isInteger(nVal)
@@ -51,6 +54,15 @@ This is a polyfill for checking if something is an integer. This is proposed fun
 - nVal `Object` - The value to be checked  
 
 **Returns**: `Boolean` - True if <tt>nVal</tt> can successfully be parsed as an Integer, else false.  
+<a name="Polyfills.isInt64"></a>
+##Polyfills.isInt64(nVal)
+This is a polyfill for checking if something is an int64.
+
+**Params**
+
+- nVal `Object` - The value to be checked  
+
+**Returns**: `Boolean` - True if <tt>nVal</tt> can successfully be parsed as an int64, else false.  
 <a name="Validation"></a>
 #Validation
 **Members**
@@ -76,6 +88,7 @@ This is a polyfill for checking if something is an integer. This is proposed fun
     * [Parameters.Return_Error(err, [errArgs])](#Validation.Parameters.Return_Error)
     * [Parameters.Return_Success(val)](#Validation.Parameters.Return_Success)
     * [Parameters.Is_Required(param, value)](#Validation.Parameters.Is_Required)
+    * [Parameters.Validate_Int64(param, value)](#Validation.Parameters.Validate_Int64)
     * [Parameters.Validate_Integer(param, value)](#Validation.Parameters.Validate_Integer)
     * [Parameters.Validate_Integer_Formats(param, value)](#Validation.Parameters.Validate_Integer_Formats)
     * [Parameters.Validate_Number(param, value)](#Validation.Parameters.Validate_Number)
@@ -212,6 +225,7 @@ Validates the query string of the <tt>req</tt> that called validation. Additiona
   * [Parameters.Return_Error(err, [errArgs])](#Validation.Parameters.Return_Error)
   * [Parameters.Return_Success(val)](#Validation.Parameters.Return_Success)
   * [Parameters.Is_Required(param, value)](#Validation.Parameters.Is_Required)
+  * [Parameters.Validate_Int64(param, value)](#Validation.Parameters.Validate_Int64)
   * [Parameters.Validate_Integer(param, value)](#Validation.Parameters.Validate_Integer)
   * [Parameters.Validate_Integer_Formats(param, value)](#Validation.Parameters.Validate_Integer_Formats)
   * [Parameters.Validate_Number(param, value)](#Validation.Parameters.Validate_Number)
@@ -312,9 +326,19 @@ Used by the [Parameters](#Validation.Parameters) to determine whether or not a p
 - value `Object` - The value that is passed in along the req (via body, header, etc.)  
 
 **Returns**: `Array` - If <tt>value</tt> is required, is undefined, null, or an empty string, and there is no defaultValue, this will return theresult of [Return_Error](#Validation.Parameters.Return_Error). If there is a defaultValue, this will return an empty array, which indicatesthat the defaultValue will be used, which is not validated. If <tt>value</tt> is not undefined, null, or an empty string,this will return undefined indicating that further validation is required.  
+<a name="Validation.Parameters.Validate_Int64"></a>
+###Parameters.Validate_Int64(param, value)
+Ensures that the <tt>value</tt> that is passed in is a valid integer with a format of int64.This allows all forms of a number (so 2, 2.0, 2e0, 0x2). As a hex value COULD be the hex representationof an actual integer (and JavaScript parses it for us anyway), allow JavaScript to treat hex numbers in theway it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt> ensure that thevalue is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).This allows numbers between <tt>Number.MIN_VALUE</tt> (exclusive) and <tt>Number.MAX_VALUE</tt> (inclusive).This does have issues with edge cases, however, (such as Number.MAX_VALUE + 1) as, per IEEE-754 2008 §4.3.1 spec,JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE notNumber.Infinity. There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive.If "nothing" was passed into the validate function and it's required with no default value,then this will throw a parameter is required error.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- value `Object` - The value that is passed in along the req (via body, header, etc.)  
+
+**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value parsed successfully.  
 <a name="Validation.Parameters.Validate_Integer"></a>
 ###Parameters.Validate_Integer(param, value)
-Ensures that the <tt>value</tt> that is passed in is a valid integer (or an integer with a format of int32).This allows all forms of a number (so 2, 2.0, 2e0, 0x2). As a hex value COULD be the hex representationof an actual integer (and JavaScript parses it for us anyway), allow JavaScript to treat hex numbers in theway it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt> ensure that thevalue is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).If "nothing" was passed into the validate function and it's required with no default value,then this will throw a parameter is required error.
+Ensures that the <tt>value</tt> that is passed in is a valid integer (or an integer with a format of int32).This allows all forms of a number (so 2, 2.0, 2e0, 0x2). As a hex value COULD be the hex representationof an actual integer (and JavaScript parses it for us anyway), allow JavaScript to treat hex numbers in theway it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt> ensure that thevalue is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).This allows numbers between -9007199254740991 and +9007199254740991 (inclusive) per(@link http://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.isinteger).If "nothing" was passed into the validate function and it's required with no default value,then this will throw a parameter is required error.
 
 **Params**
 
@@ -334,7 +358,7 @@ Redirects the different Integer formats to their respective validation methods. 
 **Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value parsed successfully.  
 <a name="Validation.Parameters.Validate_Number"></a>
 ###Parameters.Validate_Number(param, value)
-Ensures that the <tt>value</tt> that is passed in is a valid number (or a number with a formats of int32, double, float, or longor a integer with a format of int64). This allows all forms of a number (so 2, 2.0, 2.2, 2e0, 0x2). As a hexvalue COULD be the hex representation of an actual number (and JavaScript parses it for us anyway), allow JavaScriptto treat hex numbers in the way it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt>ensure that the value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).This does have issues with edge case validation (such as Number.MAX_VALUE + 1) as, per IEEE-754 2008 §4.3.1 spec,JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE not Number.Infinity.There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive.If "nothing" was passed into the validate function and it's required with no default value,then this will throw a parameter is required error.
+Ensures that the <tt>value</tt> that is passed in is a valid number (or a number with a formats of int32, double, float, or longor a integer with a format of int64). This allows all forms of a number (so 2, 2.0, 2.2, 2e0, 0x2). As a hexvalue COULD be the hex representation of an actual number (and JavaScript parses it for us anyway), allow JavaScriptto treat hex numbers in the way it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt>ensure that the value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).This allows numbers between <tt>Number.MIN_VALUE</tt> (inclusive) and <tt>Number.MAX_VALUE</tt> (inclusive).This does have issues with edge cases, however, (such as Number.MAX_VALUE + 1) as, per IEEE-754 2008 §4.3.1 spec,JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE notNumber.Infinity. There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive.If "nothing" was passed into the validate function and it's required with no default value,then this will throw a parameter is required error.
 
 **Params**
 

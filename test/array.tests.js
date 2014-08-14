@@ -41,8 +41,8 @@ describe('array', function() {
   });
 
   it('should validate with integer with int64 format', function() {
-    var value = [1.265, '2.2352', 2e0, 0x88];
-    var transformedValue = [1.265, 2.2352, 2.0, 0x88];
+    var value = [Number.MAX_VALUE, Number.MIN_VALUE + 1, 2.0, 2e0, 0x88];
+    var transformedValue = [Number.MAX_VALUE, Number.MIN_VALUE + 1, 2.0, 2, 136];
     var ret = validate(helper.makeArrayParam(false, 'integer', 'int64'), value);
     helper.validateSuccess(ret, 1, [transformedValue]);
   });
@@ -232,7 +232,7 @@ describe('array', function() {
   });
 
   it('should not validate with one error with integer with int64 format', function() {
-    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64'), [1.265, '2.2352', 2e0, 0x88, 'this is a string']);
+    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64'), [1234, 2e0, 0x88, 'this is a string']);
     helper.validateError(ret, 1, ["this is a string is not a type of int64"]);
   });
 
@@ -267,7 +267,7 @@ describe('array', function() {
   });
 
   it('should not validate with two errors with integer with int64 format', function() {
-    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64'), [1.265, '2.2352', 2e0, 0x88, 'this is a string', 'this is also a string']);
+    var ret = validate(helper.makeArrayParam(false, 'integer', 'int64'), [Number.MAX_VALUE - 123123123123, 2e0, 0x88, 'this is a string', 'this is also a string']);
     helper.validateError(ret, 2, ["this is a string is not a type of int64", "this is also a string is not a type of int64"]);
   });
 

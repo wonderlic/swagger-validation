@@ -16,6 +16,18 @@ describe('number - float', function() {
     helper.validateSuccess(ret, 1, [value]);
   });
 
+  it('should validate with max number', function() {
+    var value = Number.MAX_VALUE;
+    var ret = validate(helper.makeNumberParam('number', false, 'float'), value);
+    helper.validateSuccess(ret, 1, [value]);
+  });
+
+  it('should validate with min number', function() {
+    var value = Number.MIN_VALUE;
+    var ret = validate(helper.makeNumberParam('number', false, 'float'), value);
+    helper.validateSuccess(ret, 1, [value]);
+  });
+
   it('should validate with hex', function() {
     var value = 0x123;
     var transformedValue = 291;

@@ -194,7 +194,7 @@ describe('object', function() {
     };
 
     it('should validate', function() {
-      var value = { id: 1.235641231};
+      var value = { id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -728,7 +728,7 @@ describe('object', function() {
         double: [323.33],
         integer: {},
         int32: -2312,
-        int64: -Number.MIN_VALUE,
+        int64: Number.MIN_VALUE + 1,
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
         date: '2013-08-09',
@@ -932,7 +932,7 @@ describe('object', function() {
         double: [323.33],
         integer: {},
         int32: -2312,
-        int64: -Number.MIN_VALUE,
+        int64: Number.MIN_VALUE + 1,
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
         date: '2014-08-09',
@@ -1198,7 +1198,7 @@ describe('object', function() {
         double: [323.33],
         integer: {},
         int32: -2312,
-        int64: -Number.MIN_VALUE,
+        int64: Number.MIN_VALUE + 1,
         string: 'ThisIsAString ThatContains Many Spaces',
         byte: [35, 98],
         date: '2013-08-09',
