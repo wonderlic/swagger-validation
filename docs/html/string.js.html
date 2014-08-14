@@ -124,9 +124,8 @@ var validateString = function(param, value) {
     return helper.errorReturn("%s is not a valid entry", param.name);
   }
 
-
   if (!isPatternMatch(param, value)) {
-    return helper.errorReturn("%s does not match the required pattern %s", [param.name, param.pattern]);
+    return helper.errorReturn("%s does not match the pattern %s", [param.name, param.pattern]);
   }
 
   return helper.successReturn(value);

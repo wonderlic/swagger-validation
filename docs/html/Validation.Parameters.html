@@ -325,7 +325,7 @@ if pattern exists and <tt>value</tt> does not match pattern.</p>
     
     
     <div class="description">
-        <p>Used by the <a href="Validation.Parameters.html">Validation.Parameters</a> to determine whether or not a particular <tt>value</tt> is required.</p>
+        <p>Used by the <a href="Validation.Parameters.html">Validation.Parameters</a> to determine whether or not a particular <tt>value</tt> is required and not present.</p>
     </div>
     
 
@@ -462,10 +462,10 @@ if pattern exists and <tt>value</tt> does not match pattern.</p>
     
             
 <div class="param-desc">
-    <p>If <tt>value</tt> is require, it is undefined/null/emptystring, and there is no defaultValue, this will return the 
-result of <a href="Validation.Parameters.html#Return_Error">Validation.Parameters.Return_Error</a>. If there is a defaultValue, this will return an empty array, which indicates 
-that the defaultValue will be used, which is not validated. If <tt>value</tt> is not undefined/null/empty, this will return undefined,
-indicating that further validation is required.</p>
+    <p>If <tt>value</tt> is required, is undefined, null, or an empty string, and there is no defaultValue, this will return the
+result of <a href="Validation.Parameters.html#Return_Error">Validation.Parameters.Return_Error</a>. If there is a defaultValue, this will return an empty array, which indicates
+that the defaultValue will be used, which is not validated. If <tt>value</tt> is not undefined, null, or an empty string,
+this will return undefined indicating that further validation is required.</p>
 </div>
 
 
@@ -1441,7 +1441,7 @@ or a value property that contains the value passed in unmodified.</p>
         <p>There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time
 (more than likely due to the varied formats a date could have). Even using moment.js and something
 like moment-parseformat or the native Date object has the potential to lead to false positives. Therefore,
-swagger-validation will accept a 'pattern' property on Swagger Property/Parameter Objects, which
+swagger-validation will accept a 'pattern' property on the Swagger Property/Parameter Objects, which
 should be a moment.js format string, which specifies the explicit format expected for date and date-time formats.
 If no pattern property is detected, date and date-time formats will use moment.ISO_8601 by default.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
@@ -1584,9 +1584,9 @@ then this will throw a parameter is required error.</p>
 <div class="param-desc">
     <p>An empty Array if the <tt>value</tt> was &quot;nothing&quot; and not required, else an array
 containing an object with either an error property (which contains an Array of Error objects)
-or a value property that contains a Date object parsed from <tt>value</tt>. The time portion of the
-Date object will automatically be zero'd out, since date formats are meant to ignore the time portion
-of the date. If you need the time, use &quot;date-time&quot; instead.</p>
+or a value property that contains a Date object parsed from <tt>value</tt>. Since the date format
+is meant to ignore time, the time will be automatically removed from the returned value.
+If the time is needed, use the parameter &quot;date-time&quot; instead.</p>
 </div>
 
 
@@ -3368,7 +3368,7 @@ or a value property that contains the value parsed successfully.</p>
 		<ul class="dummy">
 			<li>
 				<a href="string.js.html">validation/parameters/string.js</a>,
-				 <a href="string.js.html#sunlight-1-line-68">line 68</a>
+				 <a href="string.js.html#sunlight-1-line-67">line 67</a>
 			</li>
 		</ul>
 	</dd>

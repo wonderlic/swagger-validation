@@ -87,9 +87,9 @@ var body = function(param, req, models) {
   var value = _.has(req.header, param.name) ? req.header[param.name] : undefined;
   var ret = helper(param, value, models, param.allowMultiple);
   if (!_.some(ret, function(val) { return val.hasOwnProperty('error'); })) {
-    var parsedValue = _.chain(ret).pluck('value').first().value();
-    req.header[param.name] = parsedValue;
+    req.header[param.name] = _.chain(ret).pluck('value').first().value();
   }
+  return ret;
 };
 module.exports = exports = body;</pre>
 	</article>

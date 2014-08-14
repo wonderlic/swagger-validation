@@ -86,9 +86,9 @@ var body = function(param, req, models) {
   var value = req.body;
   var ret = helper(param, value, models, false);
   if (!_.some(ret, function(val) { return val.hasOwnProperty('error'); })) {
-    var parsedValue = _.chain(ret).pluck('value').first().value();
-    req.body = parsedValue;
+    req.body = _.chain(ret).pluck('value').first().value();
   }
+  return ret;
 };
 module.exports = exports = body;</pre>
 	</article>
