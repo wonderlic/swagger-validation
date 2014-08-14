@@ -155,7 +155,7 @@ exports.findById = {
     type : "Pet",
     nickname : "getPetById",
     produces : ["application/json"],
-    parameters : [param.path("petId", "ID of pet that needs to be fetched", "integer")],
+    parameters : [param.path("petId", "ID of pet that needs to be fetched", "string")],
     responseMessages : [swe.invalid('id'), swe.notFound('pet')]
   },
   'action': function (req,res) {
