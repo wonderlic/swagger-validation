@@ -279,8 +279,32 @@ validation = {
 };
 ```
 
-The enabled property turns on / off swagger-validation holistically for the particular spec. <br/>
-The replaceValues property turns on / off the functionality to manipulate values on the req (detailed in the previous section).
+and can be used like 
+
+```javascript
+exports.findByName = {
+  spec: {
+    description : "Find pet by name",  
+    path : "/pet/{petName}",
+    method: "GET",
+    type : "Pet",
+    validation = {
+      replaceValues : false
+    },
+    produces : ["application/json"],
+    parameters : [{
+      id: "petName",
+      description: "petName",
+      type: "string",
+      pattern: "/^dr*/i"
+    }]
+  }
+};
+```
+
+The `enabled` property turns on / off swagger-validation holistically for the particular spec. <br/>
+The `replaceValues` property turns on / off the functionality to manipulate values on the req (detailed in the previous section). <br/>
+Both of these values default to true (so validation is enabled as well as it will replace the values on the req).
 
 ## Types of validation
 
