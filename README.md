@@ -212,7 +212,7 @@ This **will** be deprecated / removed once the pull request specified above gets
         
 ```
 
-## Functionality outside of swagger specification
+## Functionality outside of Swagger specification
 
 swagger-validation adheres to the official swagger specification, but does provide non-specification defined
 functionality to allow additional validation / ease that the swagger specification doesn't support.
@@ -251,24 +251,41 @@ If you want to be more explicit, you can specify your own format using the `patt
 
 ### Value manipulation
 
-In addition to validating the req, it will replace the value on the req according to the following chart
+In addition to validating the req, it will replace the value on the req according to the following chart:
 
-| Input Type                                   | Swagger Type  | Swagger Format     | Output                                               |
-| -------------------------------------------- | ------------- | ------------------ | ---------------------------------------------------- |
-| string integer/long e.g. `"123"`             | `integer`     | `int32` or `int64` | integer/long e.g. `123`                              |
-| string hex e.g. `"0x123"`                    | `integer`     | `int32` or `int64` | integer/long e.g. `291`                              |
-| string float/double e.g. `"123.01"`          | `number`      | `float` or `double`| float/double e.g. `123.01`                           |
-| string boolean e.g. `"true"`                 | `boolean`     |                    | boolean e.g. `true`                                  |
-| string date e.g. `"2014-08-10"`              | `string`      | `date`             | Date object e.g. `new Date("2014-08-10")`**          |
-| string date e.g. `"2014-08-10T12:00:01"`     | `string`      | `date-time`        | Date object e.g. `new Date("2014-08-10T12:00:01")`** |
+| Input Type | Swagger Type | Swagger Format | Output | 
+| ----- | ----- | ----- | ----- |
+| string integer/long e.g. `"123"` | `integer` | `int32` or `int64` | integer/long e.g. `123` |
+| string hex e.g. `"0x123"` | `integer` | `int32` or `int64` | integer/long e.g. `291` |
+| string float/double e.g. `"123.01"` | `number` | `float` or `double`| float/double e.g. `123.01` |
+| string boolean e.g. `"true"` | `boolean` | | boolean e.g. `true` |
+| string date e.g. `"2014-08-10"` | `string` | `date` | Date object e.g. `new Date("2014-08-10")`** |
+| string date e.g. `"2014-08-10T12:00:01"` | `string` | `date-time` | Date object e.g. `new Date("2014-08-10T12:00:01")`** |
 
 ** The date conversions are done using the [moment.js](//momentjs.com/) library. 
 By default, it uses the `moment.ISO_8601()` format for parsing dates, but can be overridden by changing the `pattern` property
 
+In addition, if a defaultValue is specified for the param and the value is null, undefined, or an empty string, swagger-validation 
+will replace the value on the req with the defaultValue for that parameter.
+
+### Validation object
+
+Swagger-validation also adds another object to the swagger.spec definition called validation that looks like this
+
+```javascript
+validation = {
+  enabled : [true / false],
+  replaceValues : [true / false]
+};
+```
+
+The enabled property turns on / off swagger-validation holistically for the particular spec. <br/>
+The replaceValues property turns on / off the functionality to manipulate values on the req (detailed in the previous section).
+
 ## Types of validation
 
 | Type | Format | Description |
-| ---- | ------ | ----- |
+| ----- | ------ | ----- |
 | `array` | | This checks that each value inside the array corresponds to the type that was specified. It doesn't check that the array contains 'empty' values, even if the array parameter is required as spec doesn't have a way to say all values inside the array are required. <br/><br/> While the spec says `uniqueItems` marks the array to be treated like a set instead of an array (and not that this is invalid if it isn't unique), it does have the potential to lead to an unintentional and unintended loss of data, so this throws a validation error that what you are passing isn't unique over just allowing the non-unique data to be lost. As such, if all the items passed their validation, check for uniqueness. This only validates uniqueness after all the items in the array are validated. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
 | `boolean` | | This only handles native boolean types or converting from `true` / `false` strings, as the concept is not uniform for other types (ie, if it's a number, should it be 0 = false and 1 = true or should any non-zero number be true). However, this only handles strings that are the string representation in JavaScript of their boolean counterparts, so True, TRUE, etc. will not validate. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
 | `integer` | | This allows all forms of a number (so 2, 2.0, 2e0, 0x2). As a hex value COULD be the hex representation of an actual integer (and JavaScript parses it for us anyway), allow JavaScript to treat hex numbers in the way it wants to. Additionally, if a minimum or maximum is defined this ensures the value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined). <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
@@ -279,10 +296,10 @@ By default, it uses the `moment.ISO_8601()` format for parsing dates, but can be
 | `number` | `float` | This allows all forms of a number (so 2, 2.0, 2.2, 2e0, 0x2). As a hex value COULD be the hex representation of an actual number (and JavaScript parses it for us anyway), allow JavaScript to treat hex numbers in the way it wants to. Additionally, if a minimum or maximum is defined this ensures the value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined). <br/><br/> This does have issues with edge case validation (such as Number.MAX_VALUE + 1) as, per [IEEE-754 2008 §4.3.1 spec](http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=4610935), JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE not Number.Infinity. There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
 | `number` | `double` | This allows all forms of a number (so 2, 2.0, 2.2, 2e0, 0x2). As a hex value COULD be the hex representation of an actual number (and JavaScript parses it for us anyway), allow JavaScript to treat hex numbers in the way it wants to. Additionally, if a minimum or maximum is defined this ensures the value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined). <br/><br/> This does have issues with edge case validation (such as Number.MAX_VALUE + 1) as, per [IEEE-754 2008 §4.3.1 spec](http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=4610935), JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE not Number.Infinity. There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
 | `object` | | This checks that the value is a valid Object by iterating through each property on the associated model and calling out to the respective validation method to validate that property. After validating the properties on this object's model, it will recursively look to see if any other models have this model in their subType array. If so, it will validate those properties as well. It will continue to do this until no more types are found in the subType array. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
-| `string` | | If an enum is defined this ensures that the value is inside the enum list (which is case-sensitive). <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
+| `string` | | If an enum is defined this ensures that the value is inside the enum list (which is case-sensitive). If a pattern is defined this also ensures that the value adheres to it.<br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
 | `string` | `byte` | This has no type validation, but it is valid. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
-| `string` | `date` | This has no type validation, but it is valid. <br/><br/> There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time (more than likely due to the varied formats a date could have). Even using [moment.js](http://momentjs.com/) and something like [moment-parseformat](https://github.com/gr2m/moment.parseFormat) or the native Date object has the potential to lead to false positives. Without additional spec definition into what defines a date or date-time (or, ideally, the spec adds in a `format` for date / date time that can be used in a date validation function), this is too varied to be handled by the validation framework. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
-| `string` | `date-time` | This has no type validation, but it is valid. <br/><br/> There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time (more than likely due to the varied formats a date could have). Even using [moment.js](http://momentjs.com/) and something like [moment-parseformat](https://github.com/gr2m/moment.parseFormat) or the native Date object has the potential to lead to false positives. Without additional spec definition into what defines a date or date-time (or, ideally, the spec adds in a `format` for date / date time that can be used in a date validation function), this is too varied to be handled by the validation framework. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
+| `string` | `date` | There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time (more than likely due to the varied formats a date could have). Therefore, swagger-validation will accept a 'pattern' property on the Swagger Property/Parameter Objects, which is a moment.js format string, that specifies the explicit format expected for the date format. If no pattern property is detected, moment.ISO_8601 will be used by default. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
+| `string` | `date-time` | There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time (more than likely due to the varied formats a date could have). Therefore, swagger-validation will accept a 'pattern' property on the Swagger Property/Parameter Objects, which is a moment.js format string, that specifies the explicit format expected for the date format. If no pattern property is detected, moment.ISO_8601 will be used by default. <br/><br/> If "nothing" was passed into the validate function and it's required with no default value, then this will throw a parameter is required error.
 
 ## Documentation
 
