@@ -2160,7 +2160,7 @@ This allows all forms of a number (so 2, 2.0, 2e0, 0x2). As a hex value COULD be
 of an actual integer (and JavaScript parses it for us anyway), allow JavaScript to treat hex numbers in the
 way it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt> ensure that the
 value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).</p>
-<p>This allows numbers between -9007199254740991 and +9007199254740991 (inclusive) per
+<p>This allows numbers between -9007199254740991 and +9007199254740991 (both inclusive) per
 (@link http://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.isinteger).</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
 then this will throw a parameter is required error.</p>
@@ -2515,7 +2515,7 @@ or a integer with a format of int64). This allows all forms of a number (so 2, 2
 value COULD be the hex representation of an actual number (and JavaScript parses it for us anyway), allow JavaScript
 to treat hex numbers in the way it wants to. Additionally, if a minimum or maximum is defined for this <tt>param</tt>
 ensure that the value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).</p>
-<p>This allows numbers between <tt>Number.MIN_VALUE</tt> (inclusive) and <tt>Number.MAX_VALUE</tt> (inclusive).
+<p>This allows numbers between <tt>Number.MIN_VALUE</tt> and <tt>Number.MAX_VALUE</tt> (both inclusive).
 This does have issues with edge cases, however, (such as Number.MAX_VALUE + 1) as, per IEEE-754 2008 §4.3.1 spec,
 JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE not
 Number.Infinity. There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive.</p>

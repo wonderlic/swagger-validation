@@ -77,7 +77,7 @@ var helper = require('./helper');
  * to treat hex numbers in the way it wants to. Additionally, if a minimum or maximum is defined for this &lt;tt>param&lt;/tt>
  * ensure that the value is greater than the minimum (if minimum defined) or less than the maximum (if maximum defined).
  *
- * This allows numbers between &lt;tt>Number.MIN_VALUE&lt;/tt> (inclusive) and &lt;tt>Number.MAX_VALUE&lt;/tt> (inclusive).
+ * This allows numbers between &lt;tt>Number.MIN_VALUE&lt;/tt> and &lt;tt>Number.MAX_VALUE&lt;/tt> (both inclusive).
  * This does have issues with edge cases, however, (such as Number.MAX_VALUE + 1) as, per IEEE-754 2008 §4.3.1 spec,
  * JavaScript does rounding during addition, so essentially, Number.MAX_VALUE + 1 will equal Number.MAX_VALUE not
  * Number.Infinity. There isn't anything we can do about this as it is correct, per spec, but it isn't intuitive.
