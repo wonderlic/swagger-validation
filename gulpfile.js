@@ -16,7 +16,7 @@ gulp.task("jsdoc_markdown", function() {
   return gulp.src("lib/**/*.js")
     .pipe(concat("DOCUMENTATION.md"))
     .pipe(jsdoc2md())
-    .on("error", function(err){
+    .on("error", function(err) {
       gutil.log("jsdoc2md failed:", err.message);
     })
     .pipe(gulp.dest("docs/md"));

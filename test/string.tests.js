@@ -89,6 +89,6 @@ describe('string', function() {
   it('should not validate when pattern does not match', function() {
     var value = 'Heya';
     var ret = validate(helper.makeStringParam('string', false, null, '/^Goodbye$/i'), value);
-    helper.validateError(ret, 1, ["testParam does not match the pattern /^Goodbye$/i"]);
+    helper.validateError(ret, 1, ["testParam is not valid based on the pattern /^Goodbye$/i"]);
   });
 });

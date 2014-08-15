@@ -156,32 +156,36 @@ describe('array', function() {
         }
       }
     };
-    var value = [{
-      number: 0x33,
-      float: -2.231231,
-      double: Number.MIN_VALUE,
-      integer: 2e0,
-      int32: -2312,
-      int64: Number.MAX_VALUE,
-      string: 'this is a string ThatContains Many Spaces',
-      byte: [35, 98],
-      date: '8/9/2013',
-      datetime: '1/1/2014 5:00PM',
-      boolean: true
-    }];
-    var transformedValue = [{
-      number: 0x33,
-      float: -2.231231,
-      double: Number.MIN_VALUE,
-      integer: 2e0,
-      int32: -2312,
-      int64: Number.MAX_VALUE,
-      string: 'this is a string ThatContains Many Spaces',
-      byte: [35, 98],
-      date: moment('2013-08-09').toDate(),
-      datetime: moment('2014-01-01T17:00:00').toDate(),
-      boolean: true
-    }];
+    var value = [
+      {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'this is a string ThatContains Many Spaces',
+        byte: [35, 98],
+        date: '8/9/2013',
+        datetime: '1/1/2014 5:00PM',
+        boolean: true
+      }
+    ];
+    var transformedValue = [
+      {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'this is a string ThatContains Many Spaces',
+        byte: [35, 98],
+        date: moment('2013-08-09').toDate(),
+        datetime: moment('2014-01-01T17:00:00').toDate(),
+        boolean: true
+      }
+    ];
     var ret = validate(helper.makeArrayParam(false, 'baz'), value, model);
     helper.validateSuccess(ret, 1, [transformedValue]);
   });

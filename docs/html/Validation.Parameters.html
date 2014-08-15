@@ -290,8 +290,7 @@ RegExp object, pattern matching is skipped and <tt>value</tt> is considered vali
     
             
 <div class="param-desc">
-    <p>True if <tt>value</tt> matches pattern, or no valid pattern exists. False
-if pattern exists and <tt>value</tt> does not match pattern.</p>
+    <p>True if <tt>value</tt> matches pattern or no valid pattern exists, else false</p>
 </div>
 
 
@@ -1439,11 +1438,10 @@ or a value property that contains the value passed in unmodified.</p>
     
     <div class="description">
         <p>There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time
-(more than likely due to the varied formats a date could have). Even using moment.js and something
-like moment-parseformat or the native Date object has the potential to lead to false positives. Therefore,
-swagger-validation will accept a 'pattern' property on the Swagger Property/Parameter Objects, which
-should be a moment.js format string, which specifies the explicit format expected for date and date-time formats.
-If no pattern property is detected, date and date-time formats will use moment.ISO_8601 by default.</p>
+(more than likely due to the varied formats a date could have). Therefore, swagger-validation will accept a
+'pattern' property on the Swagger Property/Parameter Objects, which is a moment.js format string,
+that specifies the explicit format expected for the date format. If no pattern property is detected,
+moment.ISO_8601 will be used by default.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
 then this will throw a parameter is required error.</p>
     </div>
@@ -1621,11 +1619,10 @@ If the time is needed, use the parameter &quot;date-time&quot; instead.</p>
     
     <div class="description">
         <p>There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time
-(more than likely due to the varied formats a date could have). Even using moment.js and something
-like moment-parseformat or the native Date object has the potential to lead to false positives. Therefore,
-swagger-validation will accept a 'pattern' property on Swagger Property/Parameter Objects, which
-should be a moment.js format string, which specifies the explicit format expected for date and date-time formats.
-If no pattern property is detected, date and date-time formats will use moment.ISO_8601 by default.</p>
+(more than likely due to the varied formats a date could have). Therefore, swagger-validation will accept a
+'pattern' property on the Swagger Property/Parameter Objects, which is a moment.js format string,
+that specifies the explicit format expected for the date-time format. If no pattern property is detected,
+moment.ISO_8601 will be used by default.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
 then this will throw a parameter is required error.</p>
     </div>
@@ -2095,7 +2092,7 @@ then this will throw a parameter is required error.</p>
 		<ul class="dummy">
 			<li>
 				<a href="integer.js_.html">validation/parameters/integer.js</a>,
-				 <a href="integer.js_.html#sunlight-1-line-8">line 8</a>
+				 <a href="integer.js_.html#sunlight-1-line-7">line 7</a>
 			</li>
 		</ul>
 	</dd>
@@ -2276,7 +2273,7 @@ then this will throw a parameter is required error.</p>
 		<ul class="dummy">
 			<li>
 				<a href="integer.js_.html">validation/parameters/integer.js</a>,
-				 <a href="integer.js_.html#sunlight-1-line-63">line 63</a>
+				 <a href="integer.js_.html#sunlight-1-line-61">line 61</a>
 			</li>
 		</ul>
 	</dd>
@@ -2450,7 +2447,7 @@ are validated the same way, with the exception of int64 as that is validated lik
 		<ul class="dummy">
 			<li>
 				<a href="integer.js_.html">validation/parameters/integer.js</a>,
-				 <a href="integer.js_.html#sunlight-1-line-115">line 115</a>
+				 <a href="integer.js_.html#sunlight-1-line-113">line 113</a>
 			</li>
 		</ul>
 	</dd>
@@ -3270,6 +3267,8 @@ or a value property that contains the value parsed successfully.</p>
     <div class="description">
         <p>Ensures that the <tt>value</tt> that is passed in is a valid string. Additionally, if an enum is
 defined for this <tt>param</tt> ensure that the value is inside the enum list (which is case-sensitive).</p>
+<p>This also ensures that the <tt>value</tt> adheres to the <tt>pattern</tt> specified on the <tt>spec</tt>,
+if a pattern is specified.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
 then this will throw a parameter is required error.</p>
     </div>
@@ -3381,7 +3380,7 @@ then this will throw a parameter is required error.</p>
 		<ul class="dummy">
 			<li>
 				<a href="string.js.html">validation/parameters/string.js</a>,
-				 <a href="string.js.html#sunlight-1-line-31">line 31</a>
+				 <a href="string.js.html#sunlight-1-line-32">line 32</a>
 			</li>
 		</ul>
 	</dd>
@@ -3554,7 +3553,7 @@ or a value property that contains the value parsed successfully.</p>
 		<ul class="dummy">
 			<li>
 				<a href="string.js.html">validation/parameters/string.js</a>,
-				 <a href="string.js.html#sunlight-1-line-67">line 67</a>
+				 <a href="string.js.html#sunlight-1-line-71">line 71</a>
 			</li>
 		</ul>
 	</dd>
@@ -3632,7 +3631,7 @@ or a value property that contains the value parsed successfully.</p>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a>
-		on Thu Aug 14th 2014 using the <a
+		on Fri Aug 15th 2014 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>

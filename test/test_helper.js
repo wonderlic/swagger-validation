@@ -65,7 +65,7 @@ exports.validateSuccess = function(ret, length, values) {
   expect(ret).to.have.length(length);
 
   // don't run this for certain checks (like the ones that convert strings to numbers)
-  if(values) {
+  if (values) {
     for (var i = 0; i < values.length; i++) {
       var param = ret[i];
       expect(param).to.be.an('object');

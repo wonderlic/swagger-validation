@@ -22,7 +22,7 @@ describe('string - datetime', function() {
   it('should not validate with random string', function() {
     var value = 'this is a string that does not match ISO 8601';
     var ret = validate(helper.makeStringParam('string', false, 'date-time'), value);
-    helper.validateError(ret, 1, ["testParam is not a timestamp that can be parsed according to the expected pattern ISO 8601"]);
+    helper.validateError(ret, 1, ["testParam is not valid based on the pattern for moment.ISO 8601"]);
   });
 
   it('should not validate with required field null', function() {

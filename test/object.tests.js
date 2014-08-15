@@ -709,8 +709,8 @@ describe('object', function() {
       }, model);
       helper.validateError(ret, 10, [
         'boolean is not a type of boolean',
-        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
-        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
         'double is not a type of double',
         'float is not a type of float',
         'int32 is not a type of int32',
@@ -759,8 +759,8 @@ describe('object', function() {
       }, model);
       helper.validateError(ret, 6, [
         'boolean is not a type of boolean',
-        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
-        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
         'int32 is not a type of int32',
         'int64 is not a type of int64',
         'string is not a type of string'
@@ -913,8 +913,8 @@ describe('object', function() {
       }, model);
       helper.validateError(ret, 10, [
         'boolean is not a type of boolean',
-        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
-        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
         'double is not a type of double',
         'float is not a type of float',
         'int32 is not a type of int32',
@@ -958,8 +958,8 @@ describe('object', function() {
       }, model);
       helper.validateError(ret, 6, [
         'boolean is not a type of boolean',
-        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
-        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
         'int32 is not a type of int32',
         'int64 is not a type of int64',
         'string is not a type of string'
@@ -997,7 +997,9 @@ describe('object', function() {
 
     it('should validate all missing', function() {
       var ret = validate(helper.makeParam('foo', true), {}, model);
-      helper.validateSuccess(ret, 1, [{}]);
+      helper.validateSuccess(ret, 1, [
+        {}
+      ]);
     });
 
     it('should validate array missing', function() {
@@ -1179,8 +1181,8 @@ describe('object', function() {
       }, model);
       helper.validateError(ret, 10, [
         'boolean is not a type of boolean',
-        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
-        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
         'double is not a type of double',
         'float is not a type of float',
         'int32 is not a type of int32',
@@ -1224,8 +1226,8 @@ describe('object', function() {
       }, model);
       helper.validateError(ret, 6, [
         'boolean is not a type of boolean',
-        'date is not a timestamp that can be parsed according to the expected pattern ISO 8601',
-        'datetime is not a timestamp that can be parsed according to the expected pattern ISO 8601',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
         'int32 is not a type of int32',
         'int64 is not a type of int64',
         'string is not a type of string'
