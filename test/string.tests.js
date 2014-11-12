@@ -28,6 +28,46 @@ describe('string', function() {
     helper.validateSuccess(ret, 1, [value]);
   });
 
+  var complexPattern = '^/dev/[^/]+(/[^/]+)*$';
+  it('should detect when complex patterns do not match', function() {
+    var value = 'should not match';
+    var ret = validate(helper.makeStringParam('string', false, null, complexPattern), value);
+    helper.validateError(ret, 1, ["testParam is not valid based on the pattern ^/dev/[^/]+(/[^/]+)*$"]);
+  });
+
+  it('should detect when complex patterns do match', function() {
+    var value = '/dev/sda';
+    var ret = validate(helper.makeStringParam('string', false, null, complexPattern), value);
+    helper.validateSuccess(ret, 1, [value]);
+  });
+
+  var basicUrlPattern = '^((https?|ftp|file):\/\/[-a-zA-Z0-9+&@#%?=~_|!:,.;]+)?(\/?[-a-zA-Z0-9+&@#%=~_|?]+)*$';
+  it('should detect when more complex patterns do not match', function() {
+    var value = 'http://foo@#$';
+    var ret = validate(helper.makeStringParam('string', false, null, basicUrlPattern), value);
+    helper.validateError(ret, 1, ["testParam is not valid based on the pattern ^((https?|ftp|file)://[-a-zA-Z0-9+&@#%?=~_|!:,.;]+)?(/?[-a-zA-Z0-9+&@#%=~_|?]+)*$"]);
+  });
+
+  it('should detect when more complex patterns do match', function() {
+    var value = 'http://foo@#';
+    var ret = validate(helper.makeStringParam('string', false, null, basicUrlPattern), value);
+    helper.validateSuccess(ret, 1, [value]);
+  });
+
+  it('should not validate with string with boolean passed in for pattern', function() {
+    var ret = validate(helper.makeStringParam('string', false, null, true), 'Does not matter');
+    helper.validateError(ret, 1, [
+        "string property \'testParam\' is specified with an invalid pattern: true "
+    ]);
+  });
+
+  it('should not validate with string with object passed in for pattern', function() {
+    var ret = validate(helper.makeStringParam('string', false, null, {}), 'Does not matter');
+    helper.validateError(ret, 1, [
+        "string property \'testParam\' is specified with an invalid pattern: [object Object] "
+    ]);
+  });
+
   it('should not validate with required field null', function() {
     var value = null;
     var ret = validate(helper.makeStringParam('string', true), value);
