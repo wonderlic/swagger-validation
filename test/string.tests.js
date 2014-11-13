@@ -24,7 +24,7 @@ describe('string', function() {
 
   it('should validate when pattern does match', function() {
     var value = 'Heya';
-    var ret = validate(helper.makeStringParam('string', false, null, '/^Heya$/i'), value);
+    var ret = validate(helper.makeStringParam('string', false, null, '^Heya$'), value);
     helper.validateSuccess(ret, 1, [value]);
   });
 
