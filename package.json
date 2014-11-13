@@ -1,6 +1,6 @@
 {
   "name": "swagger-validation",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "author": {
     "name": "Wonderlic, Inc.",
     "email": "SoftwareDevelopment@wonderlic.com",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "chai": "1.9.x",
-    "gulp": "3.8.x",
+    "gulp": "3.8.7",
     "gulp-concat": "2.3.x",
     "gulp-jsdoc-to-markdown": "0.1.x",
     "gulp-shell": "0.2.x",

@@ -54,18 +54,24 @@ describe('string', function() {
     helper.validateSuccess(ret, 1, [value]);
   });
 
-  it('should not validate with string with boolean passed in for pattern', function() {
+  it('should not validate with string with true boolean passed in for pattern', function() {
     var ret = validate(helper.makeStringParam('string', false, null, true), 'Does not matter');
-    helper.validateError(ret, 1, [
-        "string property \'testParam\' is specified with an invalid pattern: true "
-    ]);
+    helper.validateError(ret, 1, ['testParam is specified with an invalid pattern true']);
+  });
+
+  it('should not validate with string with false boolean passed in for pattern', function() {
+    var ret = validate(helper.makeStringParam('string', false, null, false), 'Does not matter');
+    helper.validateError(ret, 1, ['testParam is specified with an invalid pattern false']);
   });
 
   it('should not validate with string with object passed in for pattern', function() {
     var ret = validate(helper.makeStringParam('string', false, null, {}), 'Does not matter');
-    helper.validateError(ret, 1, [
-        "string property \'testParam\' is specified with an invalid pattern: [object Object] "
-    ]);
+    helper.validateError(ret, 1, ['testParam is specified with an invalid pattern [object Object]']);
+  });
+
+  it('should not validate with string with random string passed in for pattern', function() {
+    var ret = validate(helper.makeStringParam('string', false, null, 'paosdaksnjkdashdjgad'), 'Does not matter');
+    helper.validateError(ret, 1, ['testParam is not valid based on the pattern paosdaksnjkdashdjgad']);
   });
 
   it('should not validate with required field null', function() {

@@ -139,11 +139,11 @@ describe('paramType - body', function() {
           discriminator: "name",
           required: ['number', 'float', 'double', 'integer', 'int32'],
           properties: {
-            number: { type: 'number' },
-            float: { type: 'number', format: 'float' },
-            double: { type: 'number', format: 'double' },
-            integer: { type: 'integer' },
-            int32: { type: 'integer', format: 'int32' }
+            number: {type: 'number'},
+            float: {type: 'number', format: 'float'},
+            double: {type: 'number', format: 'double'},
+            integer: {type: 'integer'},
+            int32: {type: 'integer', format: 'int32'}
           }
         },
         bar: {
@@ -153,11 +153,11 @@ describe('paramType - body', function() {
           discriminator: "name",
           required: ['int64', 'string', 'byte', 'date', 'datetime'],
           properties: {
-            int64: { type: 'integer', format: 'int64' },
-            string: { type: 'string' },
-            byte: { type: 'string', format: 'byte' },
-            date: { type: 'string', format: 'date' },
-            datetime: { type: 'string', format: 'date-time' }
+            int64: {type: 'integer', format: 'int64'},
+            string: {type: 'string'},
+            byte: {type: 'string', format: 'byte'},
+            date: {type: 'string', format: 'date'},
+            datetime: {type: 'string', format: 'date-time'}
           }
         },
         baz: {
@@ -165,7 +165,7 @@ describe('paramType - body', function() {
           name: 'baz',
           required: ['boolean'],
           properties: {
-            boolean: { type: 'boolean' }
+            boolean: {type: 'boolean'}
           }
         }
       };

@@ -20,7 +20,7 @@ exports.makeStringParam = function(type, required, format, pattern, enums, name)
     format: format ? format : undefined,
     'enum': enums ? enums : undefined,
     name: name ? name : 'testParam',
-    pattern: pattern ? pattern : undefined
+    pattern: pattern || pattern === false ? pattern : undefined
   };
 };
 

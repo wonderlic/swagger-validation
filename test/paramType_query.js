@@ -63,7 +63,7 @@ describe('paramType - query', function() {
       };
 
       var req = {
-        query: { }
+        query: {}
       };
       var ret = validate(spec, req);
       helper.validateSuccess(ret, 0);

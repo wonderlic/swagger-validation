@@ -35,7 +35,6 @@
     * [Parameters.Validate_Number_Formats(param, value)](#Validation.Parameters.Validate_Number_Formats)
     * [Parameters.Validate_Object(param, value, models)](#Validation.Parameters.Validate_Object)
     * [Parameters.Validate_Object_Formats(param, value, models)](#Validation.Parameters.Validate_Object_Formats)
-    * [Parameters.Is_Pattern_Match(param, value)](#Validation.Parameters.Is_Pattern_Match)
     * [Parameters.Validate_String(param, value)](#Validation.Parameters.Validate_String)
     * [Parameters.Validate_String_Formats(param, value)](#Validation.Parameters.Validate_String_Formats)
  
@@ -99,7 +98,6 @@ This is a polyfill for checking if something is an int64.
     * [Parameters.Validate_Number_Formats(param, value)](#Validation.Parameters.Validate_Number_Formats)
     * [Parameters.Validate_Object(param, value, models)](#Validation.Parameters.Validate_Object)
     * [Parameters.Validate_Object_Formats(param, value, models)](#Validation.Parameters.Validate_Object_Formats)
-    * [Parameters.Is_Pattern_Match(param, value)](#Validation.Parameters.Is_Pattern_Match)
     * [Parameters.Validate_String(param, value)](#Validation.Parameters.Validate_String)
     * [Parameters.Validate_String_Formats(param, value)](#Validation.Parameters.Validate_String_Formats)
 
@@ -263,7 +261,6 @@ Validates the query string of the <tt>req</tt> that called validation. Additiona
   * [Parameters.Validate_Number_Formats(param, value)](#Validation.Parameters.Validate_Number_Formats)
   * [Parameters.Validate_Object(param, value, models)](#Validation.Parameters.Validate_Object)
   * [Parameters.Validate_Object_Formats(param, value, models)](#Validation.Parameters.Validate_Object_Formats)
-  * [Parameters.Is_Pattern_Match(param, value)](#Validation.Parameters.Is_Pattern_Match)
   * [Parameters.Validate_String(param, value)](#Validation.Parameters.Validate_String)
   * [Parameters.Validate_String_Formats(param, value)](#Validation.Parameters.Validate_String_Formats)
 
@@ -300,7 +297,7 @@ There is no validation to be done for this type, but it is valid.If "nothing" 
 **Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value passed in unmodified.  
 <a name="Validation.Parameters.Validate_Date"></a>
 ###Parameters.Validate_Date(param, value)
-There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time(more than likely due to the varied formats a date could have). Therefore, swagger-validation will accept a'pattern' property on the Swagger Property/Parameter Objects, which is a moment.js format string,that specifies the explicit format expected for the date format. If no pattern property is detected,moment.ISO_8601 will be used by default.If "nothing" was passed into the validate function and it's required with no default value,then this will throw a parameter is required error.
+There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time(more than likely due to the varied formats a date could have). Therefore, swagger-validation will accept a'pattern' property on the Swagger Property/Parameter Objects, which is a moment.js format stringthat specifies the explicit format expected for the date format. If no pattern property is detected,moment.ISO_8601 will be used by default.If "nothing" was passed into the validate function and it's required with no default value,then this will throw a parameter is required error.
 
 **Params**
 
@@ -429,19 +426,9 @@ Redirects to the validate object method if this is a valid object in the model, 
 - models `Object` - Any models that are defined for this API  
 
 **Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value parsed successfully.  
-<a name="Validation.Parameters.Is_Pattern_Match"></a>
-###Parameters.Is_Pattern_Match(param, value)
-Ensures that the <tt>value</tt> that is passed in matches the <tt>param</tt>'s pattern property.If <tt>param</tt> does not have a pattern property, or the pattern cannot be parsed into a validRegExp object, pattern matching is skipped and <tt>value</tt> is considered valid.
-
-**Params**
-
-- param `Object` - The Swagger param that was created for this operation  
-- value `Object` - The value that is passed in along the req (via body, header, etc.)  
-
-**Returns**: `Boolean` - True if <tt>value</tt> matches pattern or no valid pattern exists, else false  
 <a name="Validation.Parameters.Validate_String"></a>
 ###Parameters.Validate_String(param, value)
-Ensures that the <tt>value</tt> that is passed in is a valid string. Additionally, if an enum isdefined for this <tt>param</tt> ensure that the value is inside the enum list (which is case-sensitive).This also ensures that the <tt>value</tt> adheres to the <tt>pattern</tt> specified on the <tt>spec</tt>,if a pattern is specified.If "nothing" was passed into the validate function and it's required with no default value,then this will throw a parameter is required error.
+Ensures that the <tt>value</tt> that is passed in is a valid string. Additionally, if an enum isdefined for this <tt>param</tt> ensure that the value is inside the enum list (which is case-sensitive).This also ensures that the <tt>value</tt> adheres to the <tt>pattern</tt> specified on the <tt>spec</tt>,if a pattern is specified.Additionally, if a pattern property is defined for this <tt>param</tt>, ensure that the <tt>value</tt>that is passed in matches the <tt>param</tt>'s pattern property. If <tt>param</tt> does not have a patternproperty, pattern matching is skipped. If <tt>param</tt> has an invalid pattern property a invalid patternerror is thrown.If "nothing" was passed into the validate function and it's required with no default value,then this will throw a parameter is required error.
 
 **Params**
 

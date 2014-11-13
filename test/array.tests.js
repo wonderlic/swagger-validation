@@ -75,16 +75,16 @@ describe('array', function() {
 
   it('should validate with simple objects', function() {
     var value = [
-      { id: 1.23 },
-      { id: 1.23 },
-      { id: 1.23 }
+      {id: 1.23},
+      {id: 1.23},
+      {id: 1.23}
     ];
     var model = {
       Test: {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'number' }
+          id: {type: 'number'}
         }
       }
     };
@@ -94,17 +94,17 @@ describe('array', function() {
 
   it('should validate with complex objects', function() {
     var value = [
-      { test1: 1, test2: 'string', test3: true },
-      { test1: 1, test2: 'string', test3: false }
+      {test1: 1, test2: 'string', test3: true},
+      {test1: 1, test2: 'string', test3: false}
     ];
     var model = {
       Test: {
         id: 'Test',
         name: 'Test',
         properties: {
-          test1: { type: 'integer' },
-          test2: { type: 'string' },
-          test3: { type: 'boolean' }
+          test1: {type: 'integer'},
+          test2: {type: 'string'},
+          test3: {type: 'boolean'}
         }
       }
     };
@@ -120,11 +120,11 @@ describe('array', function() {
         subTypes: ["bar"],
         discriminator: "name",
         properties: {
-          number: { type: 'number' },
-          float: { type: 'number', format: 'float' },
-          double: { type: 'number', format: 'double' },
-          integer: { type: 'integer' },
-          int32: { type: 'integer', format: 'int32' }
+          number: {type: 'number'},
+          float: {type: 'number', format: 'float'},
+          double: {type: 'number', format: 'double'},
+          integer: {type: 'integer'},
+          int32: {type: 'integer', format: 'int32'}
         }
       },
       bar: {
@@ -133,9 +133,9 @@ describe('array', function() {
         subTypes: ["baz"],
         discriminator: "name",
         properties: {
-          int64: { type: 'integer', format: 'int64' },
-          string: { type: 'string' },
-          byte: { type: 'string', format: 'byte' },
+          int64: {type: 'integer', format: 'int64'},
+          string: {type: 'string'},
+          byte: {type: 'string', format: 'byte'},
           date: {
             type: 'string',
             format: 'date',
@@ -152,7 +152,7 @@ describe('array', function() {
         id: 'baz',
         name: 'baz',
         properties: {
-          boolean: { type: 'boolean' }
+          boolean: {type: 'boolean'}
         }
       }
     };
@@ -286,14 +286,14 @@ describe('array', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'number' }
+          id: {type: 'number'}
         }
       }
     };
 
     var ret = validate(helper.makeArrayParam(false, 'Test'), [
-      { id: 1},
-      { id: 'Yo'}
+      {id: 1},
+      {id: 'Yo'}
     ], model);
     helper.validateError(ret, 1, ["id is not a type of number"]);
   });
@@ -305,15 +305,15 @@ describe('array', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          test1: { type: 'integer' },
-          test2: { type: 'string' },
-          test3: { type: 'boolean' }
+          test1: {type: 'integer'},
+          test2: {type: 'string'},
+          test3: {type: 'boolean'}
         }
       }
     };
 
     var ret = validate(helper.makeArrayParam(false, 'Test'), [
-      { test1: 'No', test2: true, test3: 1}
+      {test1: 'No', test2: true, test3: 1}
     ], model);
     helper.validateError(ret, 3, ["test1 is not a type of integer", "test2 is not a type of string", "test3 is not a type of boolean"]);
   });

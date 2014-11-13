@@ -12,7 +12,7 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'number' }
+          id: {type: 'number'}
         }
       }
     };
@@ -68,19 +68,19 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'number' }
+          id: {type: 'number'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1};
+      var value = {id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', false), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', false), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of number"]);
     });
   });
@@ -92,19 +92,19 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'number', format: 'float' }
+          id: {type: 'number', format: 'float'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1.233242};
+      var value = {id: 1.233242};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', false), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', false), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of float"]);
     });
   });
@@ -116,19 +116,19 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'number', format: 'double' }
+          id: {type: 'number', format: 'double'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1.233242 };
+      var value = {id: 1.233242};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', false), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', false), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of double"]);
     });
   });
@@ -140,19 +140,19 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'integer' }
+          id: {type: 'integer'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1};
+      var value = {id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', false), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', false), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of integer"]);
     });
   });
@@ -164,19 +164,19 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'integer', format: 'int32' }
+          id: {type: 'integer', format: 'int32'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1};
+      var value = {id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', false), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', false), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of int32"]);
     });
   });
@@ -188,19 +188,19 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'integer', format: 'int64' }
+          id: {type: 'integer', format: 'int64'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1};
+      var value = {id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', true), { id: '  '}, model);
+      var ret = validate(helper.makeParam('Test', true), {id: '  '}, model);
       helper.validateError(ret, 1, ["id is not a type of int64"]);
     });
   });
@@ -212,19 +212,19 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'string' }
+          id: {type: 'string'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 'this is a string'};
+      var value = {id: 'this is a string'};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', false), { id: {}}, model);
+      var ret = validate(helper.makeParam('Test', false), {id: {}}, model);
       helper.validateError(ret, 1, ["id is not a type of string"]);
     });
   });
@@ -236,13 +236,13 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'string', format: 'byte' }
+          id: {type: 'string', format: 'byte'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: [65, 43]};
+      var value = {id: [65, 43]};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -264,8 +264,8 @@ describe('object', function() {
     };
 
     it('should validate', function() {
-      var value = { id: '2014-08-08'};
-      var transformedValue = { id: moment('2014-08-08').toDate()};
+      var value = {id: '2014-08-08'};
+      var transformedValue = {id: moment('2014-08-08').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [transformedValue]);
     });
@@ -278,14 +278,14 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'string', format: 'date-time' }
+          id: {type: 'string', format: 'date-time'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: '2014-08-09T12:43:00'};
-      var transformedValue = { id: moment('2014-08-09T12:43:00').toDate()};
+      var value = {id: '2014-08-09T12:43:00'};
+      var transformedValue = {id: moment('2014-08-09T12:43:00').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [transformedValue]);
     });
@@ -298,20 +298,20 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          id: { type: 'boolean' }
+          id: {type: 'boolean'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 'true'};
-      var transformedValue = { id: true};
+      var value = {id: 'true'};
+      var transformedValue = {id: true};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [transformedValue]);
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', false), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', false), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of boolean"]);
     });
   });
@@ -324,13 +324,13 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'number' }
+          id: {type: 'number'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1};
+      var value = {id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -341,7 +341,7 @@ describe('object', function() {
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', true), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', true), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of number"]);
     });
   });
@@ -354,13 +354,13 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'number', format: 'float' }
+          id: {type: 'number', format: 'float'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1.233242};
+      var value = {id: 1.233242};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -371,7 +371,7 @@ describe('object', function() {
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', true), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', true), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of float"]);
     });
   });
@@ -384,13 +384,13 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'number', format: 'double' }
+          id: {type: 'number', format: 'double'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1.233242};
+      var value = {id: 1.233242};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -401,7 +401,7 @@ describe('object', function() {
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', true), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', true), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of double"]);
     });
   });
@@ -414,13 +414,13 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'integer' }
+          id: {type: 'integer'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1};
+      var value = {id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -431,7 +431,7 @@ describe('object', function() {
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', true), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', true), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of integer"]);
     });
   });
@@ -444,13 +444,13 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'integer', format: 'int32' }
+          id: {type: 'integer', format: 'int32'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1};
+      var value = {id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -461,7 +461,7 @@ describe('object', function() {
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', true), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', true), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of int32"]);
     });
   });
@@ -474,13 +474,13 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'integer', format: 'int64' }
+          id: {type: 'integer', format: 'int64'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 1};
+      var value = {id: 1};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -491,7 +491,7 @@ describe('object', function() {
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', true), { id: ' '}, model);
+      var ret = validate(helper.makeParam('Test', true), {id: ' '}, model);
       helper.validateError(ret, 1, ["id is not a type of int64"]);
     });
   });
@@ -504,13 +504,13 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'string' }
+          id: {type: 'string'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 'this is a string'};
+      var value = {id: 'this is a string'};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -521,7 +521,7 @@ describe('object', function() {
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', true), { id: {}}, model);
+      var ret = validate(helper.makeParam('Test', true), {id: {}}, model);
       helper.validateError(ret, 1, ["id is not a type of string"]);
     });
   });
@@ -534,13 +534,13 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'string', format: 'byte' }
+          id: {type: 'string', format: 'byte'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: [65, 43]};
+      var value = {id: [65, 43]};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [value]);
     });
@@ -568,8 +568,8 @@ describe('object', function() {
     };
 
     it('should validate', function() {
-      var value = { id: '2014-08-08'};
-      var transformedValue = { id: moment('2014-08-08').toDate()};
+      var value = {id: '2014-08-08'};
+      var transformedValue = {id: moment('2014-08-08').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [transformedValue]);
     });
@@ -597,8 +597,8 @@ describe('object', function() {
     };
 
     it('should validate', function() {
-      var value = { id: '2014-08-09T12:43:00'};
-      var transformedValue = { id: moment('2014-08-09T12:43:00').toDate()};
+      var value = {id: '2014-08-09T12:43:00'};
+      var transformedValue = {id: moment('2014-08-09T12:43:00').toDate()};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [transformedValue]);
     });
@@ -617,14 +617,14 @@ describe('object', function() {
         name: 'Test',
         required: ['id'],
         properties: {
-          id: { type: 'boolean' }
+          id: {type: 'boolean'}
         }
       }
     };
 
     it('should validate', function() {
-      var value = { id: 'true'};
-      var transformedValue = { id: true};
+      var value = {id: 'true'};
+      var transformedValue = {id: true};
       var ret = validate(helper.makeParam('Test', false), value, model);
       helper.validateSuccess(ret, 1, [transformedValue]);
     });
@@ -635,7 +635,7 @@ describe('object', function() {
     });
 
     it('should not validate', function() {
-      var ret = validate(helper.makeParam('Test', true), { id: 'thisisastring'}, model);
+      var ret = validate(helper.makeParam('Test', true), {id: 'thisisastring'}, model);
       helper.validateError(ret, 1, ["id is not a type of boolean"]);
     });
   });
@@ -647,17 +647,17 @@ describe('object', function() {
         id: 'Test',
         name: 'Test',
         properties: {
-          number: { type: 'number' },
-          float: { type: 'number', format: 'float' },
-          double: { type: 'number', format: 'double' },
-          integer: { type: 'integer' },
-          int32: { type: 'integer', format: 'int32' },
-          int64: { type: 'integer', format: 'int64' },
-          string: { type: 'string' },
-          byte: { type: 'string', format: 'byte' },
-          date: { type: 'string', format: 'date' },
-          datetime: { type: 'string', format: 'date-time' },
-          boolean: { type: 'boolean' }
+          number: {type: 'number'},
+          float: {type: 'number', format: 'float'},
+          double: {type: 'number', format: 'double'},
+          integer: {type: 'integer'},
+          int32: {type: 'integer', format: 'int32'},
+          int64: {type: 'integer', format: 'int64'},
+          string: {type: 'string'},
+          byte: {type: 'string', format: 'byte'},
+          date: {type: 'string', format: 'date'},
+          datetime: {type: 'string', format: 'date-time'},
+          boolean: {type: 'boolean'}
         }
       }
     };
@@ -776,17 +776,17 @@ describe('object', function() {
         name: 'Test',
         required: ['param1', 'param2', 'param3', 'param4', 'param5', 'param6', 'param7', 'param8', 'param9', 'param10', 'param11'],
         properties: {
-          param1: { type: 'number' },
-          param2: { type: 'number', format: 'float' },
-          param3: { type: 'number', format: 'double' },
-          param4: { type: 'integer' },
-          param5: { type: 'integer', format: 'int32' },
-          param6: { type: 'integer', format: 'int64' },
-          param7: { type: 'string' },
-          param8: { type: 'string', format: 'byte' },
-          param9: { type: 'string', format: 'date' },
-          param10: { type: 'string', format: 'date-time' },
-          param11: { type: 'boolean' }
+          param1: {type: 'number'},
+          param2: {type: 'number', format: 'float'},
+          param3: {type: 'number', format: 'double'},
+          param4: {type: 'integer'},
+          param5: {type: 'integer', format: 'int32'},
+          param6: {type: 'integer', format: 'int64'},
+          param7: {type: 'string'},
+          param8: {type: 'string', format: 'byte'},
+          param9: {type: 'string', format: 'date'},
+          param10: {type: 'string', format: 'date-time'},
+          param11: {type: 'boolean'}
         }
       }
     };
@@ -837,11 +837,11 @@ describe('object', function() {
         subTypes: ["bar"],
         discriminator: "name",
         properties: {
-          number: { type: 'number' },
-          float: { type: 'number', format: 'float' },
-          double: { type: 'number', format: 'double' },
-          integer: { type: 'integer' },
-          int32: { type: 'integer', format: 'int32' }
+          number: {type: 'number'},
+          float: {type: 'number', format: 'float'},
+          double: {type: 'number', format: 'double'},
+          integer: {type: 'integer'},
+          int32: {type: 'integer', format: 'int32'}
         }
       },
       bar: {
@@ -850,18 +850,18 @@ describe('object', function() {
         subTypes: ["baz"],
         discriminator: "name",
         properties: {
-          int64: { type: 'integer', format: 'int64' },
-          string: { type: 'string' },
-          byte: { type: 'string', format: 'byte' },
-          date: { type: 'string', format: 'date' },
-          datetime: { type: 'string', format: 'date-time' }
+          int64: {type: 'integer', format: 'int64'},
+          string: {type: 'string'},
+          byte: {type: 'string', format: 'byte'},
+          date: {type: 'string', format: 'date'},
+          datetime: {type: 'string', format: 'date-time'}
         }
       },
       baz: {
         id: 'baz',
         name: 'baz',
         properties: {
-          boolean: { type: 'boolean' }
+          boolean: {type: 'boolean'}
         }
       }
     };
@@ -980,15 +980,15 @@ describe('object', function() {
         id: 'foo',
         name: 'foo',
         properties: {
-          obj: { $ref: 'bar' },
-          integer: { type: 'integer' }
+          obj: {$ref: 'bar'},
+          integer: {type: 'integer'}
         }
       }
     };
 
     it('should validate', function() {
       var value = {
-        obj: { array: [true, false, true] },
+        obj: {array: [true, false, true]},
         integer: 1
       };
       var ret = validate(helper.makeParam('foo', false), value, model);
@@ -1022,7 +1022,7 @@ describe('object', function() {
 
     it('should not validate array invalid', function() {
       var value = {
-        obj: { array: ['1'] },
+        obj: {array: ['1']},
         integer: 1
       };
       var ret = validate(helper.makeParam('foo', true), value, model);
@@ -1045,15 +1045,15 @@ describe('object', function() {
         name: 'foo',
         required: ['obj', 'integer'],
         properties: {
-          obj: { $ref: 'bar' },
-          integer: { type: 'integer' }
+          obj: {$ref: 'bar'},
+          integer: {type: 'integer'}
         }
       }
     };
 
     it('should validate', function() {
       var value = {
-        obj: { array: [true, false, true] },
+        obj: {array: [true, false, true]},
         integer: 1
       };
       var ret = validate(helper.makeParam('foo', false), value, model);
@@ -1080,7 +1080,7 @@ describe('object', function() {
 
     it('should not validate array invalid', function() {
       var value = {
-        obj: { array: ['1'] },
+        obj: {array: ['1']},
         integer: 1
       };
       var ret = validate(helper.makeParam('foo', true), value, model);
@@ -1103,11 +1103,11 @@ describe('object', function() {
         discriminator: "name",
         required: ['number', 'float', 'double', 'integer', 'int32'],
         properties: {
-          number: { type: 'number' },
-          float: { type: 'number', format: 'float' },
-          double: { type: 'number', format: 'double' },
-          integer: { type: 'integer' },
-          int32: { type: 'integer', format: 'int32' }
+          number: {type: 'number'},
+          float: {type: 'number', format: 'float'},
+          double: {type: 'number', format: 'double'},
+          integer: {type: 'integer'},
+          int32: {type: 'integer', format: 'int32'}
         }
       },
       bar: {
@@ -1117,11 +1117,11 @@ describe('object', function() {
         discriminator: "name",
         required: ['int64', 'string', 'byte', 'date', 'datetime'],
         properties: {
-          int64: { type: 'integer', format: 'int64' },
-          string: { type: 'string' },
-          byte: { type: 'string', format: 'byte' },
-          date: { type: 'string', format: 'date' },
-          datetime: { type: 'string', format: 'date-time' }
+          int64: {type: 'integer', format: 'int64'},
+          string: {type: 'string'},
+          byte: {type: 'string', format: 'byte'},
+          date: {type: 'string', format: 'date'},
+          datetime: {type: 'string', format: 'date-time'}
         }
       },
       baz: {
@@ -1129,7 +1129,7 @@ describe('object', function() {
         name: 'baz',
         required: ['boolean'],
         properties: {
-          boolean: { type: 'boolean' }
+          boolean: {type: 'boolean'}
         }
       }
     };

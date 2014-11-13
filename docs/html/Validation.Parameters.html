@@ -143,179 +143,6 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="Is_Pattern_Match"><span class="type-signature">&lt;static> </span>Is_Pattern_Match<span class="signature">(param, value)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        <p>Ensures that the <tt>value</tt> that is passed in matches the <tt>param</tt>'s pattern property.
-If <tt>param</tt> does not have a pattern property, or the pattern cannot be parsed into a valid
-RegExp object, pattern matching is skipped and <tt>value</tt> is considered valid.</p>
-    </div>
-    
-
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>param</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The Swagger param that was created for this operation</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The value that is passed in along the req (via body, header, etc.)</p></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="string.js.html">validation/parameters/string.js</a>,
-				 <a href="string.js.html#sunlight-1-line-8">line 8</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>True if <tt>value</tt> matches pattern or no valid pattern exists, else false</p>
-</div>
-
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">Boolean</span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-</dd>
-
-        
-            
-<dt>
     <h4 class="name" id="Is_Required"><span class="type-signature">&lt;static> </span>Is_Required<span class="signature">(param, value)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
@@ -1439,7 +1266,7 @@ or a value property that contains the value passed in unmodified.</p>
     <div class="description">
         <p>There is no definitive definition in the swagger spec as to what constitutes a valid date or date-time
 (more than likely due to the varied formats a date could have). Therefore, swagger-validation will accept a
-'pattern' property on the Swagger Property/Parameter Objects, which is a moment.js format string,
+'pattern' property on the Swagger Property/Parameter Objects, which is a moment.js format string
 that specifies the explicit format expected for the date format. If no pattern property is detected,
 moment.ISO_8601 will be used by default.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
@@ -3269,6 +3096,10 @@ or a value property that contains the value parsed successfully.</p>
 defined for this <tt>param</tt> ensure that the value is inside the enum list (which is case-sensitive).</p>
 <p>This also ensures that the <tt>value</tt> adheres to the <tt>pattern</tt> specified on the <tt>spec</tt>,
 if a pattern is specified.</p>
+<p>Additionally, if a pattern property is defined for this <tt>param</tt>, ensure that the <tt>value</tt>
+that is passed in matches the <tt>param</tt>'s pattern property. If <tt>param</tt> does not have a pattern
+property, pattern matching is skipped. If <tt>param</tt> has an invalid pattern property a invalid pattern
+error is thrown.</p>
 <p>If &quot;nothing&quot; was passed into the validate function and it's required with no default value,
 then this will throw a parameter is required error.</p>
     </div>
@@ -3380,7 +3211,7 @@ then this will throw a parameter is required error.</p>
 		<ul class="dummy">
 			<li>
 				<a href="string.js.html">validation/parameters/string.js</a>,
-				 <a href="string.js.html#sunlight-1-line-32">line 32</a>
+				 <a href="string.js.html#sunlight-1-line-7">line 7</a>
 			</li>
 		</ul>
 	</dd>
@@ -3553,7 +3384,7 @@ or a value property that contains the value parsed successfully.</p>
 		<ul class="dummy">
 			<li>
 				<a href="string.js.html">validation/parameters/string.js</a>,
-				 <a href="string.js.html#sunlight-1-line-71">line 71</a>
+				 <a href="string.js.html#sunlight-1-line-59">line 59</a>
 			</li>
 		</ul>
 	</dd>
@@ -3631,7 +3462,7 @@ or a value property that contains the value parsed successfully.</p>
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a>
-		on Fri Aug 15th 2014 using the <a
+		on Thu Nov 13th 2014 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>
