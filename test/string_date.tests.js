@@ -12,6 +12,12 @@ describe('string - date', function() {
     helper.validateSuccess(ret, 1, [expected]);
   });
 
+  it('a date should always validate', function() {
+    var expected = moment('2014-01-01', 'YYYY-MM-DD').toDate();
+    var ret = validate(helper.makeStringParam('string', false, 'date'), expected);
+    helper.validateSuccess(ret, 1, [expected]);
+  });
+
   it('should validate with custom pattern', function() {
     var value = '1/1/2014 5:00PM';
     var expected = moment('1/1/2014', 'M/D/YYYY').toDate();
