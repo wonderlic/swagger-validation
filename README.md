@@ -233,14 +233,14 @@ exports.findByName = {
       id: "petName",
       description: "petName",
       type: "string",
-      pattern: "/^dr*/i"
+      pattern: "^dr*"
     }]
   }
 };
 ```
 
-swagger-validation will now enforce that all names sent to the /pet/{petName} route start with `"dr"` (case insensitive). 
-`pattern` will accept any regex string as long as it's in the format of a regex object (e.g. "/somematch/"" not "somematch").
+swagger-validation will now enforce that all names sent to the /pet/{petName} route start with `"dr"`.
+`pattern` will accept any regex string.  An invalid regex string will report an error.
 
 ### Date pattern matching (moment.js format)
 

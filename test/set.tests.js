@@ -48,7 +48,7 @@ describe('set', function() {
   });
 
   it('should validate with string with no format', function() {
-    var ret = validate(helper.makeArrayParam(false, 'string', null, true), ['These', 'are', 'a', 'lot', 'of', 'strings']);
+    var ret = validate(helper.makeArrayParam(false, 'string', null, null, true), ['These', 'are', 'a', 'lot', 'of', 'strings']);
     helper.validateSuccess(ret, 1, [
       ['These', 'are', 'a', 'lot', 'of', 'strings']
     ]);
