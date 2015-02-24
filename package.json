@@ -20,7 +20,7 @@
   "main": "index.js",
   "license": "MIT",
   "engines": {
-    "node": ">= 0.9.x"
+    "node": ">= 0.10.x"
   },
   "scripts": {
     "jshint": "jshint ./lib ./test index.js gulpfile.js",
