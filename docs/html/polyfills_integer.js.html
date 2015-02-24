@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>DocStrap Index</title>
+	<title>DocStrap Source: polyfills/integer.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -41,35 +41,48 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
-    		<h1 class="page-title">Index</h1>
+    		<h1 class="page-title">Source: polyfills/integer.js</h1>
 			
 
-	
-	<span class="page-title">Index</span>
-	
-	
+		<h1 class="page-title">Source: polyfills/integer.js</h1>
+    
+<section>
+	<article>
+		<pre
+			class="sunlight-highlight-javascript linenums">/** @namespace Polyfills */
+'use strict';
 
+/**
+ * This is a polyfill for checking if something is an integer. This is proposed functionality in ECMA6 (aka Harmony). &lt;br/>
+ * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger#Polyfill}
+ * @method isInteger
+ * @memberOf Polyfills
+ * @param {Object} nVal The value to be checked
+ * @returns {Boolean} True if &lt;tt>nVal&lt;/tt> can successfully be parsed as an Integer, else false.
+ */
+if (!Number.isInteger) {
+  Number.isInteger = function isInteger(nVal) {
+    return typeof nVal === "number" &amp;&amp; isFinite(nVal) &amp;&amp; nVal > -9007199254740992 &amp;&amp; nVal &lt; 9007199254740992 &amp;&amp; Math.floor(nVal) === nVal;
+  };
+}
 
-
-
-
-
-
-
-
-
-
-	
-	
-
-
-
-
-
-
+/**
+ * This is a polyfill for checking if something is an int64.
+ * @method isInt64
+ * @memberOf Polyfills
+ * @param {Object} nVal The value to be checked
+ * @returns {Boolean} True if &lt;tt>nVal&lt;/tt> can successfully be parsed as an int64, else false.
+ */
+if (!Number.isInt64) {
+  Number.isInt64 = function isInt64(nVal) {
+    return typeof nVal === "number" &amp;&amp; isFinite(nVal) &amp;&amp; Math.floor(nVal) === nVal;
+  };
+}</pre>
+	</article>
+</section>
 
 
 
@@ -80,10 +93,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3"></div>
-		</div>
 	
 
 </div>

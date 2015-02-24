@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>DocStrap Index</title>
+	<title>DocStrap Source: validation/paramTypes/path.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -41,35 +41,49 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
-    		<h1 class="page-title">Index</h1>
+    		<h1 class="page-title">Source: validation/paramTypes/path.js</h1>
 			
 
-	
-	<span class="page-title">Index</span>
-	
-	
+		<h1 class="page-title">Source: validation/paramTypes/path.js</h1>
+    
+<section>
+	<article>
+		<pre
+			class="sunlight-highlight-javascript linenums">'use strict';
 
+var _ = require('lodash');
+var helper = require('./helper');
 
-
-
-
-
-
-
-
-
-
-	
-	
-
-
-
-
-
-
+/**
+ * Validates the path of the &lt;tt>req&lt;/tt> that called validation. Additionally, this will honor
+ * the allowMultiple flag.
+ *
+ * @memberOf Validation.ParamTypes
+ * @method Validate_Header
+ * @param {Object} param The Swagger param that was created for this operation
+ * @param {Object} req The request that this is validating
+ * @param {Object} [models] Optionally, the models that are defined as part of this Swagger API definition
+ * @param {Object} validationObj The validation object that is defined as part of this Swagger API definition
+ * @returns {Array} An empty Array if the &lt;tt>value&lt;/tt> was "nothing" and not required, else an array
+ * containing an object with either an error property (which contains an Array of Error objects)
+ * or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.
+ */
+var body = function(param, req, models, validationObj) {
+  var value = _.has(req.params, param.name) ? req.params[param.name] : undefined;
+  var ret = helper.paramType(param, value, models, param.allowMultiple);
+  if (!_.some(ret, function(val) { return val.hasOwnProperty('error'); })) {
+    if (validationObj.replaceValues) {
+      req.params[param.name] = helper.getValue(param, ret);
+    }
+  }
+  return ret;
+};
+module.exports = exports = body;</pre>
+	</article>
+</section>
 
 
 
@@ -80,10 +94,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3"></div>
-		</div>
 	
 
 </div>
