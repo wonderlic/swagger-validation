@@ -326,8 +326,8 @@ Both of these values default to true (so validation is enabled as well as it wil
 
 ## Documentation
 
-Full documentation of how all code works in swagger-validation is available in both markdown and HTML format (using jsdoc) 
-in the /docs sub-folder of this project.
+Full documentation of how all code works in swagger-validation is available in both markdown and HTML format (using jsdoc).
+To create it, run the default Gulp task (cli - gulp default).
 
 ## License
 
