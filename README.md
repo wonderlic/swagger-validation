@@ -2,7 +2,6 @@
 
 [![Build Status](https://img.shields.io/travis/wonderlic/swagger-validation/master.svg)](https://travis-ci.org/wonderlic/swagger-validation)
 [![NPM version](https://badge.fury.io/js/swagger-validation.svg)](http://badge.fury.io/js/swagger-validation)
-[![Code Climate](https://codeclimate.com/github/wonderlic/swagger-validation/badges/gpa.svg)](https://codeclimate.com/github/wonderlic/swagger-validation)
 
 DocumentUp available here: http://documentup.com/wonderlic/swagger-validation
 
