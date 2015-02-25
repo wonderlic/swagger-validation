@@ -1239,4 +1239,268 @@ describe('object', function() {
       helper.validateError(ret, 11, ['boolean is required', 'byte is required', 'date is required', 'datetime is required', 'double is required', 'float is required', 'int32 is required', 'int64 is required', 'integer is required', 'number is required', 'string is required']);
     });
   });
+
+  describe('one of each type with self-referential array property', function() {
+    // each section defines it's own validation parameters
+    var model = {
+      foo: {
+        id: 'foo',
+        name: 'foo',
+        required: ['number', 'float', 'double', 'integer', 'int32', 'int64', 'string', 'byte', 'date', 'datetime', 'boolean'],
+        properties: {
+          number: {type: 'number'},
+          float: {type: 'number', format: 'float'},
+          double: {type: 'number', format: 'double'},
+          integer: {type: 'integer'},
+          int32: {type: 'integer', format: 'int32'},
+          int64: {type: 'integer', format: 'int64'},
+          string: {type: 'string'},
+          byte: {type: 'string', format: 'byte'},
+          date: {type: 'string', format: 'date'},
+          datetime: {type: 'string', format: 'date-time'},
+          boolean: {type: 'boolean'},
+          foos: {
+            type: "array",
+            items: {
+              "$ref": "foo"
+            }
+          }
+        }
+      }
+    };
+
+    it('should validate', function() {
+      var value = {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'ThisIsAString ThatContains Many Spaces',
+        byte: [35, 98],
+        date: '2013-08-09',
+        datetime: '2014-01-01T17:00:00',
+        boolean: true,
+        foos: [
+          {
+            number: 0x33,
+            float: -2.231231,
+            double: Number.MIN_VALUE,
+            integer: 2e0,
+            int32: -2312,
+            int64: Number.MAX_VALUE,
+            string: 'ThisIsAString ThatContains Many Spaces',
+            byte: [35, 98],
+            date: '2013-08-09',
+            datetime: '2014-01-01T17:00:00',
+            boolean: true
+          }
+        ]
+      };
+      var transformedValue = {
+        number: 0x33,
+        float: -2.231231,
+        double: Number.MIN_VALUE,
+        integer: 2e0,
+        int32: -2312,
+        int64: Number.MAX_VALUE,
+        string: 'ThisIsAString ThatContains Many Spaces',
+        byte: [35, 98],
+        date: moment('2013-08-09').toDate(),
+        datetime: moment('2014-01-01T17:00:00').toDate(),
+        boolean: true,
+        foos: [
+          {
+            number: 0x33,
+            float: -2.231231,
+            double: Number.MIN_VALUE,
+            integer: 2e0,
+            int32: -2312,
+            int64: Number.MAX_VALUE,
+            string: 'ThisIsAString ThatContains Many Spaces',
+            byte: [35, 98],
+            date: moment('2013-08-09').toDate(),
+            datetime: moment('2014-01-01T17:00:00').toDate(),
+            boolean: true
+          }
+        ]
+      };
+      var ret = validate(helper.makeParam('foo', false), value, model);
+      helper.validateSuccess(ret, 1, [transformedValue]);
+    });
+
+    it('should not validate all invalid', function() {
+      var ret = validate(helper.makeParam('foo', true),
+        {
+          number: 'Random String',
+          float: true,
+          double: [323.33],
+          integer: {},
+          int32: Number.MIN_VALUE,
+          int64: Number.MAX_VALUE + Number.MAX_VALUE,
+          string: 1,
+          byte: false,
+          date: Number(1),
+          datetime: Number(2.2356),
+          boolean: 'Not a boolean',
+          foos: [
+            {
+              number: 'Random String',
+              float: true,
+              double: [323.33],
+              integer: {},
+              int32: Number.MIN_VALUE,
+              int64: Number.MAX_VALUE + Number.MAX_VALUE,
+              string: 1,
+              byte: false,
+              date: Number(1),
+              datetime: Number(2.2356),
+              boolean: 'Not a boolean'
+            }
+          ]
+        }, model);
+      helper.validateError(ret, 20, [
+        'boolean is not a type of boolean',
+        'boolean is not a type of boolean',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
+        'double is not a type of double',
+        'double is not a type of double',
+        'float is not a type of float',
+        'float is not a type of float',
+        'int32 is not a type of int32',
+        'int32 is not a type of int32',
+        'int64 is not a type of int64',
+        'int64 is not a type of int64',
+        'integer is not a type of integer',
+        'integer is not a type of integer',
+        'number is not a type of number',
+        'number is not a type of number',
+        'string is not a type of string',
+        'string is not a type of string'
+      ]);
+    });
+
+    it('should not validate half invalid', function() {
+      var ret = validate(helper.makeParam('foo', true), {
+        number: 'Random String',
+        float: true,
+        double: [323.33],
+        integer: {},
+        int32: -2312,
+        int64: Number.MIN_VALUE + 1,
+        string: 'ThisIsAString ThatContains Many Spaces',
+        byte: [35, 98],
+        date: '2013-08-09',
+        datetime: '2014-01-01T17:00:00Z',
+        boolean: true,
+        foos: [
+          {
+            number: 'Random String',
+            float: true,
+            double: [323.33],
+            integer: {},
+            int32: -2312,
+            int64: Number.MIN_VALUE + 1,
+            string: 'ThisIsAString ThatContains Many Spaces',
+            byte: [35, 98],
+            date: '2013-08-09',
+            datetime: '2014-01-01T17:00:00Z',
+            boolean: true
+          }
+        ]
+      }, model);
+      helper.validateError(ret, 8, [
+        'double is not a type of double',
+        'double is not a type of double',
+        'float is not a type of float',
+        'float is not a type of float',
+        'integer is not a type of integer',
+        'integer is not a type of integer',
+        'number is not a type of number',
+        'number is not a type of number'
+      ]);
+    });
+
+    it('should not validate other half invalid', function() {
+      var ret = validate(helper.makeParam('foo', true), {
+        number: 0x33,
+        float: -2.231231,
+        double: -Number.MIN_VALUE,
+        integer: 2e8,
+        int32: Number.MIN_VALUE,
+        int64: Number.MAX_VALUE + Number.MAX_VALUE,
+        string: 1,
+        byte: false,
+        date: Number(1),
+        datetime: Number(2.2356),
+        boolean: 'Not a boolean',
+        foos: [
+          {
+            number: 0x33,
+            float: -2.231231,
+            double: -Number.MIN_VALUE,
+            integer: 2e8,
+            int32: Number.MIN_VALUE,
+            int64: Number.MAX_VALUE + Number.MAX_VALUE,
+            string: 1,
+            byte: false,
+            date: Number(1),
+            datetime: Number(2.2356),
+            boolean: 'Not a boolean'
+          }
+        ]
+      }, model);
+      helper.validateError(ret, 12, [
+        'boolean is not a type of boolean',
+        'boolean is not a type of boolean',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'date is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
+        'datetime is not valid based on the pattern for moment.ISO 8601',
+        'int32 is not a type of int32',
+        'int32 is not a type of int32',
+        'int64 is not a type of int64',
+        'int64 is not a type of int64',
+        'string is not a type of string',
+        'string is not a type of string'
+      ]);
+    });
+
+    it('should not validate all missing', function() {
+      var ret = validate(helper.makeParam('foo', true),
+        {
+          number: 0x33,
+          float: -2.231231,
+          double: Number.MIN_VALUE,
+          integer: 2e0,
+          int32: -2312,
+          int64: Number.MAX_VALUE,
+          string: 'ThisIsAString ThatContains Many Spaces',
+          byte: [35, 98],
+          date: '2013-08-09',
+          datetime: '2014-01-01T17:00:00',
+          boolean: true,
+          foos: [{}]
+        }, model);
+      helper.validateError(ret, 11,
+        [
+          'boolean is required',
+          'byte is required',
+          'date is required',
+          'datetime is required',
+          'double is required',
+          'float is required',
+          'int32 is required',
+          'int64 is required',
+          'integer is required',
+          'number is required',
+          'string is required',
+        ]
+      );
+    });
+  });
 });

@@ -2,7 +2,9 @@
 
 [![Build Status](https://img.shields.io/travis/wonderlic/swagger-validation/master.svg)](https://travis-ci.org/wonderlic/swagger-validation)
 [![NPM version](https://badge.fury.io/js/swagger-validation.svg)](http://badge.fury.io/js/swagger-validation)
-[![Dependency Status](https://david-dm.org/wonderlic/swagger-validation.png)](https://david-dm.org/wonderlic/swagger-validation.png)
+[![Code Climate](https://codeclimate.com/github/wonderlic/swagger-validation/badges/gpa.svg)](https://codeclimate.com/github/wonderlic/swagger-validation)
+
+DocumentUp available here: http://documentup.com/wonderlic/swagger-validation
 
 ## Quick Description
 
@@ -327,8 +329,8 @@ Both of these values default to true (so validation is enabled as well as it wil
 
 ## Documentation
 
-Full documentation of how all code works in swagger-validation is available in both markdown and HTML format (using jsdoc) 
-in the /docs sub-folder of this project.
+Full documentation of how all code works in swagger-validation is available in both markdown and HTML format (using jsdoc).
+To create it, run the default Gulp task (cli - gulp default).
 
 ## License
 

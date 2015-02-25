@@ -6,7 +6,7 @@
     "email": "SoftwareDevelopment@wonderlic.com",
     "url": "http://www.wonderlic.com"
   },
-  "description": "Validation implementation intended to be used with the Wordnik Swagger implementation for Express",
+  "description": "Validation implementation intended to be used with the Wordnik Swagger implementation for Express (swagger-node-express)",
   "repository": {
     "type": "git",
     "url": "https://github.com/wonderlic/swagger-validation.git"
@@ -20,7 +20,7 @@
   "main": "index.js",
   "license": "MIT",
   "engines": {
-    "node": ">= 0.8.x"
+    "node": ">= 0.10.x"
   },
   "scripts": {
     "jshint": "jshint ./lib ./test index.js gulpfile.js",
@@ -28,19 +28,19 @@
     "test-debug": "mocha --debug-brk"
   },
   "dependencies": {
-    "lodash": "2.4.x",
-    "moment": "^2.8.1"
+    "lodash": "3.3.0",
+    "moment": "2.9.0"
   },
   "devDependencies": {
-    "chai": "1.9.x",
-    "gulp": "3.8.7",
-    "gulp-concat": "2.3.x",
-    "gulp-jsdoc-to-markdown": "0.1.x",
-    "gulp-shell": "0.2.x",
-    "gulp-util": "3.0.x",
-    "ink-docstrap": "0.4.x",
-    "jsdoc": "3.3.x",
-    "jshint": "^2.5.3",
-    "mocha": "1.21.x"
+    "chai": "2.1.0",
+    "gulp": "3.8.11",
+    "gulp-concat": "2.5.2",
+    "gulp-jsdoc-to-markdown": "0.1.6",
+    "gulp-shell": "0.3.0",
+    "gulp-util": "3.0.3",
+    "ink-docstrap": "0.5.2",
+    "jsdoc": "3.3.0-beta1",
+    "jshint": "2.6.0",
+    "mocha": "2.1.0"
   }
 }
