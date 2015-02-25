@@ -17,8 +17,8 @@ it only uses the message property of the Error object which, using lo-dash or Un
 var errors = _.pluck(_.pluck([VALIDATION RETURN], 'error'), 'message');)
 ```
 
-## Validate non-request object
-### As of v1.3
+#### Validate non-request object
+##### As of v1.3
 
 The main intention of this module is to validate the request passed into express via swagger-node-express. However,
 there are use cases where an object must be validated outside of a request (for example, if an object passed into a
