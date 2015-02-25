@@ -17,6 +17,16 @@ it only uses the message property of the Error object which, using lo-dash or Un
 var errors = _.pluck(_.pluck([VALIDATION RETURN], 'error'), 'message');)
 ```
 
+## Validate non-request object
+### As of v1.3
+
+The main intention of this module is to validate the request passed into express via swagger-node-express. However,
+there are use cases where an object must be validated outside of a request (for example, if an object passed into a
+request is also used in other methods or during unit testing). To support this functionality, if the req object passed
+into the validate function does not have one of the expected paramType properties (q, query, path, body, form, header,
+or params) then validation will be done against the req object itself. Therefore, this can be used to validate that
+an object matches the swagger specification outside of a request.
+
 ## Installation
 
 Using NPM, include the `swagger-validation` module in your `package.json` dependencies.
@@ -307,12 +317,6 @@ exports.findByName = {
 The `enabled` property turns on / off swagger-validation holistically for the particular spec. <br/>
 The `replaceValues` property turns on / off the functionality to manipulate values on the req (detailed in the previous section). <br/>
 Both of these values default to true (so validation is enabled as well as it will replace the values on the req).
-
-### Validate non-request object
-
-If the req parameter passed into the validate function does not have one of the following properties (q, query, path, body,
-form, header, params) then validation will be done against the req object itself. This can be used to validate that an
-object matches the swagger specification even when it is not part of a request object.
 
 ## Types of validation
 
