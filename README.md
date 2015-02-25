@@ -25,7 +25,7 @@ request is also used in other methods or during unit testing). To support this f
 if the req object passed into the validate function does not have one of the expected paramType properties
 (q, query, path, body, form, header, or params) then validation will be done against the req object itself.
 Therefore, this can be used to validate that an object matches the swagger specification outside of a request.
-Validating an object follow all the same rules outlined under Validate request object, but ignores the paramType
+Validating an object follows all the same rules outlined under *Validating a request*, but ignores the paramType
 on the Swagger spec as it already has the object to validate.
 
 ## Installation
