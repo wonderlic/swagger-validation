@@ -8,7 +8,7 @@ DocumentUp available here: http://documentup.com/wonderlic/swagger-validation
 
 ## Quick Description
 
-#### Validate request object
+#### Validating the request
 This module validates a request from a swagger-node-express application using the existing swagger-node-express objects,
 parameters, and models following the [swagger specification 1.2](https://github.com/wordnik/swagger-spec/blob/master/versions/1.2.md). 
 It returns an array of JavaScript Error objects if there are any validation errors. For now,
@@ -18,10 +18,10 @@ it only uses the message property of the Error object which, using lo-dash or Un
 var errors = _.pluck(_.pluck([VALIDATION RETURN], 'error'), 'message');)
 ```
 
-#### Validate non-request object
+#### Validating an object
 ##### As of v1.3
 
-The main intention of this module is to validate the request passed into express via swagger-node-express. However,
+While the main intention of this module is to validate the request passed into express via swagger-node-express,
 there are use cases where an object must be validated outside of a request (for example, if an object passed into a
 request is also used in other methods or during unit testing). To support this functionality, if the req object passed
 into the validate function does not have one of the expected paramType properties (q, query, path, body, form, header,
