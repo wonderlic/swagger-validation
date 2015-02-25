@@ -308,6 +308,12 @@ The `enabled` property turns on / off swagger-validation holistically for the pa
 The `replaceValues` property turns on / off the functionality to manipulate values on the req (detailed in the previous section). <br/>
 Both of these values default to true (so validation is enabled as well as it will replace the values on the req).
 
+### Validate non-request object
+
+If the req parameter passed into the validate function does not have one of the following properties (q, query, path, body,
+form, header, params) then validation will be done against the req object itself. This can be used to validate that an
+object matches the swagger specification even when it is not part of a request object.
+
 ## Types of validation
 
 | Type | Format | Description |
