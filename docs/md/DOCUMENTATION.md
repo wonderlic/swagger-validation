@@ -6,18 +6,9 @@
   * [Polyfills.isInteger(nVal)](#Polyfills.isInteger)
   * [Polyfills.isInt64(nVal)](#Polyfills.isInt64)
 * [Validation](#Validation)
-  * [Validation.Validate_ParamType(param, req, [models], validationObj)](#Validation.Validate_ParamType)
   * [Validation.Validate_Parameter(param, value, [models])](#Validation.Validate_Parameter)
+  * [Validation.Validate_ParamType(param, req, [models], validationObj)](#Validation.Validate_ParamType)
   * [Validation.Validate(spec, req, [models])](#Validation.Validate)
-  * [Validation.ParamTypes](#Validation.ParamTypes)
-    * [ParamTypes.Make_Validation_Object([validation])](#Validation.ParamTypes.Make_Validation_Object)
-    * [ParamTypes.Validate_Body(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Body)
-    * [ParamTypes.Validate_Form(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Form)
-    * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
-    * [ParamTypes.Validate_ParamType(param, ret)](#Validation.ParamTypes.Validate_ParamType)
-    * [ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])](#Validation.ParamTypes.Validate_ParamType)
-    * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
-    * [ParamTypes.Validate_Query(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Query)
   * [Validation.Parameters](#Validation.Parameters)
     * [Parameters.Validate_Array(param, value, [models])](#Validation.Parameters.Validate_Array)
     * [Parameters.Validate_Boolean(param, value)](#Validation.Parameters.Validate_Boolean)
@@ -37,6 +28,15 @@
     * [Parameters.Validate_Object_Formats(param, value, models)](#Validation.Parameters.Validate_Object_Formats)
     * [Parameters.Validate_String(param, value)](#Validation.Parameters.Validate_String)
     * [Parameters.Validate_String_Formats(param, value)](#Validation.Parameters.Validate_String_Formats)
+  * [Validation.ParamTypes](#Validation.ParamTypes)
+    * [ParamTypes.Make_Validation_Object([validation])](#Validation.ParamTypes.Make_Validation_Object)
+    * [ParamTypes.Validate_Body(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Body)
+    * [ParamTypes.Validate_Form(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Form)
+    * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
+    * [ParamTypes.Validate_ParamType(param, ret)](#Validation.ParamTypes.Validate_ParamType)
+    * [ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])](#Validation.ParamTypes.Validate_ParamType)
+    * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
+    * [ParamTypes.Validate_Query(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Query)
  
 <a name="Polyfills"></a>
 #Polyfills
@@ -69,18 +69,9 @@ This is a polyfill for checking if something is an int64.
 **Members**
 
 * [Validation](#Validation)
-  * [Validation.Validate_ParamType(param, req, [models], validationObj)](#Validation.Validate_ParamType)
   * [Validation.Validate_Parameter(param, value, [models])](#Validation.Validate_Parameter)
+  * [Validation.Validate_ParamType(param, req, [models], validationObj)](#Validation.Validate_ParamType)
   * [Validation.Validate(spec, req, [models])](#Validation.Validate)
-  * [Validation.ParamTypes](#Validation.ParamTypes)
-    * [ParamTypes.Make_Validation_Object([validation])](#Validation.ParamTypes.Make_Validation_Object)
-    * [ParamTypes.Validate_Body(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Body)
-    * [ParamTypes.Validate_Form(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Form)
-    * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
-    * [ParamTypes.Validate_ParamType(param, ret)](#Validation.ParamTypes.Validate_ParamType)
-    * [ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])](#Validation.ParamTypes.Validate_ParamType)
-    * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
-    * [ParamTypes.Validate_Query(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Query)
   * [Validation.Parameters](#Validation.Parameters)
     * [Parameters.Validate_Array(param, value, [models])](#Validation.Parameters.Validate_Array)
     * [Parameters.Validate_Boolean(param, value)](#Validation.Parameters.Validate_Boolean)
@@ -100,7 +91,27 @@ This is a polyfill for checking if something is an int64.
     * [Parameters.Validate_Object_Formats(param, value, models)](#Validation.Parameters.Validate_Object_Formats)
     * [Parameters.Validate_String(param, value)](#Validation.Parameters.Validate_String)
     * [Parameters.Validate_String_Formats(param, value)](#Validation.Parameters.Validate_String_Formats)
+  * [Validation.ParamTypes](#Validation.ParamTypes)
+    * [ParamTypes.Make_Validation_Object([validation])](#Validation.ParamTypes.Make_Validation_Object)
+    * [ParamTypes.Validate_Body(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Body)
+    * [ParamTypes.Validate_Form(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Form)
+    * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
+    * [ParamTypes.Validate_ParamType(param, ret)](#Validation.ParamTypes.Validate_ParamType)
+    * [ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])](#Validation.ParamTypes.Validate_ParamType)
+    * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
+    * [ParamTypes.Validate_Query(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Query)
 
+<a name="Validation.Validate_Parameter"></a>
+##Validation.Validate_Parameter(param, value, [models])
+Ensures that the <tt>value</tt> that is passed in on the req is valid based upon the Swagger definition for this operation.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- value `Object` - The value that is passed in along the req (via body, header, etc.)  
+- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
+
+**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
 <a name="Validation.Validate_ParamType"></a>
 ##Validation.Validate_ParamType(param, req, [models], validationObj)
 Ensures that the <tt>req</tt> that is passed in on the req is valid based upon the Swagger definition for this operation.
@@ -111,17 +122,6 @@ Ensures that the <tt>req</tt> that is passed in on the req is valid based upon t
 - req `Object` - The request that this is validating  
 - \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
 - validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
-
-**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
-<a name="Validation.Validate_Parameter"></a>
-##Validation.Validate_Parameter(param, value, [models])
-Ensures that the <tt>value</tt> that is passed in on the req is valid based upon the Swagger definition for this operation.
-
-**Params**
-
-- param `Object` - The Swagger param that was created for this operation  
-- value `Object` - The value that is passed in along the req (via body, header, etc.)  
-- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
 
 **Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
 <a name="Validation.Validate"></a>
@@ -135,111 +135,6 @@ Validates the <tt>req</tt> against the <tt>spec</tt> that was defined.
 - \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
 
 **Returns**: `Array` - An empty array if there were no validation errors or an array of objects with error propertiesif there are one or more validation errors.  
-<a name="Validation.ParamTypes"></a>
-##Validation.ParamTypes
-**Members**
-
-* [Validation.ParamTypes](#Validation.ParamTypes)
-  * [ParamTypes.Make_Validation_Object([validation])](#Validation.ParamTypes.Make_Validation_Object)
-  * [ParamTypes.Validate_Body(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Body)
-  * [ParamTypes.Validate_Form(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Form)
-  * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
-  * [ParamTypes.Validate_ParamType(param, ret)](#Validation.ParamTypes.Validate_ParamType)
-  * [ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])](#Validation.ParamTypes.Validate_ParamType)
-  * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
-  * [ParamTypes.Validate_Query(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Query)
-
-<a name="Validation.ParamTypes.Make_Validation_Object"></a>
-###ParamTypes.Make_Validation_Object([validation])
-Ensures that that the validation object on the <tt>spec</tt> is complete with all defaults configured.
-
-**Params**
-
-- \[validation\] `Object` - Optionally, the validation object that is defined as part of this Swagger API definition  
-
-**Returns**: `Object` - An object that contains the values passed in on <tt>spec.validation</tt>,plus any defaults for missing values  
-<a name="Validation.ParamTypes.Validate_Body"></a>
-###ParamTypes.Validate_Body(param, req, [models], validationObj)
-Validates the body of the <tt>req</tt> that called validation.
-
-**Params**
-
-- param `Object` - The Swagger param that was created for this operation  
-- req `Object` - The request that this is validating  
-- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
-- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
-
-**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
-<a name="Validation.ParamTypes.Validate_Form"></a>
-###ParamTypes.Validate_Form(param, req, [models], validationObj)
-Validates the form of the <tt>req</tt> that called validation.
-
-**Params**
-
-- param `Object` - The Swagger param that was created for this operation  
-- req `Object` - The request that this is validating  
-- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
-- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
-
-**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
-<a name="Validation.ParamTypes.Validate_Header"></a>
-###ParamTypes.Validate_Header(param, req, [models], validationObj)
-Validates the header of the <tt>req</tt> that called validation. Additionally, this will honorthe allowMultiple flag.
-
-**Params**
-
-- param `Object` - The Swagger param that was created for this operation  
-- req `Object` - The request that this is validating  
-- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
-- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
-
-**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
-<a name="Validation.ParamTypes.Validate_ParamType"></a>
-###ParamTypes.Validate_ParamType(param, ret)
-Gets the value to be passed back in the req if <tt>spec.validation.replaceValues === true</tt>.
-
-**Params**
-
-- param `Object` - The Swagger param that was created for this operation  
-- ret `Object` - The value that was returned from the paramType and parameter validation  
-
-**Returns**: `Object` - The values that was returned from the paramType and parameter validation,else the defaultValue if specified, else undefined.  
-<a name="Validation.ParamTypes.Validate_ParamType"></a>
-###ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])
-Validates the form of the <tt>req</tt> that called validation.
-
-**Params**
-
-- param `Object` - The Swagger param that was created for this operation  
-- value `Object` - The value that was passed to be validated  
-- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
-- \[allowMultiple=false\] `Boolean` - True if this <tt>param</tt> allowed multiple and the param type allows multiple, else false  
-
-**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
-<a name="Validation.ParamTypes.Validate_Header"></a>
-###ParamTypes.Validate_Header(param, req, [models], validationObj)
-Validates the path of the <tt>req</tt> that called validation. Additionally, this will honorthe allowMultiple flag.
-
-**Params**
-
-- param `Object` - The Swagger param that was created for this operation  
-- req `Object` - The request that this is validating  
-- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
-- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
-
-**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
-<a name="Validation.ParamTypes.Validate_Query"></a>
-###ParamTypes.Validate_Query(param, req, [models], validationObj)
-Validates the query string of the <tt>req</tt> that called validation. Additionally, this will honorthe allowMultiple flag.
-
-**Params**
-
-- param `Object` - The Swagger param that was created for this operation  
-- req `Object` - The request that this is validating  
-- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
-- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
-
-**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
 <a name="Validation.Parameters"></a>
 ##Validation.Parameters
 **Members**
@@ -446,3 +341,108 @@ Redirects the different String formats to their respective validation methods.
 - value `Object` - The value that is passed in along the req (via body, header, etc.)  
 
 **Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value parsed successfully.  
+<a name="Validation.ParamTypes"></a>
+##Validation.ParamTypes
+**Members**
+
+* [Validation.ParamTypes](#Validation.ParamTypes)
+  * [ParamTypes.Make_Validation_Object([validation])](#Validation.ParamTypes.Make_Validation_Object)
+  * [ParamTypes.Validate_Body(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Body)
+  * [ParamTypes.Validate_Form(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Form)
+  * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
+  * [ParamTypes.Validate_ParamType(param, ret)](#Validation.ParamTypes.Validate_ParamType)
+  * [ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])](#Validation.ParamTypes.Validate_ParamType)
+  * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
+  * [ParamTypes.Validate_Query(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Query)
+
+<a name="Validation.ParamTypes.Make_Validation_Object"></a>
+###ParamTypes.Make_Validation_Object([validation])
+Ensures that that the validation object on the <tt>spec</tt> is complete with all defaults configured.
+
+**Params**
+
+- \[validation\] `Object` - Optionally, the validation object that is defined as part of this Swagger API definition  
+
+**Returns**: `Object` - An object that contains the values passed in on <tt>spec.validation</tt>,plus any defaults for missing values  
+<a name="Validation.ParamTypes.Validate_Body"></a>
+###ParamTypes.Validate_Body(param, req, [models], validationObj)
+Validates the body of the <tt>req</tt> that called validation.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- req `Object` - The request that this is validating  
+- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
+- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
+
+**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
+<a name="Validation.ParamTypes.Validate_Form"></a>
+###ParamTypes.Validate_Form(param, req, [models], validationObj)
+Validates the form of the <tt>req</tt> that called validation.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- req `Object` - The request that this is validating  
+- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
+- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
+
+**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
+<a name="Validation.ParamTypes.Validate_Header"></a>
+###ParamTypes.Validate_Header(param, req, [models], validationObj)
+Validates the header of the <tt>req</tt> that called validation. Additionally, this will honorthe allowMultiple flag.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- req `Object` - The request that this is validating  
+- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
+- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
+
+**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
+<a name="Validation.ParamTypes.Validate_ParamType"></a>
+###ParamTypes.Validate_ParamType(param, ret)
+Gets the value to be passed back in the req if <tt>spec.validation.replaceValues === true</tt>.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- ret `Object` - The value that was returned from the paramType and parameter validation  
+
+**Returns**: `Object` - The values that was returned from the paramType and parameter validation,else the defaultValue if specified, else undefined.  
+<a name="Validation.ParamTypes.Validate_ParamType"></a>
+###ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])
+Validates the form of the <tt>req</tt> that called validation.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- value `Object` - The value that was passed to be validated  
+- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
+- \[allowMultiple=false\] `Boolean` - True if this <tt>param</tt> allowed multiple and the param type allows multiple, else false  
+
+**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
+<a name="Validation.ParamTypes.Validate_Header"></a>
+###ParamTypes.Validate_Header(param, req, [models], validationObj)
+Validates the path of the <tt>req</tt> that called validation. Additionally, this will honorthe allowMultiple flag.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- req `Object` - The request that this is validating  
+- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
+- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
+
+**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
+<a name="Validation.ParamTypes.Validate_Query"></a>
+###ParamTypes.Validate_Query(param, req, [models], validationObj)
+Validates the query string of the <tt>req</tt> that called validation. Additionally, this will honorthe allowMultiple flag.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- req `Object` - The request that this is validating  
+- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
+- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
+
+**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
