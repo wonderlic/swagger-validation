@@ -14,7 +14,7 @@ describe('paramType - object', function() {
 					{
 						name: 'someModel',
 						type: 'SomeModel',
-						paramType: 'object'
+						paramType: ''
 					}
 				]
 			};
@@ -53,7 +53,7 @@ describe('paramType - object', function() {
 					{
 						name: 'someModel',
 						type: 'SomeModel',
-						paramType: 'object'
+						paramType: ''
 					}
 				]
 			};
@@ -102,7 +102,7 @@ describe('paramType - object', function() {
 					{
 						name: 'someModel',
 						type: 'SomeModel',
-						paramType: 'object'
+						paramType: ''
 					}
 				]
 			};
@@ -178,7 +178,7 @@ describe('paramType - object', function() {
 					{
 						name: 'baz',
 						type: 'baz',
-						paramType: 'object'
+						paramType: ''
 					}
 				]
 			};
@@ -209,7 +209,7 @@ describe('paramType - object', function() {
 						name: 'someDate',
 						type: 'string',
 						format: 'date',
-						paramType: 'object'
+						paramType: ''
 					}
 				]
 			};
@@ -231,7 +231,7 @@ describe('paramType - object', function() {
 						name: 'someDate',
 						type: 'string',
 						format: 'date',
-						paramType: 'object'
+						paramType: ''
 					}
 				]
 			};
