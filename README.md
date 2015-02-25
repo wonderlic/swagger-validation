@@ -21,11 +21,11 @@ var errors = _.pluck(_.pluck([VALIDATION RETURN], 'error'), 'message');)
 #### Validating an object
 While the main intention of this module is to validate the request passed into express via swagger-node-express,
 there are use cases where an object must be validated outside of a request (for example, if an object passed into a
-request is also used in other methods or during unit testing). To support this functionality, as of version 1.3.0,
-if the req object passed into the validate function does not have one of the expected paramType properties
-(q, query, path, body, form, header, or params) then validation will be done against the req object itself.
-Therefore, this can be used to validate that an object matches the swagger specification outside of a request.
-Validating an object follows all the same rules outlined under *[Validating a request](#validating-a-request)*,
+request is also used in other methods that do their own validation or during unit testing). To support this
+functionality, as of version 1.3.0, if the req object passed into the validate function does not have one of the
+expected paramType properties (q, query, path, body, form, header, or params) then validation will be done against
+the req object itself. Therefore, this can be used to validate that an object matches the swagger specification outside
+of a request. Validating an object follows all the same rules outlined under *[Validating a request](#validating-a-request)*,
 but ignores the paramType on the Swagger spec as it already has the object to validate.
 
 ## Installation
