@@ -822,6 +822,262 @@ or a value property that contains the value, parsed successfully if validation k
     
     
     <div class="description">
+        <p>Validates the header of the <tt>req</tt> that called validation. Additionally, this will honor
+the allowMultiple flag.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The Swagger param that was created for this operation</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The request that this is validating</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>models</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Optionally, the models that are defined as part of this Swagger API definition</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>validationObj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The validation object that is defined as part of this Swagger API definition</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="validation_paramTypes_header.js.html">validation/paramTypes/header.js</a>,
+				 <a href="validation_paramTypes_header.js.html#sunlight-1-line-6">line 6</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>An empty Array if the <tt>value</tt> was &quot;nothing&quot; and not required, else an array
+containing an object with either an error property (which contains an Array of Error objects)
+or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.</p>
+</div>
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Array</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id=".Validate_Header"><span class="type-signature">&lt;static> </span>Validate_Header<span class="signature">(param, req, <span class="optional">models</span>, validationObj)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
         <p>Validates the path of the <tt>req</tt> that called validation. Additionally, this will honor
 the allowMultiple flag.</p>
     </div>
@@ -1070,7 +1326,7 @@ or a value property that contains the value, parsed successfully if validation k
         
             
 <dt>
-    <h4 class="name" id=".Validate_Header"><span class="type-signature">&lt;static> </span>Validate_Header<span class="signature">(param, req, <span class="optional">models</span>, validationObj)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id=".Validate_Object"><span class="type-signature">&lt;static> </span>Validate_Object<span class="signature">(param, req, <span class="optional">models</span>, validationObj)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
 </dt>
@@ -1078,8 +1334,7 @@ or a value property that contains the value, parsed successfully if validation k
     
     
     <div class="description">
-        <p>Validates the header of the <tt>req</tt> that called validation. Additionally, this will honor
-the allowMultiple flag.</p>
+        <p>Validates the object <tt>req</tt> that called validation.</p>
     </div>
     
 
@@ -1170,7 +1425,7 @@ the allowMultiple flag.</p>
 
             
 
-            <td class="description last"><p>The request that this is validating</p></td>
+            <td class="description last"><p>The object that this is validating</p></td>
         </tr>
 
 	
@@ -1270,8 +1525,8 @@ the allowMultiple flag.</p>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="validation_paramTypes_header.js.html">validation/paramTypes/header.js</a>,
-				 <a href="validation_paramTypes_header.js.html#sunlight-1-line-6">line 6</a>
+				<a href="validation_paramTypes_object.js.html">validation/paramTypes/object.js</a>,
+				 <a href="validation_paramTypes_object.js.html#sunlight-1-line-6">line 6</a>
 			</li>
 		</ul>
 	</dd>
@@ -2054,7 +2309,7 @@ or a value property that contains the value, parsed successfully if validation k
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta1</a>
-		on Tue Feb 24th 2015 using the <a
+		on Wed Feb 25th 2015 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>

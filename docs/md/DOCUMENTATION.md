@@ -35,6 +35,7 @@
     * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
     * [ParamTypes.Validate_ParamType(param, ret)](#Validation.ParamTypes.Validate_ParamType)
     * [ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])](#Validation.ParamTypes.Validate_ParamType)
+    * [ParamTypes.Validate_Object(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Object)
     * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
     * [ParamTypes.Validate_Query(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Query)
  
@@ -98,6 +99,7 @@ This is a polyfill for checking if something is an int64.
     * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
     * [ParamTypes.Validate_ParamType(param, ret)](#Validation.ParamTypes.Validate_ParamType)
     * [ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])](#Validation.ParamTypes.Validate_ParamType)
+    * [ParamTypes.Validate_Object(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Object)
     * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
     * [ParamTypes.Validate_Query(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Query)
 
@@ -352,6 +354,7 @@ Redirects the different String formats to their respective validation methods.
   * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
   * [ParamTypes.Validate_ParamType(param, ret)](#Validation.ParamTypes.Validate_ParamType)
   * [ParamTypes.Validate_ParamType(param, value, [models], [allowMultiple])](#Validation.ParamTypes.Validate_ParamType)
+  * [ParamTypes.Validate_Object(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Object)
   * [ParamTypes.Validate_Header(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Header)
   * [ParamTypes.Validate_Query(param, req, [models], validationObj)](#Validation.ParamTypes.Validate_Query)
 
@@ -420,6 +423,18 @@ Validates the form of the <tt>req</tt> that called validation.
 - value `Object` - The value that was passed to be validated  
 - \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
 - \[allowMultiple=false\] `Boolean` - True if this <tt>param</tt> allowed multiple and the param type allows multiple, else false  
+
+**Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
+<a name="Validation.ParamTypes.Validate_Object"></a>
+###ParamTypes.Validate_Object(param, req, [models], validationObj)
+Validates the object <tt>req</tt> that called validation.
+
+**Params**
+
+- param `Object` - The Swagger param that was created for this operation  
+- req `Object` - The object that this is validating  
+- \[models\] `Object` - Optionally, the models that are defined as part of this Swagger API definition  
+- validationObj `Object` - The validation object that is defined as part of this Swagger API definition  
 
 **Returns**: `Array` - An empty Array if the <tt>value</tt> was "nothing" and not required, else an arraycontaining an object with either an error property (which contains an Array of Error objects)or a value property that contains the value, parsed successfully if validation knows how, else the value unmodified.  
 <a name="Validation.ParamTypes.Validate_Header"></a>
