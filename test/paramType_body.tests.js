@@ -8,7 +8,7 @@ var helper = require('./test_helper');
 
 describe('paramType - body', function() {
   describe('with models', function() {
-    it('should convert strings', function() {
+    describe('should convert strings', function() {
       var spec = {
         parameters: [
           {
@@ -35,19 +35,32 @@ describe('paramType - body', function() {
       var someDate = '2014-08-12';
       var someString = 'blah blah';
       var someDateTransformed = moment('2014-08-12').toDate();
-      var req = {
-        body: {
-          someDate: someDate,
-          someString: someString
-        }
+
+      var obj = {
+        someDate: someDate,
+        someString: someString
       };
-      var ret = validate(spec, req, models);
-      helper.validateSuccess(ret, 0);
-      expect(req.body.someDate).to.eql(someDateTransformed);
-      expect(req.body.someString).to.equal(someString);
+
+      var req = {
+        body: JSON.parse(JSON.stringify(obj))
+      };
+
+      it("with request", function() {
+        var ret = validate(spec, req, models);
+        helper.validateSuccess(ret, 0);
+        expect(req.body.someDate).to.eql(someDateTransformed);
+        expect(req.body.someString).to.eql(someString);
+      });
+
+      it("without request", function() {
+        var ret = validate(spec, obj, models);
+        helper.validateSuccess(ret, 0);
+        expect(obj.someDate).to.eql(someDateTransformed);
+        expect(obj.someString).to.eql(someString);
+      });
     });
 
-    it('should handle nested models when converting strings', function() {
+    describe('should handle nested models when converting strings', function() {
       var spec = {
         parameters: [
           {
@@ -82,21 +95,34 @@ describe('paramType - body', function() {
       };
       var someDate = '2014-08-12';
       var someDateTransformed = moment('2014-08-12').toDate();
-      var req = {
-        body: {
-          someDate: someDate,
-          nestedModel: {
-            anotherDate: someDate
-          }
+
+      var obj = {
+        someDate: someDate,
+        nestedModel: {
+          anotherDate: someDate
         }
       };
-      var ret = validate(spec, req, models);
-      helper.validateSuccess(ret, 0);
-      expect(req.body.someDate).to.eql(someDateTransformed);
-      expect(req.body.nestedModel.anotherDate).to.eql(someDateTransformed);
+
+      var req = {
+        body: JSON.parse(JSON.stringify(obj))
+      };
+
+      it("with request", function() {
+        var ret = validate(spec, req, models);
+        helper.validateSuccess(ret, 0);
+        expect(req.body.someDate).to.eql(someDateTransformed);
+        expect(req.body.nestedModel.anotherDate).to.eql(someDateTransformed);
+      });
+
+      it("without request", function() {
+        var ret = validate(spec, obj, models);
+        helper.validateSuccess(ret, 0);
+        expect(obj.someDate).to.eql(someDateTransformed);
+        expect(obj.nestedModel.anotherDate).to.eql(someDateTransformed);
+      });
     });
 
-    it('should return validation errors', function() {
+    describe('should return validation errors', function() {
       var spec = {
         parameters: [
           {
@@ -120,17 +146,28 @@ describe('paramType - body', function() {
           }
         }
       };
-      var req = {
-        body: {
-          someDate: 'not a real date',
-          someString: 'blah blah'
-        }
+
+      var obj = {
+        someDate: 'not a real date',
+        someString: 'blah blah'
       };
-      var ret = validate(spec, req, models);
-      helper.validateError(ret, 1, ["someDate is not valid based on the pattern for moment.ISO 8601"]);
+
+      var req = {
+        body: JSON.parse(JSON.stringify(obj))
+      };
+
+      it("with request", function() {
+        var ret = validate(spec, req, models);
+        helper.validateError(ret, 1, ["someDate is not valid based on the pattern for moment.ISO 8601"]);
+      });
+
+      it("without request", function() {
+        var ret = validate(spec, obj, models);
+        helper.validateError(ret, 1, ["someDate is not valid based on the pattern for moment.ISO 8601"]);
+      });
     });
 
-    it('should not run validation tests', function() {
+    describe('should not run validation tests', function() {
       var models = {
         foo: {
           id: 'foo',
@@ -183,7 +220,7 @@ describe('paramType - body', function() {
         ]
       };
 
-      var req = {
+      var obj = {
         number: 'Random String',
         float: true,
         double: [323.33],
@@ -196,13 +233,25 @@ describe('paramType - body', function() {
         datetime: Number(2.2356),
         boolean: 'Not a boolean'
       };
-      var ret = validate(spec, req, models);
-      helper.validateSuccess(ret, 0);
+
+      var req = {
+        body: JSON.parse(JSON.stringify(obj))
+      };
+
+      it("with request", function() {
+        var ret = validate(spec, req, models);
+        helper.validateSuccess(ret, 0);
+      });
+
+      it("without request", function() {
+        var ret = validate(spec, req, models);
+        helper.validateSuccess(ret, 0);
+      });
     });
   });
 
   describe('without models', function() {
-    it('should validate spec and convert strings', function() {
+    describe('should validate spec and convert strings', function() {
       var spec = {
         parameters: [
           {
@@ -215,15 +264,27 @@ describe('paramType - body', function() {
       };
       var someDate = '2014-08-12';
       var someDateTransformed = moment('2014-08-12').toDate();
+
+      var obj = someDate;
+
       var req = {
-        body: someDate
+        body: JSON.parse(JSON.stringify(obj))
       };
-      var ret = validate(spec, req);
-      helper.validateSuccess(ret, 0);
-      expect(req.body).to.eql(someDateTransformed);
+
+      it("with request", function() {
+        var ret = validate(spec, req);
+        helper.validateSuccess(ret, 0);
+        expect(req.body).to.eql(someDateTransformed);
+      });
+
+      it("without request", function() {
+        var ret = validate(spec, obj);
+        helper.validateSuccess(ret, 0);
+        expect(obj).to.eql(someDate);
+      });
     });
 
-    it('should validate spec and not convert strings', function() {
+    describe('should validate spec and not convert strings', function() {
       var spec = {
         validation: {
           replaceValues: false
@@ -238,12 +299,23 @@ describe('paramType - body', function() {
         ]
       };
       var someDate = '2014-08-12';
+      var obj = someDate;
+
       var req = {
-        body: someDate
+        body: JSON.parse(JSON.stringify(obj))
       };
-      var ret = validate(spec, req);
-      helper.validateSuccess(ret, 0);
-      expect(req.body).to.eql(someDate);
+
+      it("with request", function() {
+        var ret = validate(spec, req);
+        helper.validateSuccess(ret, 0);
+        expect(req.body).to.eql(someDate);
+      });
+
+      it("without request", function() {
+        var ret = validate(spec, req);
+        helper.validateSuccess(ret, 0);
+        expect(obj).to.eql(someDate);
+      });
     });
   });
 });

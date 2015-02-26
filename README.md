@@ -23,10 +23,10 @@ While the main intention of this module is to validate the request passed into e
 there are use cases where an object must be validated outside of a request (for example, if an object passed into a
 request is also used in other methods that do their own validation or during unit testing). To support this
 functionality, as of version 1.3.0, if the req object passed into the validate function does not have one of the
-expected paramType properties (q, query, path, body, form, header, or params) then validation will be done against
+expected paramType properties (query, path, body, form, or header) then validation will be done against
 the req object itself. Therefore, this can be used to validate that an object matches the swagger specification outside
 of a request. Validating an object follows all the same rules outlined under *[Validating a request](#validating-a-request)*,
-but ignores the paramType on the Swagger spec as it already has the object to validate.
+but ignores the paramType on the Swagger spec as it already has the object / value to validate.
 
 ## Installation
 
@@ -227,8 +227,8 @@ This **will** be deprecated / removed once the pull request specified above gets
 
 ## Functionality outside of Swagger specification
 
-swagger-validation adheres to the official swagger specification, but does provide non-specification defined
-functionality to allow additional validation / ease that the swagger specification doesn't support.
+Swagger-validation adheres to the official swagger specification, but does provide non-standard
+functionality to allow additional validation / ease that the official swagger specification doesn't support.
 
 ### String pattern matching (RegExp)
 
@@ -252,19 +252,21 @@ exports.findByName = {
 };
 ```
 
-swagger-validation will now enforce that all names sent to the /pet/{petName} route start with `"dr"`.
+Swagger-validation will now enforce that all names sent to the /pet/{petName} route start with `"dr"`.
 `pattern` will accept any regex string.  An invalid regex string will report an error.
 
 ### Date pattern matching (moment.js format)
 
-Much like the string pattern matching mentioned above, swagger objects with a type of `string` and a format of `date` or `date-time` 
-also accept a `pattern` property. However, instead of a RegExp string, they accept a [moment.js format string](http://momentjs.com/docs/#/displaying/format/).
-By default, it uses `moment.ISO_8601()`, which should match any ISO 8601 compatible date.
-If you want to be more explicit, you can specify your own format using the `pattern` property.
+Much like the string pattern matching mentioned above, swagger objects with a type of `string` and a format of
+`date` or `date-time` also accept a `pattern` property. However, instead of a RegExp string, they accept a
+[moment.js format string](http://momentjs.com/docs/#/displaying/format/). By default, it uses `moment.ISO_8601()`,
+which should match any ISO 8601 compatible date. If you want to be more explicit, you can specify your own
+format using the `pattern` property.
 
 ### Value manipulation
 
-In addition to validating the req, it will replace the value on the req according to the following chart:
+In addition to validating the request / object, swagger-validation will replace the value on the request / object
+according to the following chart:
 
 | Input Type | Swagger Type | Swagger Format | Output | 
 | ----- | ----- | ----- | ----- |
@@ -278,12 +280,18 @@ In addition to validating the req, it will replace the value on the req accordin
 ** The date conversions are done using the [moment.js](//momentjs.com/) library. 
 By default, it uses the `moment.ISO_8601()` format for parsing dates, but can be overridden by changing the `pattern` property
 
-In addition, if a defaultValue is specified for the param and the value is null, undefined, or an empty string, swagger-validation 
-will replace the value on the req with the defaultValue for that parameter.
+In addition, if a defaultValue is specified for the param and the value is null, undefined, or an empty string,
+swagger-validation will replace the value on the req with the defaultValue for that parameter.
+
+#### NOTE
+As JavaScript doesn't pass method parameters by reference for non object / array values (such as strings or numbers),
+passing in a value type cannot convert the value. Therefore, passing in a value type without an object will not
+convert the value. This only applies when passing in the value itself NOT when the value is part of the request.
+If the value is on the request, regardless of type, it will still convert the value and update the request.
 
 ### Validation object
 
-Swagger-validation also adds another object to the swagger.spec definition called validation that looks like this
+Swagger-validation adds another object to the swagger.spec definition called validation that looks like this
 
 ```javascript
 validation = {
