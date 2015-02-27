@@ -58,6 +58,13 @@ describe('paramType - body', function() {
         expect(obj.someDate).to.eql(someDateTransformed);
         expect(obj.someString).to.eql(someString);
       });
+
+      it("without request & spec", function() {
+        var ret = validate('SomeModel', obj, models);
+        helper.validateSuccess(ret, 0);
+        expect(obj.someDate).to.eql(someDateTransformed);
+        expect(obj.someString).to.eql(someString);
+      });
     });
 
     describe('should handle nested models when converting strings', function() {
@@ -120,6 +127,13 @@ describe('paramType - body', function() {
         expect(obj.someDate).to.eql(someDateTransformed);
         expect(obj.nestedModel.anotherDate).to.eql(someDateTransformed);
       });
+
+      it("without request & spec", function() {
+        var ret = validate('SomeModel', obj, models);
+        helper.validateSuccess(ret, 0);
+        expect(obj.someDate).to.eql(someDateTransformed);
+        expect(obj.nestedModel.anotherDate).to.eql(someDateTransformed);
+      });
     });
 
     describe('should return validation errors', function() {
@@ -163,6 +177,11 @@ describe('paramType - body', function() {
 
       it("without request", function() {
         var ret = validate(spec, obj, models);
+        helper.validateError(ret, 1, ["someDate is not valid based on the pattern for moment.ISO 8601"]);
+      });
+
+      it("without request & spec", function() {
+        var ret = validate('SomeModel', obj, models);
         helper.validateError(ret, 1, ["someDate is not valid based on the pattern for moment.ISO 8601"]);
       });
     });

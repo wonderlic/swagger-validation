@@ -4,7 +4,7 @@
 [![NPM version](https://badge.fury.io/js/swagger-validation.svg)](http://badge.fury.io/js/swagger-validation)
 [![Code Climate](https://codeclimate.com/github/wonderlic/swagger-validation/badges/gpa.svg)](https://codeclimate.com/github/wonderlic/swagger-validation)
 
-DocumentUp available here: http://documentup.com/wonderlic/swagger-validation
+DocumentUp available here: [http://documentup.com/wonderlic/swagger-validation](http://documentup.com/wonderlic/swagger-validation)
 
 ## Quick Description
 
@@ -27,6 +27,18 @@ expected paramType properties (query, path, body, form, or header) then validati
 the req object itself. Therefore, this can be used to validate that an object matches the swagger specification outside
 of a request. Validating an object follows all the same rules outlined under *[Validating a request](#validating-a-request)*,
 but ignores the paramType on the Swagger spec as it already has the object / value to validate.
+
+Additionally, as of version 1.4.0, passing in a model name instead of the swagger specification will validate the object
+directly instead of looking at the request. However, this functionality only works with objects. Any non-object passed
+in will return an error instead of being validated.
+
+As an example:
+
+```javascript
+    var validate = require('swagger-validation');
+    var models = require("./models.js");
+    var ret = validate('[MODEL NAME HERE]', obj, models);
+```
 
 ## Installation
 
