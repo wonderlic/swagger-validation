@@ -1246,7 +1246,7 @@ describe('object', function() {
       foo: {
         id: 'foo',
         name: 'foo',
-        required: ['number', 'float', 'double', 'integer', 'int32', 'int64', 'string', 'byte', 'date', 'datetime', 'boolean'],
+        required: ['number', 'float', 'double', 'integer', 'int32', 'int64', 'string', 'byte', 'date', 'datetime', 'boolean', 'obj'],
         properties: {
           number: {type: 'number'},
           float: {type: 'number', format: 'float'},
@@ -1259,6 +1259,7 @@ describe('object', function() {
           date: {type: 'string', format: 'date'},
           datetime: {type: 'string', format: 'date-time'},
           boolean: {type: 'boolean'},
+          obj: {type: 'object'},
           foos: {
             type: "array",
             items: {
@@ -1282,6 +1283,9 @@ describe('object', function() {
         date: '2013-08-09',
         datetime: '2014-01-01T17:00:00',
         boolean: true,
+        obj: {
+          test: 'test'
+        },
         foos: [
           {
             number: 0x33,
@@ -1294,7 +1298,13 @@ describe('object', function() {
             byte: [35, 98],
             date: '2013-08-09',
             datetime: '2014-01-01T17:00:00',
-            boolean: true
+            boolean: true,
+            obj: {
+              int: 0x99,
+              hello: [{
+                hi: new Date()
+              }]
+            }
           }
         ]
       };
@@ -1310,6 +1320,9 @@ describe('object', function() {
         date: moment('2013-08-09').toDate(),
         datetime: moment('2014-01-01T17:00:00').toDate(),
         boolean: true,
+        obj: {
+          test: 'test'
+        },
         foos: [
           {
             number: 0x33,
@@ -1322,7 +1335,13 @@ describe('object', function() {
             byte: [35, 98],
             date: moment('2013-08-09').toDate(),
             datetime: moment('2014-01-01T17:00:00').toDate(),
-            boolean: true
+            boolean: true,
+            obj: {
+              int: 0x99,
+              hello: [{
+                hi: new Date()
+              }]
+            }
           }
         ]
       };
@@ -1344,6 +1363,7 @@ describe('object', function() {
           date: Number(1),
           datetime: Number(2.2356),
           boolean: 'Not a boolean',
+          obj: [],
           foos: [
             {
               number: 'Random String',
@@ -1356,11 +1376,12 @@ describe('object', function() {
               byte: false,
               date: Number(1),
               datetime: Number(2.2356),
-              boolean: 'Not a boolean'
+              boolean: 'Not a boolean',
+              obj: 0x88
             }
           ]
         }, model);
-      helper.validateError(ret, 20, [
+      helper.validateError(ret, 22, [
         'boolean is not a type of boolean',
         'boolean is not a type of boolean',
         'date is not valid based on the pattern for moment.ISO 8601',
@@ -1379,6 +1400,8 @@ describe('object', function() {
         'integer is not a type of integer',
         'number is not a type of number',
         'number is not a type of number',
+        'obj is not a type of object',
+        'obj is not a type of object',
         'string is not a type of string',
         'string is not a type of string'
       ]);
@@ -1397,6 +1420,12 @@ describe('object', function() {
         date: '2013-08-09',
         datetime: '2014-01-01T17:00:00Z',
         boolean: true,
+        obj: {
+          int: 0x99,
+          hello: [{
+            hi: new Date()
+          }]
+        },
         foos: [
           {
             number: 'Random String',
@@ -1409,11 +1438,12 @@ describe('object', function() {
             byte: [35, 98],
             date: '2013-08-09',
             datetime: '2014-01-01T17:00:00Z',
-            boolean: true
+            boolean: true,
+            obj: []
           }
         ]
       }, model);
-      helper.validateError(ret, 8, [
+      helper.validateError(ret, 9, [
         'double is not a type of double',
         'double is not a type of double',
         'float is not a type of float',
@@ -1421,7 +1451,8 @@ describe('object', function() {
         'integer is not a type of integer',
         'integer is not a type of integer',
         'number is not a type of number',
-        'number is not a type of number'
+        'number is not a type of number',
+        'obj is not a type of object'
       ]);
     });
 
@@ -1438,6 +1469,7 @@ describe('object', function() {
         date: Number(1),
         datetime: Number(2.2356),
         boolean: 'Not a boolean',
+        obj: [],
         foos: [
           {
             number: 0x33,
@@ -1450,11 +1482,12 @@ describe('object', function() {
             byte: false,
             date: Number(1),
             datetime: Number(2.2356),
-            boolean: 'Not a boolean'
+            boolean: 'Not a boolean',
+            obj: {}
           }
         ]
       }, model);
-      helper.validateError(ret, 12, [
+      helper.validateError(ret, 13, [
         'boolean is not a type of boolean',
         'boolean is not a type of boolean',
         'date is not valid based on the pattern for moment.ISO 8601',
@@ -1465,6 +1498,7 @@ describe('object', function() {
         'int32 is not a type of int32',
         'int64 is not a type of int64',
         'int64 is not a type of int64',
+        'obj is not a type of object',
         'string is not a type of string',
         'string is not a type of string'
       ]);
@@ -1484,9 +1518,10 @@ describe('object', function() {
           date: '2013-08-09',
           datetime: '2014-01-01T17:00:00',
           boolean: true,
+          obj: {},
           foos: [{}]
         }, model);
-      helper.validateError(ret, 11,
+      helper.validateError(ret, 12,
         [
           'boolean is required',
           'byte is required',
@@ -1498,7 +1533,8 @@ describe('object', function() {
           'int64 is required',
           'integer is required',
           'number is required',
-          'string is required',
+          'obj is required',
+          'string is required'
         ]
       );
     });
