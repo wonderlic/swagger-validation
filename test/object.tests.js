@@ -1302,7 +1302,7 @@ describe('object', function() {
             obj: {
               int: 0x99,
               hello: [{
-                hi: new Date()
+                hi: '2013-08-09'
               }]
             }
           }
@@ -1339,7 +1339,7 @@ describe('object', function() {
             obj: {
               int: 0x99,
               hello: [{
-                hi: new Date()
+                hi: '2013-08-09'
               }]
             }
           }
