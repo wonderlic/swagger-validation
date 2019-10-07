@@ -1,6 +1,6 @@
 node_modules/*
 docs/*
-
+test/*
 .idea/*
 *.sublime-project
 *.sublime-workspace
