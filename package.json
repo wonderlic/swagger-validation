@@ -28,8 +28,8 @@
     "test-debug": "mocha --debug-brk"
   },
   "dependencies": {
-    "lodash": "3.3.0",
-    "moment": "2.9.0"
+    "lodash": "^3.3.0",
+    "moment": "^2.9.0"
   },
   "devDependencies": {
     "chai": "2.1.0",
